@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { CAR_BRANDS, SERVICE_PACKAGES } from '../data/brandsData';
 import { ArrowLeft, CheckCircle2, Clock, ShieldCheck, Sparkles, ArrowRight, Car, Wrench, X } from 'lucide-react';
+import ScrollReveal from '../components/ScrollReveal';
 
 export default function BrandsEstimatorPage({ onBackToHome, onBookSlot }) {
   const [selectedBrand, setSelectedBrand] = useState(CAR_BRANDS[0]);
@@ -20,7 +21,11 @@ export default function BrandsEstimatorPage({ onBackToHome, onBookSlot }) {
     // Smooth scroll down to the estimate card once opened
     setTimeout(() => {
       if (estimateCardRef.current) {
-        estimateCardRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        if (window.lenis) {
+          window.lenis.scrollTo(estimateCardRef.current, { offset: -60, duration: 1.0 });
+        } else {
+          estimateCardRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
       }
     }, 100);
   };
@@ -59,7 +64,7 @@ export default function BrandsEstimatorPage({ onBackToHome, onBookSlot }) {
         </div>
 
         {/* Page Title & Context */}
-        <div className="text-center max-w-3xl mx-auto mb-10">
+        <ScrollReveal animation="fade-up" duration={700} className="text-center max-w-3xl mx-auto mb-10">
           <span className="font-mono-tech text-[10px] uppercase text-orange-500 tracking-widest block mb-2 font-bold">
             DEDICATED MULTI-BRAND SERVICE CALCULATOR
           </span>
@@ -69,10 +74,10 @@ export default function BrandsEstimatorPage({ onBackToHome, onBookSlot }) {
           <p className="font-space text-slate-400 text-xs sm:text-sm leading-relaxed">
             Choose your car brand and model below. Then select any service package to reveal your guaranteed price, turnaround time, and parts checklist.
           </p>
-        </div>
+        </ScrollReveal>
 
         {/* 1. Car Brand Logos Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3.5 mb-12">
+        <ScrollReveal animation="fade-up" delay={100} duration={800} className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3.5 mb-12">
           {CAR_BRANDS.map((brand) => {
             const isSelected = selectedBrand.id === brand.id;
             return (
@@ -108,12 +113,13 @@ export default function BrandsEstimatorPage({ onBackToHome, onBookSlot }) {
               </button>
             );
           })}
-        </div>
+        </ScrollReveal>
 
         {/* 
           2. SELECTION BAY (All arranged on top across full width as requested):
           User requested: "ये जो पार्ट ये जो कॉलम बने हैं लेफ्ट साइड में ये सब पहले ऊपर रहेंगे। जब हम बॉक्स पर क्लिक करेंगे तो फिर उसके बाद राइट वाला बॉक्स ओपन हो वरना ये हाइड ही ओके।"
         */}
+        <ScrollReveal animation="fade-up" delay={150} duration={850}>
         <div className="rounded-2xl border border-white/10 bg-[#090b0e] p-6 sm:p-10 shadow-2xl space-y-8 mb-10">
           
           {/* Active Brand Header */}
@@ -226,6 +232,7 @@ export default function BrandsEstimatorPage({ onBackToHome, onBookSlot }) {
           </div>
 
         </div>
+        </ScrollReveal>
 
         {/* 
           3. THE ESTIMATE & TURNAROUND DRAWER / BOX:

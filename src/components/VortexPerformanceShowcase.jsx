@@ -1,12 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Play, ArrowRight, Download, CheckCircle2, Phone, Mail, ChevronRight } from 'lucide-react';
+import ScrollReveal from './ScrollReveal';
 
 export default function VortexPerformanceShowcase({ currentLanguage = 'en', onOpenBooking, onOpenBrandsPage }) {
   const [activeTelemetryTab, setActiveTelemetryTab] = useState('SPEED');
   const [activeAeroSpeed, setActiveAeroSpeed] = useState(150);
   const [isFilmOpen, setIsFilmOpen] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
   const canvasRef = useRef(null);
   const aeroCanvasRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Inquiry Form State
   const [inquiryForm, setInquiryForm] = useState({
@@ -246,12 +256,13 @@ export default function VortexPerformanceShowcase({ currentLanguage = 'en', onOp
       {/* ============================================================== */}
       <section id="hero" className="relative min-h-screen flex flex-col justify-between pt-28 sm:pt-32 pb-10 overflow-hidden w-full">
         
-        {/* Full-Bleed Background Image (Supercar) */}
+        {/* Full-Bleed Background Image (Supercar) with Parallax Scroll */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
           <img
             src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=2200&auto=format&fit=crop&q=90"
             alt="Vortex Track Supercar"
-            className="w-full h-full object-cover object-[75%_center] md:object-right-center lg:object-center brightness-[0.70] contrast-[1.15]"
+            style={{ transform: `translateY(${Math.min(scrollY * 0.35, 260)}px) scale(1.06)` }}
+            className="w-full h-full object-cover object-[75%_center] md:object-right-center lg:object-center brightness-[0.70] contrast-[1.15] will-change-transform transition-transform duration-75 ease-out"
           />
           {/* Deep Dark Motorsport Vignettes for 100% Typography Legibility */}
           {/* Left-to-right pitch black gradient for text readability */}
@@ -265,10 +276,8 @@ export default function VortexPerformanceShowcase({ currentLanguage = 'en', onOp
         {/* Hero Content Container */}
         <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-8 lg:px-12 flex-1 flex flex-col justify-between">
           
-
-
           {/* Main Headline & Description */}
-          <div className="max-w-2xl space-y-6 text-left py-4">
+          <ScrollReveal animation="fade-up" duration={900} className="max-w-2xl space-y-6 text-left py-4">
             <h1 className="font-syncopate text-4xl sm:text-6xl lg:text-7xl font-bold uppercase tracking-tight leading-[1.03] text-white drop-shadow-2xl">
               BUILT FOR <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-amber-400 to-yellow-500">
@@ -324,10 +333,10 @@ export default function VortexPerformanceShowcase({ currentLanguage = 'en', onOp
               </button>
             </div>
 
-          </div>
+          </ScrollReveal>
 
           {/* HUD Telemetry Metric Ticker Bar (Placed on bottom with dark glassmorphic styling) */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 pt-8 border-t border-white/15 mt-8 font-mono-tech">
+          <ScrollReveal animation="fade-up" delay={200} duration={800} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 pt-8 border-t border-white/15 mt-8 font-mono-tech">
             
             <div className="flex items-center gap-3 p-3.5 rounded-sm bg-black/70 backdrop-blur-md border border-white/10 hover:border-orange-500/40 transition-colors">
               <span className="text-orange-500 text-lg">⏱</span>
@@ -369,7 +378,7 @@ export default function VortexPerformanceShowcase({ currentLanguage = 'en', onOp
               </div>
             </div>
 
-          </div>
+          </ScrollReveal>
 
         </div>
 
@@ -379,68 +388,73 @@ export default function VortexPerformanceShowcase({ currentLanguage = 'en', onOp
       {/* 2. BUILDS: FEATURED BUILDS GRID (Matches Navbar item #2) */}
       {/* ============================================================== */}
       <section id="builds" className="py-20 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto border-t border-white/5">
-        <div className="mb-10">
+        <ScrollReveal animation="fade-up" duration={800} className="mb-10">
           <span className="font-mono-tech text-[10px] uppercase text-orange-500 tracking-widest block mb-1">
             FEATURED BUILDS & PERFORMANCE PACKAGES
           </span>
           <h2 className="font-syncopate text-2xl sm:text-3xl font-bold uppercase text-white tracking-tight">
             MOTORSPORT WEAPONS
           </h2>
-        </div>
+        </ScrollReveal>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {FEATURED_BUILDS.map((build) => (
-            <div
+          {FEATURED_BUILDS.map((build, index) => (
+            <ScrollReveal
               key={build.id}
-              className="group rounded-xl bg-[#090b0e] border border-white/10 overflow-hidden shadow-2xl flex flex-col justify-between hover:border-orange-500/50 transition-all duration-300"
+              animation="fade-up"
+              delay={index * 150}
+              duration={850}
+              className="h-full"
             >
-              <div>
-                <div className="p-5 pb-3">
-                  <h3 className="font-syncopate text-lg font-bold uppercase text-white tracking-wide">
-                    {build.name}
-                  </h3>
-                  <span className="font-mono-tech text-[10px] uppercase text-orange-400 tracking-wider">
-                    {build.tag}
-                  </span>
+              <div className="group h-full rounded-xl bg-[#090b0e] border border-white/10 overflow-hidden shadow-2xl flex flex-col justify-between hover:border-orange-500/60 hover:shadow-[0_0_30px_rgba(249,115,22,0.22)] transition-all duration-300">
+                <div>
+                  <div className="p-5 pb-3">
+                    <h3 className="font-syncopate text-lg font-bold uppercase text-white tracking-wide">
+                      {build.name}
+                    </h3>
+                    <span className="font-mono-tech text-[10px] uppercase text-orange-400 tracking-wider">
+                      {build.tag}
+                    </span>
+                  </div>
+
+                  <div className="relative h-44 overflow-hidden">
+                    <img
+                      src={build.image}
+                      alt={build.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#090b0e] via-transparent to-transparent pointer-events-none" />
+                  </div>
+
+                  <div className="grid grid-cols-3 gap-2 px-5 py-3 text-center border-t border-b border-white/5 font-mono-tech text-[11px]">
+                    <div>
+                      <div className="font-bold text-white">{build.hp}</div>
+                      <div className="text-[9px] text-slate-500">POWER</div>
+                    </div>
+                    <div>
+                      <div className="font-bold text-white">{build.weight}</div>
+                      <div className="text-[9px] text-slate-500">WEIGHT</div>
+                    </div>
+                    <div>
+                      <div className="font-bold text-orange-400">{build.spec}</div>
+                      <div className="text-[9px] text-slate-500">CLASS</div>
+                    </div>
+                  </div>
+
+                  <p className="font-space px-5 py-3 text-xs text-slate-400 leading-relaxed">
+                    {build.desc}
+                  </p>
                 </div>
 
-                <div className="relative h-44 overflow-hidden">
-                  <img
-                    src={build.image}
-                    alt={build.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#090b0e] via-transparent to-transparent pointer-events-none" />
-                </div>
-
-                <div className="grid grid-cols-3 gap-2 px-5 py-3 text-center border-t border-b border-white/5 font-mono-tech text-[11px]">
-                  <div>
-                    <div className="font-bold text-white">{build.hp}</div>
-                    <div className="text-[9px] text-slate-500">POWER</div>
-                  </div>
-                  <div>
-                    <div className="font-bold text-white">{build.weight}</div>
-                    <div className="text-[9px] text-slate-500">WEIGHT</div>
-                  </div>
-                  <div>
-                    <div className="font-bold text-orange-400">{build.spec}</div>
-                    <div className="text-[9px] text-slate-500">CLASS</div>
-                  </div>
-                </div>
-
-                <p className="font-space px-5 py-3 text-xs text-slate-400 leading-relaxed">
-                  {build.desc}
-                </p>
+                {/* Orange Bottom Button (Exact match from screenshot) */}
+                <a
+                  href="#inquiry"
+                  className="w-full py-3.5 px-4 bg-orange-600 hover:bg-orange-500 text-black font-rajdhani font-black text-xs uppercase tracking-widest transition-colors cursor-pointer text-center block"
+                >
+                  VIEW BUILD &bull; INQUIRE
+                </a>
               </div>
-
-              {/* Orange Bottom Button (Exact match from screenshot) */}
-              <a
-                href="#inquiry"
-                className="w-full py-3.5 px-4 bg-orange-600 hover:bg-orange-500 text-black font-rajdhani font-black text-xs uppercase tracking-widest transition-colors cursor-pointer text-center block"
-              >
-                VIEW BUILD &bull; INQUIRE
-              </a>
-            </div>
+            </ScrollReveal>
           ))}
         </div>
       </section>
@@ -451,7 +465,7 @@ export default function VortexPerformanceShowcase({ currentLanguage = 'en', onOp
       <section id="telemetry" className="py-20 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto border-t border-white/5">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          <div className="lg:col-span-4 space-y-4">
+          <ScrollReveal animation="slide-left" duration={850} className="lg:col-span-4 space-y-4">
             <span className="font-mono-tech text-[10px] uppercase text-orange-500 tracking-widest block">
               PERFORMANCE TELEMETRY
             </span>
@@ -469,9 +483,9 @@ export default function VortexPerformanceShowcase({ currentLanguage = 'en', onOp
               <span>VIEW FULL DATA LOGS</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </a>
-          </div>
+          </ScrollReveal>
 
-          <div className="lg:col-span-8 p-6 rounded-xl bg-[#090b0e] border border-white/10 shadow-2xl">
+          <ScrollReveal animation="slide-right" duration={850} className="lg:col-span-8 p-6 rounded-xl bg-[#090b0e] border border-white/10 shadow-2xl hover:border-orange-500/40 transition-colors">
             {/* Telemetry Mode Tabs */}
             <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-white/10 mb-4 font-mono-tech">
               <div className="flex flex-wrap gap-1.5">
@@ -500,7 +514,7 @@ export default function VortexPerformanceShowcase({ currentLanguage = 'en', onOp
             <div className="relative w-full h-[200px] overflow-hidden rounded-sm">
               <canvas ref={canvasRef} className="w-full h-full block" />
             </div>
-          </div>
+          </ScrollReveal>
 
         </div>
       </section>
@@ -512,7 +526,7 @@ export default function VortexPerformanceShowcase({ currentLanguage = 'en', onOp
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           
           {/* Left Dyno Table */}
-          <div className="lg:col-span-5 p-6 rounded-xl bg-[#090b0e] border border-white/10 shadow-2xl">
+          <ScrollReveal animation="slide-left" duration={850} className="lg:col-span-5 p-6 rounded-xl bg-[#090b0e] border border-white/10 shadow-2xl hover:border-orange-500/40 transition-colors">
             <span className="font-mono-tech text-[10px] uppercase text-orange-500 tracking-widest block mb-4">
               SPECIFICATIONS & DYNO DATA
             </span>
@@ -559,10 +573,10 @@ export default function VortexPerformanceShowcase({ currentLanguage = 'en', onOp
               <Download className="w-3.5 h-3.5 text-orange-400" />
               <span>DOWNLOAD SPEC SHEET</span>
             </button>
-          </div>
+          </ScrollReveal>
 
           {/* Right Engineered For Advantage */}
-          <div className="lg:col-span-7 space-y-6">
+          <ScrollReveal animation="slide-right" duration={850} className="lg:col-span-7 space-y-6">
             <h2 className="font-syncopate text-3xl sm:text-4xl font-bold uppercase text-white tracking-tight">
               ENGINEERED <br />
               <span className="text-orange-500">FOR ADVANTAGE</span>
@@ -574,7 +588,7 @@ export default function VortexPerformanceShowcase({ currentLanguage = 'en', onOp
 
             {/* Custom Clean Vector Icons */}
             <div className="grid grid-cols-3 gap-4 pt-4">
-              <div className="p-4 rounded-xl bg-[#090b0e] border border-white/5 text-center">
+              <div className="p-4 rounded-xl bg-[#090b0e] border border-white/5 text-center hover:border-orange-500/50 hover:scale-105 transition-all">
                 <svg viewBox="0 0 48 48" className="w-7 h-7 mx-auto mb-2 text-orange-500" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <path d="M6 16C16 16 22 28 42 28M6 24C14 24 20 32 42 32M6 32C18 32 24 20 42 20" strokeLinecap="round" />
                 </svg>
@@ -582,7 +596,7 @@ export default function VortexPerformanceShowcase({ currentLanguage = 'en', onOp
                 <span className="font-mono-tech text-[9px] text-slate-500">Wind-Tunnel Verified</span>
               </div>
 
-              <div className="p-4 rounded-xl bg-[#090b0e] border border-white/5 text-center">
+              <div className="p-4 rounded-xl bg-[#090b0e] border border-white/5 text-center hover:border-orange-500/50 hover:scale-105 transition-all">
                 <svg viewBox="0 0 48 48" className="w-7 h-7 mx-auto mb-2 text-orange-500" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <rect x="20" y="6" width="8" height="36" rx="2" />
                   <path d="M14 14C24 10 24 20 34 16M14 24C24 20 24 30 34 26M14 34C24 30 24 40 34 36" strokeLinecap="round" />
@@ -591,7 +605,7 @@ export default function VortexPerformanceShowcase({ currentLanguage = 'en', onOp
                 <span className="font-mono-tech text-[9px] text-slate-500">Active Dynamic Damping</span>
               </div>
 
-              <div className="p-4 rounded-xl bg-[#090b0e] border border-white/5 text-center">
+              <div className="p-4 rounded-xl bg-[#090b0e] border border-white/5 text-center hover:border-orange-500/50 hover:scale-105 transition-all">
                 <svg viewBox="0 0 48 48" className="w-7 h-7 mx-auto mb-2 text-orange-500" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <polygon points="24,6 40,16 40,32 24,42 8,32 8,16" />
                   <line x1="24" y1="6" x2="24" y2="42" />
@@ -601,7 +615,7 @@ export default function VortexPerformanceShowcase({ currentLanguage = 'en', onOp
                 <span className="font-mono-tech text-[9px] text-slate-500">Peak Torque Rigidity</span>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
 
         </div>
       </section>
@@ -612,7 +626,7 @@ export default function VortexPerformanceShowcase({ currentLanguage = 'en', onOp
       <section id="aerodynamics" className="py-20 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto border-t border-white/5">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           
-          <div className="lg:col-span-4 space-y-3">
+          <ScrollReveal animation="slide-left" duration={850} className="lg:col-span-4 space-y-3">
             <span className="font-mono-tech text-[10px] uppercase text-orange-500 tracking-widest block">
               AERO BY DESIGN
             </span>
@@ -637,10 +651,10 @@ export default function VortexPerformanceShowcase({ currentLanguage = 'en', onOp
                 className="w-full accent-orange-500 cursor-pointer"
               />
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Pure Dark Studio Supercar with Authentic Continuous Streamlines (No boats!) */}
-          <div className="lg:col-span-8 p-6 rounded-xl bg-[#07080a] border border-white/10 shadow-2xl relative overflow-hidden">
+          <ScrollReveal animation="scale-up" duration={900} className="lg:col-span-8 p-6 rounded-xl bg-[#07080a] border border-white/10 shadow-2xl relative overflow-hidden">
             
             <div className="relative w-full h-[240px] rounded-lg overflow-hidden flex items-center justify-center bg-black">
               {/* Dynamic CFD Streamlines Canvas */}
@@ -677,7 +691,7 @@ export default function VortexPerformanceShowcase({ currentLanguage = 'en', onOp
               </div>
             </div>
 
-          </div>
+          </ScrollReveal>
 
         </div>
       </section>
@@ -685,8 +699,8 @@ export default function VortexPerformanceShowcase({ currentLanguage = 'en', onOp
       {/* ============================================================== */}
       {/* 6. BUILT. TESTED. PROVEN. (Before & After Transformation) */}
       {/* ============================================================== */}
-      <section className="py-20 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto border-t border-white/5">
-        <div className="mb-8 flex flex-wrap items-center justify-between gap-4 font-mono-tech">
+      <section id="workshop" className="py-20 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto border-t border-white/5">
+        <ScrollReveal animation="fade-up" duration={800} className="mb-8 flex flex-wrap items-center justify-between gap-4 font-mono-tech">
           <div>
             <span className="text-[10px] uppercase text-orange-500 tracking-widest block mb-1">
               BUILT. TESTED. PROVEN.
@@ -701,74 +715,82 @@ export default function VortexPerformanceShowcase({ currentLanguage = 'en', onOp
             <div>&bull;</div>
             <div>DOWNFORCE: <strong className="text-emerald-400 font-bold">+41% GAIN</strong></div>
           </div>
-        </div>
+        </ScrollReveal>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="p-4 rounded-xl bg-[#090b0e] border border-white/10">
-            <span className="font-mono-tech text-[10px] uppercase text-slate-500 block mb-2 font-bold">
-              BEFORE THE BUILD (STOCK STREET SPEC)
-            </span>
-            <div className="relative h-60 rounded-lg overflow-hidden mb-3">
-              <img
-                src="https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?w=800&auto=format&fit=crop&q=85"
-                alt="Before build"
-                className="w-full h-full object-cover filter grayscale contrast-125"
-              />
-              <div className="absolute top-3 left-3 px-2 py-0.5 rounded bg-black/80 font-mono-tech text-[10px] text-slate-300">
-                STOCK ENGINE &bull; 410 HP
+          <ScrollReveal animation="slide-left" delay={100} duration={850}>
+            <div className="p-4 rounded-xl bg-[#090b0e] border border-white/10 hover:border-white/30 transition-all h-full">
+              <span className="font-mono-tech text-[10px] uppercase text-slate-500 block mb-2 font-bold">
+                BEFORE THE BUILD (STOCK STREET SPEC)
+              </span>
+              <div className="relative h-60 rounded-lg overflow-hidden mb-3">
+                <img
+                  src="https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?w=800&auto=format&fit=crop&q=85"
+                  alt="Before build"
+                  className="w-full h-full object-cover filter grayscale contrast-125 hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute top-3 left-3 px-2 py-0.5 rounded bg-black/80 font-mono-tech text-[10px] text-slate-300">
+                  STOCK ENGINE &bull; 410 HP
+                </div>
               </div>
+              <p className="font-space text-xs text-slate-400">
+                Standard factory tolerances, street suspension damping, prone to thermal brake fade under repeated track laps.
+              </p>
             </div>
-            <p className="font-space text-xs text-slate-400">
-              Standard factory tolerances, street suspension damping, prone to thermal brake fade under repeated track laps.
-            </p>
-          </div>
+          </ScrollReveal>
 
-          <div className="p-4 rounded-xl bg-[#090b0e] border border-orange-500/40 shadow-xl shadow-orange-950/30">
-            <span className="font-mono-tech text-[10px] uppercase text-orange-400 block mb-2 font-bold">
-              AFTER THE BUILD (RACE-SPEC WEAPON)
-            </span>
-            <div className="relative h-60 rounded-lg overflow-hidden mb-3">
-              <img
-                src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=800&auto=format&fit=crop&q=85"
-                alt="After build"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute top-3 left-3 px-2 py-0.5 rounded bg-orange-600 font-mono-tech text-[10px] text-black font-bold">
-                VORTEX REBUILD &bull; 820 HP
+          <ScrollReveal animation="slide-right" delay={200} duration={850}>
+            <div className="p-4 rounded-xl bg-[#090b0e] border border-orange-500/40 shadow-xl shadow-orange-950/30 hover:border-orange-500 hover:shadow-[0_0_30px_rgba(249,115,22,0.2)] transition-all h-full">
+              <span className="font-mono-tech text-[10px] uppercase text-orange-400 block mb-2 font-bold">
+                AFTER THE BUILD (RACE-SPEC WEAPON)
+              </span>
+              <div className="relative h-60 rounded-lg overflow-hidden mb-3">
+                <img
+                  src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=800&auto=format&fit=crop&q=85"
+                  alt="After build"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute top-3 left-3 px-2 py-0.5 rounded bg-orange-600 font-mono-tech text-[10px] text-black font-bold">
+                  VORTEX REBUILD &bull; 820 HP
+                </div>
               </div>
+              <p className="font-space text-xs text-slate-300">
+                Forged internals, twin sequential turbos, 100% genuine motorsport components, and 2-year performance warranty.
+              </p>
             </div>
-            <p className="font-space text-xs text-slate-300">
-              Forged internals, twin sequential turbos, 100% genuine motorsport components, and 2-year performance warranty.
-            </p>
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* ============================================================== */}
       {/* 7. DRIVER FEEDBACK (Driver Testimonials) */}
       {/* ============================================================== */}
-      <section className="py-20 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto border-t border-white/5">
-        <span className="font-mono-tech text-[10px] uppercase text-orange-500 tracking-widest block mb-2">
-          DRIVER FEEDBACK & PODIUM TESTIMONIALS
-        </span>
-        <h2 className="font-syncopate text-2xl sm:text-3xl font-bold uppercase text-white tracking-tight mb-8">
-          TRUSTED AT 180 MPH
-        </h2>
+      <section id="reviews" className="py-20 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto border-t border-white/5">
+        <ScrollReveal animation="fade-up" duration={800} className="mb-8">
+          <span className="font-mono-tech text-[10px] uppercase text-orange-500 tracking-widest block mb-2">
+            DRIVER FEEDBACK & PODIUM TESTIMONIALS
+          </span>
+          <h2 className="font-syncopate text-2xl sm:text-3xl font-bold uppercase text-white tracking-tight">
+            TRUSTED AT 180 MPH
+          </h2>
+        </ScrollReveal>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {DRIVER_REVIEWS.map((drv, i) => (
-            <div key={i} className="p-6 rounded-xl bg-[#090b0e] border border-white/10 flex flex-col justify-between">
-              <p className="font-space text-xs sm:text-sm text-slate-300 italic mb-6 leading-relaxed">
-                "{drv.quote}"
-              </p>
-              <div className="flex items-center gap-3 pt-4 border-t border-white/5 font-mono-tech">
-                <img src={drv.img} alt={drv.name} className="w-10 h-10 rounded-full object-cover border border-orange-500" />
-                <div>
-                  <h4 className="text-xs font-bold text-white uppercase">{drv.name}</h4>
-                  <span className="text-[10px] text-orange-400">{drv.title}</span>
+            <ScrollReveal key={i} animation="fade-up" delay={i * 150} duration={850} className="h-full">
+              <div className="h-full p-6 rounded-xl bg-[#090b0e] border border-white/10 hover:border-orange-500/50 hover:shadow-[0_0_25px_rgba(249,115,22,0.15)] transition-all flex flex-col justify-between">
+                <p className="font-space text-xs sm:text-sm text-slate-300 italic mb-6 leading-relaxed">
+                  "{drv.quote}"
+                </p>
+                <div className="flex items-center gap-3 pt-4 border-t border-white/5 font-mono-tech">
+                  <img src={drv.img} alt={drv.name} className="w-10 h-10 rounded-full object-cover border border-orange-500" />
+                  <div>
+                    <h4 className="text-xs font-bold text-white uppercase">{drv.name}</h4>
+                    <span className="text-[10px] text-orange-400">{drv.title}</span>
+                  </div>
                 </div>
               </div>
-            </div>
+            </ScrollReveal>
           ))}
         </div>
       </section>
@@ -777,47 +799,49 @@ export default function VortexPerformanceShowcase({ currentLanguage = 'en', onOp
       {/* 6. CAR BRANDS (Matches Navbar Item #6) */}
       {/* ============================================================== */}
       <section id="brands-pricing" className="py-20 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto border-t border-white/5">
-        <div className="p-8 sm:p-12 rounded-2xl bg-[#090b0e] border border-orange-500/30 relative overflow-hidden shadow-2xl">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-orange-600/10 blur-[130px] pointer-events-none rounded-full" />
-          
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div className="lg:col-span-8 space-y-3">
-              <span className="font-mono-tech text-[10px] uppercase text-orange-500 tracking-widest block font-bold">
-                MULTI-BRAND CAR WORKSHOP & RATE CALCULATOR
-              </span>
-              <h2 className="font-syncopate text-2xl sm:text-4xl font-bold uppercase text-white tracking-tight leading-tight">
-                SELECT YOUR BRAND & <br />
-                <span className="text-orange-500">GET INSTANT ESTIMATE</span>
-              </h2>
-              <p className="font-space text-slate-300 text-xs sm:text-sm leading-relaxed max-w-xl">
-                Need service or mechanical repairs for your Maruti Suzuki, Hyundai, Tata, Mahindra, Toyota, Honda, Kia, BMW or Mercedes? Click below to view transparent prices, turnaround time guarantees, genuine parts warranty, and 1-click slot booking on our dedicated pricing page.
-              </p>
+        <ScrollReveal animation="scale-up" duration={900}>
+          <div className="p-8 sm:p-12 rounded-2xl bg-[#090b0e] border border-orange-500/40 relative overflow-hidden shadow-2xl hover:border-orange-500/70 hover:shadow-[0_0_40px_rgba(249,115,22,0.25)] transition-all">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-orange-600/15 blur-[130px] pointer-events-none rounded-full" />
+            
+            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              <div className="lg:col-span-8 space-y-3">
+                <span className="font-mono-tech text-[10px] uppercase text-orange-500 tracking-widest block font-bold">
+                  MULTI-BRAND CAR WORKSHOP & RATE CALCULATOR
+                </span>
+                <h2 className="font-syncopate text-2xl sm:text-4xl font-bold uppercase text-white tracking-tight leading-tight">
+                  SELECT YOUR BRAND & <br />
+                  <span className="text-orange-500">GET INSTANT ESTIMATE</span>
+                </h2>
+                <p className="font-space text-slate-300 text-xs sm:text-sm leading-relaxed max-w-xl">
+                  Need service or mechanical repairs for your Maruti Suzuki, Hyundai, Tata, Mahindra, Toyota, Honda, Kia, BMW or Mercedes? Click below to view transparent prices, turnaround time guarantees, genuine parts warranty, and 1-click slot booking on our dedicated pricing page.
+                </p>
 
-              {/* Supported brands tags */}
-              <div className="flex flex-wrap gap-2 pt-2 font-mono-tech text-[10px] text-slate-400">
-                <span className="px-2 py-1 rounded bg-black/80 border border-white/10">Maruti Suzuki</span>
-                <span className="px-2 py-1 rounded bg-black/80 border border-white/10">Hyundai</span>
-                <span className="px-2 py-1 rounded bg-black/80 border border-white/10">Tata Motors</span>
-                <span className="px-2 py-1 rounded bg-black/80 border border-white/10">Mahindra 4x4</span>
-                <span className="px-2 py-1 rounded bg-black/80 border border-white/10">Toyota</span>
-                <span className="px-2 py-1 rounded bg-black/80 border border-white/10">BMW / Merc / Audi</span>
+                {/* Supported brands tags */}
+                <div className="flex flex-wrap gap-2 pt-2 font-mono-tech text-[10px] text-slate-400">
+                  <span className="px-2 py-1 rounded bg-black/80 border border-white/10">Maruti Suzuki</span>
+                  <span className="px-2 py-1 rounded bg-black/80 border border-white/10">Hyundai</span>
+                  <span className="px-2 py-1 rounded bg-black/80 border border-white/10">Tata Motors</span>
+                  <span className="px-2 py-1 rounded bg-black/80 border border-white/10">Mahindra 4x4</span>
+                  <span className="px-2 py-1 rounded bg-black/80 border border-white/10">Toyota</span>
+                  <span className="px-2 py-1 rounded bg-black/80 border border-white/10">BMW / Merc / Audi</span>
+                </div>
+              </div>
+
+              <div className="lg:col-span-4 flex flex-col gap-3">
+                <button
+                  onClick={onOpenBrandsPage}
+                  className="w-full py-4 px-6 rounded-sm bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-500 hover:to-orange-400 text-black font-rajdhani font-black text-xs uppercase tracking-widest shadow-xl shadow-orange-600/30 hover:scale-105 transition-all cursor-pointer flex items-center justify-center gap-2.5"
+                >
+                  <span>OPEN CAR BRANDS PAGE</span>
+                  <ArrowRight className="w-4 h-4 stroke-[3]" />
+                </button>
+                <span className="font-mono-tech text-[10px] text-center text-slate-500">
+                  100% Genuine OEM Spares &bull; Zero Advance Payment
+                </span>
               </div>
             </div>
-
-            <div className="lg:col-span-4 flex flex-col gap-3">
-              <button
-                onClick={onOpenBrandsPage}
-                className="w-full py-4 px-6 rounded-sm bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-500 hover:to-orange-400 text-black font-rajdhani font-black text-xs uppercase tracking-widest shadow-xl shadow-orange-600/30 hover:scale-105 transition-all cursor-pointer flex items-center justify-center gap-2.5"
-              >
-                <span>OPEN CAR BRANDS PAGE</span>
-                <ArrowRight className="w-4 h-4 stroke-[3]" />
-              </button>
-              <span className="font-mono-tech text-[10px] text-center text-slate-500">
-                100% Genuine OEM Spares &bull; Zero Advance Payment
-              </span>
-            </div>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       {/* ============================================================== */}
@@ -826,7 +850,7 @@ export default function VortexPerformanceShowcase({ currentLanguage = 'en', onOp
       <section id="inquiry" className="py-24 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto border-t border-white/5">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           
-          <div className="lg:col-span-5 space-y-4">
+          <ScrollReveal animation="slide-left" duration={850} className="lg:col-span-5 space-y-4">
             <span className="font-mono-tech text-[10px] uppercase text-orange-500 tracking-widest block">
               READY TO BUILD YOUR WEAPON?
             </span>
@@ -850,9 +874,9 @@ export default function VortexPerformanceShowcase({ currentLanguage = 'en', onOp
                 <span>EMAIL: <strong>service@vortexperformance.com</strong></span>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
 
-          <div className="lg:col-span-7">
+          <ScrollReveal animation="slide-right" duration={850} className="lg:col-span-7">
             {inquirySubmitted ? (
               <div className="p-8 rounded-xl bg-[#090b0e] border border-emerald-500/50 text-center">
                 <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto mb-3" />
@@ -868,7 +892,7 @@ export default function VortexPerformanceShowcase({ currentLanguage = 'en', onOp
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleFormSubmit} className="p-6 sm:p-8 rounded-xl bg-[#090b0e] border border-white/10 shadow-2xl space-y-4">
+              <form onSubmit={handleFormSubmit} className="p-6 sm:p-8 rounded-xl bg-[#090b0e] border border-white/10 shadow-2xl space-y-4 hover:border-orange-500/40 transition-colors">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block font-mono-tech text-[10px] uppercase text-slate-400 mb-1">FULL NAME *</label>
@@ -942,7 +966,7 @@ export default function VortexPerformanceShowcase({ currentLanguage = 'en', onOp
                 </button>
               </form>
             )}
-          </div>
+          </ScrollReveal>
 
         </div>
       </section>

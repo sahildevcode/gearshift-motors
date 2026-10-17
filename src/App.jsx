@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import SmoothScrollProvider from './components/SmoothScrollProvider';
 import VortexNavbar from './components/VortexNavbar';
 import VortexPerformanceShowcase from './components/VortexPerformanceShowcase';
 import BrandsEstimatorPage from './pages/BrandsEstimatorPage';
@@ -11,7 +12,11 @@ export default function App() {
 
   const navigateTo = (page) => {
     setActivePage(page);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (window.lenis) {
+      window.lenis.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   const handleBookService = (data) => {
@@ -23,13 +28,18 @@ export default function App() {
     setTimeout(() => {
       const element = document.getElementById('inquiry') || document.getElementById('booking-inquiry');
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        if (window.lenis) {
+          window.lenis.scrollTo(element, { offset: -60, duration: 1.2 });
+        } else {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
       }
     }, 150);
   };
 
   return (
-    <div className="min-h-screen bg-[#000000] text-slate-100 selection:bg-orange-500 selection:text-black font-space">
+    <SmoothScrollProvider activePage={activePage}>
+      <div className="min-h-screen bg-[#000000] text-slate-100 selection:bg-orange-500 selection:text-black font-space">
       
       {/* 
         1. Transparent VORTEX Navbar with low default opacity on links:
@@ -97,7 +107,7 @@ export default function App() {
           <Phone className="w-5 h-5 text-black" />
         </a>
       </div>
-
     </div>
+  </SmoothScrollProvider>
   );
 }

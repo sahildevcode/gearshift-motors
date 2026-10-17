@@ -86,3 +86,56 @@
 .animate-streamline {
   animation: flowStreamline 2.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
+
+/* Lenis Butter Smooth Scrolling */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* Motorsport Laser Accent Pulse */
+@keyframes laserSweep {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-laser-sweep {
+  background: linear-gradient(90deg, transparent, rgba(249, 115, 22, 0.6), transparent);
+  background-size: 200% 100%;
+  animation: laserSweep 3s ease-in-out infinite;
+}
+
+/* Subtle glow pulse on scroll-triggered active sections */
+@keyframes sectionGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(249, 115, 22, 0.05);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(249, 115, 22, 0.15);
+  }
+}
+
+.section-pulse-glow {
+  animation: sectionGlow 4s ease-in-out infinite;
+}
+
