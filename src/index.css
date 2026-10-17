@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-pure-black: #000000;
+    --bg-dark: #050608;
+    --bg-surface: #0a0c10;
+    --bg-card: #0e1017;
+    --vortex-orange: #f97316;
+    --vortex-orange-deep: #ea580c;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: #000000;
+    color: #f1f5f9;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background-color: #000000;
+    color: #f8fafc;
+  }
+}
+
+/* Custom Motorsport Typography Classes */
+.font-syncopate {
+  font-family: 'Syncopate', sans-serif;
+}
+
+.font-rajdhani {
+  font-family: 'Rajdhani', sans-serif;
+}
+
+.font-mono-tech {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.font-space {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* Pure Black Luxury Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #f97316;
+}
+
+/* Carbon Weave Texture */
+.carbon-pattern {
+  background-color: #030406;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 0);
+  background-size: 16px 16px;
+}
+
+/* Smooth wind tunnel airflow animation */
+@keyframes flowStreamline {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.animate-streamline {
+  animation: flowStreamline 2.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
