@@ -4,7 +4,30 @@ import BudgetCalculator from './BudgetCalculator';
 import FeaturedPartsSection from './FeaturedPartsSection';
 import BookingSection from './BookingSection';
 import WorkAndReviewsSection from './WorkAndReviewsSection';
-import kdBanner from '../assets/kd-banner.jpg';
+import kdBannerFull from '../assets/kd-banner.jpg';
+import kdBannerTop from '../assets/kd-banner-top.jpg';
+import kdBannerBottom from '../assets/kd-banner-bottom.jpg';
+
+const BANNER_OPTIONS = {
+  workshop: {
+    src: kdBannerTop,
+    alt: 'KD Workshop - Professional DPF Chemical Cleaning with XRS',
+    label: 'Workshop Bay (Dark)',
+    badge: 'Official Service Bay'
+  },
+  full: {
+    src: kdBannerFull,
+    alt: 'KD Workshop - Complete XRS DPF Decoking Poster',
+    label: 'Full Campaign Poster',
+    badge: 'Complete Guide'
+  },
+  tech: {
+    src: kdBannerBottom,
+    alt: 'KD Workshop - 3D DPF Filter Exhaust Flow Tech',
+    label: '3D Technical Cutaway',
+    badge: 'Ceramic Filter Tech'
+  }
+};
 
 export default function VortexPerformanceShowcase({ 
   onOpenBooking, 
@@ -14,6 +37,7 @@ export default function VortexPerformanceShowcase({
   prefilledBookingData 
 }) {
   const [activeBookingPrefill, setActiveBookingPrefill] = useState(prefilledBookingData || null);
+  const [activeBannerTab, setActiveBannerTab] = useState('workshop'); // Default: clean dark workshop banner
 
   const handleCalculatorBooking = (data) => {
     setActiveBookingPrefill(data);
@@ -33,16 +57,69 @@ export default function VortexPerformanceShowcase({
     <div className="relative bg-[#000000] text-white selection:bg-orange-500 selection:text-black">
       
       {/* ============================================================== */}
-      {/* 1. HERO SECTION: 100% WIDTH & 100% HEIGHT FULL-SCREEN BANNER   */}
-      {/* User requested: "100%width and higth kardo set yrr"            */}
+      {/* 1. HERO SECTION: OFFICIAL KD WORKSHOP BILLBOARD SHOWCASE      */}
+      {/* Perfectly scaled: zero top cut, zero bottom cut, zero stretch  */}
       {/* ============================================================== */}
-      <section id="hero" className="relative w-full h-screen sm:h-[100vh] overflow-hidden bg-black border-b border-white/10">
-        <img
-          src={kdBanner}
-          alt="KD Workshop - DPF Clean with XRS Products"
-          className="w-full h-full object-fill block"
-          style={{ width: '100%', height: '100%' }}
-        />
+      <section id="hero" className="relative w-full bg-[#030406] border-b border-white/10 pt-24 sm:pt-28 pb-8 sm:pb-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto space-y-3">
+          
+          {/* Subtle Top Metadata Bar & View Selector */}
+          <div className="flex flex-wrap items-center justify-between gap-3 text-xs">
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-[11px] font-bold uppercase tracking-wider text-orange-400">
+                KD WORKSHOP &bull; PRECISION AUTOMOTIVE CARE & GENUINE SPARES
+              </span>
+            </div>
+
+            {/* View Selector Pills */}
+            <div className="inline-flex items-center p-1 rounded-full bg-white/5 border border-white/10">
+              <button
+                type="button"
+                onClick={() => setActiveBannerTab('workshop')}
+                className={`px-3 py-1 rounded-full text-[11px] font-bold tracking-wider transition-all cursor-pointer ${
+                  activeBannerTab === 'workshop'
+                    ? 'bg-orange-500 text-black shadow-md shadow-orange-500/30'
+                    : 'text-slate-400 hover:text-white'
+                }`}
+              >
+                WORKSHOP BAY (DARK)
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveBannerTab('full')}
+                className={`px-3 py-1 rounded-full text-[11px] font-bold tracking-wider transition-all cursor-pointer ${
+                  activeBannerTab === 'full'
+                    ? 'bg-orange-500 text-black shadow-md shadow-orange-500/30'
+                    : 'text-slate-400 hover:text-white'
+                }`}
+              >
+                FULL POSTER
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveBannerTab('tech')}
+                className={`px-3 py-1 rounded-full text-[11px] font-bold tracking-wider transition-all cursor-pointer ${
+                  activeBannerTab === 'tech'
+                    ? 'bg-orange-500 text-black shadow-md shadow-orange-500/30'
+                    : 'text-slate-400 hover:text-white'
+                }`}
+              >
+                3D CUTAWAY
+              </button>
+            </div>
+          </div>
+
+          {/* Master Framed Banner Display - Natural Aspect Ratio, Zero Stretch, Zero Cut */}
+          <div className="relative w-full rounded-2xl sm:rounded-3xl overflow-hidden border border-white/15 bg-black shadow-2xl shadow-orange-500/10 flex items-center justify-center">
+            <img
+              src={BANNER_OPTIONS[activeBannerTab].src}
+              alt={BANNER_OPTIONS[activeBannerTab].alt}
+              className="w-full h-auto max-h-[75vh] object-contain block mx-auto transition-all duration-300"
+            />
+          </div>
+
+        </div>
       </section>
 
       {/* ============================================================== */}
