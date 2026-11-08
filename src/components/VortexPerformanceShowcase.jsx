@@ -1,598 +1,330 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Play, ArrowRight, Download, CheckCircle2, Phone, Mail, ChevronRight } from 'lucide-react';
-import ScrollReveal from './ScrollReveal';
+import React, { useState } from 'react';
+import { 
+  ArrowRight, ShieldCheck, Clock, Wrench, CheckCircle2, 
+  Phone, Mail, MapPin, Calendar, ShoppingBag, Sparkles, Car 
+} from 'lucide-react';
+import BudgetCalculator from './BudgetCalculator';
+import FeaturedPartsSection from './FeaturedPartsSection';
+import BookingSection from './BookingSection';
+import WorkAndReviewsSection from './WorkAndReviewsSection';
 
-export default function VortexPerformanceShowcase({ currentLanguage = 'en', onOpenBooking, onOpenBrandsPage }) {
-  const [isFilmOpen, setIsFilmOpen] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
+export default function VortexPerformanceShowcase({ 
+  onOpenBooking, 
+  onOpenBrandsPage, 
+  onNavigateToParts, 
+  onSelectProduct,
+  prefilledBookingData 
+}) {
+  const [activeBookingPrefill, setActiveBookingPrefill] = useState(prefilledBookingData || null);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Inquiry Form State
-  const [inquiryForm, setInquiryForm] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    projectType: 'Track Day & Performance Overhaul',
-    details: ''
-  });
-  const [inquirySubmitted, setInquirySubmitted] = useState(false);
-
-  const DRIVER_REVIEWS = [
-    {
-      name: 'MARCUS HOLLOWAY',
-      title: 'PROFESSIONAL DRIVER',
-      quote: 'The balance, the grip, the confidence — this car lets me push harder, lap after lap.',
-      img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80'
-    },
-    {
-      name: 'LIAM O’CONNOR',
-      title: 'ENDURANCE CHAMPION',
-      quote: 'Every detail is track-focused. You can feel the precision engineering in every corner entry.',
-      img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&auto=format&fit=crop&q=80'
-    },
-    {
-      name: 'ALEX RIVERA',
-      title: 'GT3 DRIVER',
-      quote: 'Fast out of the box. Built to win straight out of the garage. Unbelievable brake stability.',
-      img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&auto=format&fit=crop&q=80'
-    }
-  ];
-
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    setInquirySubmitted(true);
-    if (onOpenBooking) onOpenBooking(inquiryForm);
+  const handleCalculatorBooking = (data) => {
+    setActiveBookingPrefill(data);
+    setTimeout(() => {
+      const el = document.getElementById('booking-section');
+      if (el) {
+        if (window.lenis) {
+          window.lenis.scrollTo(el, { offset: -60, duration: 1.0 });
+        } else {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    }, 100);
   };
 
   return (
     <div className="relative bg-[#000000] text-white selection:bg-orange-500 selection:text-black">
       
       {/* ============================================================== */}
-      {/* 1. HERO SECTION (BUILT FOR LAP TIMES. ENGINEERED TO WIN.) */}
-      {/* Full-bleed background image layout */}
+      {/* 1. HERO SECTION: PRACTICAL AUTOMOTIVE WORKSHOP & SPARES        */}
       {/* ============================================================== */}
-      <section id="hero" className="relative min-h-screen flex flex-col justify-between pt-28 sm:pt-32 pb-10 overflow-hidden w-full">
+      <section id="hero" className="relative min-h-[90vh] flex flex-col justify-between pt-28 sm:pt-36 pb-12 overflow-hidden w-full border-b border-white/10">
         
-        {/* Full-Bleed Background Image (Supercar) with Parallax Scroll */}
+        {/* Workshop / Car Background with Dark Vignette */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
           <img
-            src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=2200&auto=format&fit=crop&q=90"
-            alt="Vortex Track Supercar"
-            style={{ transform: `translateY(${Math.min(scrollY * 0.35, 260)}px) scale(1.06)` }}
-            className="w-full h-full object-cover object-[75%_center] md:object-right-center lg:object-center brightness-[0.70] contrast-[1.15] will-change-transform transition-transform duration-75 ease-out"
+            src="https://images.unsplash.com/photo-1486006920555-c77dce18193b?w=2200&auto=format&fit=crop&q=85"
+            alt="Vortex Car Workshop"
+            className="w-full h-full object-cover object-center brightness-[0.45] contrast-[1.1]"
           />
-          {/* Deep Dark Motorsport Vignettes for 100% Typography Legibility */}
-          {/* Left-to-right pitch black gradient for text readability */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/85 md:via-black/70 to-black/30" />
-          {/* Top-to-bottom gradient for seamless transparent navbar and footer blend */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/85 to-black/40" />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/80" />
-          {/* Ambient orange glow in background */}
-          <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-orange-600/10 blur-[150px] rounded-full" />
+          <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-orange-600/10 blur-[150px] rounded-full" />
         </div>
 
-        {/* Hero Content Container */}
-        <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-8 lg:px-12 flex-1 flex flex-col justify-between">
+        {/* Hero Content */}
+        <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-8 lg:px-12 flex-1 flex flex-col justify-center">
           
-          {/* Main Headline & Description */}
-          <ScrollReveal animation="fade-up" duration={900} className="max-w-2xl space-y-6 text-left py-4">
-            <h1 className="font-syncopate text-4xl sm:text-6xl lg:text-7xl font-bold uppercase tracking-tight leading-[1.03] text-white drop-shadow-2xl">
-              BUILT FOR <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-amber-400 to-yellow-500">
-                LAP TIMES.
-              </span> <br />
-              ENGINEERED <br />
-              TO WIN.
+          <div className="max-w-2xl space-y-6 text-left py-4">
+            
+            {/* Top Tagline Badge */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-500/15 border border-orange-500/30 text-orange-400 text-xs font-semibold uppercase tracking-wider">
+              <Wrench className="w-3.5 h-3.5" />
+              <span>Certified Multi-Brand Automotive Workshop & Spares</span>
+            </div>
+
+            {/* Main Headline */}
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tight leading-[1.05] text-white">
+              PRECISION SERVICE. <br />
+              HONEST PRICING. <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-amber-400 to-yellow-400">
+                GENUINE SPARES.
+              </span>
             </h1>
 
-            <p className="font-space text-slate-300 text-xs sm:text-sm tracking-wide leading-relaxed max-w-lg drop-shadow">
-              Track-focused machines. Zero compromises. Every component. Every detail. Every lap. Precision maintenance and race-grade engine overhauls.
+            {/* Description */}
+            <p className="text-slate-300 text-sm sm:text-base tracking-wide leading-relaxed max-w-xl">
+              From 100% synthetic engine oiling and 3D wheel alignment to 3-layer ceramic glazing and genuine OEM spare parts. Free doorstep pick & drop, live WhatsApp video updates, and zero advance payment.
             </p>
 
-            {/* Dual Buttons (EXPLORE WORKSHOP & WATCH FILM) */}
+            {/* Action Buttons */}
             <div className="flex flex-wrap items-center gap-4 pt-2">
               <a
-                href="#engineering"
-                className="py-3.5 px-8 rounded-sm bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-500 hover:to-orange-400 text-black font-rajdhani font-black text-xs uppercase tracking-widest shadow-xl shadow-orange-600/30 hover:scale-105 transition-all flex items-center gap-2"
+                href="#booking-section"
+                className="py-3.5 px-7 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-black font-extrabold text-xs uppercase tracking-wider shadow-xl shadow-orange-500/25 hover:scale-105 transition-all flex items-center gap-2"
               >
-                <span>EXPLORE WORKSHOP</span>
+                <Calendar className="w-4 h-4 fill-black" />
+                <span>Book Service Appointment</span>
                 <ArrowRight className="w-3.5 h-3.5 stroke-[3]" />
               </a>
 
-              <button
-                onClick={() => setIsFilmOpen(true)}
-                className="py-3.5 px-6 rounded-sm bg-black/60 backdrop-blur-md border border-white/20 hover:border-white text-white font-rajdhani font-bold text-xs uppercase tracking-widest hover:bg-white/10 transition-all flex items-center gap-2 cursor-pointer"
+              <a
+                href="#budget-calculator"
+                className="py-3.5 px-6 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-white font-bold text-xs uppercase tracking-wider hover:border-orange-500/50 transition-all flex items-center gap-2"
               >
-                <span>WATCH FILM</span>
-                <Play className="w-3.5 h-3.5 fill-white" />
+                <Sparkles className="w-4 h-4 text-orange-400" />
+                <span>Calculate Service Budget</span>
+              </a>
+
+              <button
+                onClick={onNavigateToParts}
+                className="py-3.5 px-6 rounded-xl bg-black/60 hover:bg-black/90 border border-white/20 text-slate-200 hover:text-white font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer"
+              >
+                <ShoppingBag className="w-4 h-4 text-orange-400" />
+                <span>Browse Spare Parts (35+)</span>
               </button>
             </div>
 
-            {/* Quick Car Brands & Pricing Access Button */}
-            <div className="pt-4 max-w-lg">
+            {/* Direct Car Brands Selector Link */}
+            <div className="pt-2 max-w-lg">
               <button
                 onClick={onOpenBrandsPage}
-                className="w-full p-3.5 sm:p-4 rounded-xl bg-black/70 hover:bg-black/90 backdrop-blur-xl border border-white/15 hover:border-orange-500/60 flex items-center justify-between text-left transition-all cursor-pointer group/btn shadow-2xl"
+                className="w-full p-3.5 rounded-xl bg-black/70 hover:bg-black/90 backdrop-blur-md border border-white/15 hover:border-orange-500/60 flex items-center justify-between text-left transition-all cursor-pointer group/btn"
               >
                 <div className="flex items-center gap-3">
-                  <span className="text-2xl">🚗</span>
+                  <span className="text-xl">🚗</span>
                   <div>
-                    <span className="font-mono-tech text-xs font-bold text-white group-hover/btn:text-orange-400 block tracking-wide">
-                      CHECK CAR BRAND SERVICE & PRICING
+                    <span className="text-xs font-bold text-white group-hover/btn:text-orange-400 block">
+                      CHECK SPECIFIC RATES FOR YOUR CAR BRAND
                     </span>
-                    <span className="font-space text-[11px] text-slate-400">
+                    <span className="text-[11px] text-slate-400">
                       Maruti, Hyundai, Tata, Mahindra, Toyota, BMW, Mercedes rates &rarr;
                     </span>
                   </div>
                 </div>
-                <div className="w-8 h-8 rounded-full bg-orange-500 text-black flex items-center justify-center font-bold flex-shrink-0 group-hover/btn:scale-110 transition-transform">
-                  <ArrowRight className="w-4 h-4 stroke-[3]" />
+                <div className="w-7 h-7 rounded-full bg-orange-500 text-black flex items-center justify-center font-bold flex-shrink-0 group-hover/btn:scale-110 transition-transform">
+                  <ArrowRight className="w-3.5 h-3.5 stroke-[3]" />
                 </div>
               </button>
             </div>
 
-          </ScrollReveal>
+          </div>
 
-          {/* HUD Telemetry Metric Ticker Bar (Placed on bottom with dark glassmorphic styling) */}
-          <ScrollReveal animation="fade-up" delay={200} duration={800} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 pt-8 border-t border-white/15 mt-8 font-mono-tech">
+        </div>
+
+        {/* 4 Practical Trust Pillars Bar on Hero Footer */}
+        <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-8 lg:px-12 pt-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 border-t border-white/10 pt-6">
             
-            <div className="flex items-center gap-3 p-3.5 rounded-sm bg-black/70 backdrop-blur-md border border-white/10 hover:border-orange-500/40 transition-colors">
-              <span className="text-orange-500 text-lg">⏱</span>
+            <div className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.03] border border-white/5">
+              <div className="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center text-orange-400 flex-shrink-0">
+                <Clock className="w-5 h-5" />
+              </div>
               <div>
-                <div className="text-base sm:text-lg font-black text-white">01:37.542</div>
-                <div className="text-[10px] uppercase text-slate-400">LAP TIME</div>
+                <span className="text-xs font-bold text-white block">90-Min Service</span>
+                <span className="text-[10px] text-slate-400">Express Turnaround</span>
               </div>
             </div>
 
-            <div className="flex items-center gap-3 p-3.5 rounded-sm bg-black/70 backdrop-blur-md border border-white/10 hover:border-orange-500/40 transition-colors">
-              <span className="text-orange-500 text-lg">⚡</span>
+            <div className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.03] border border-white/5">
+              <div className="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center text-orange-400 flex-shrink-0">
+                <ShieldCheck className="w-5 h-5" />
+              </div>
               <div>
-                <div className="text-base sm:text-lg font-black text-white">168 MPH</div>
-                <div className="text-[10px] uppercase text-slate-400">MAX SPEED</div>
+                <span className="text-xs font-bold text-white block">100% Genuine OEM</span>
+                <span className="text-[10px] text-slate-400">Official Parts Warranty</span>
               </div>
             </div>
 
-            <div className="flex items-center gap-3 p-3.5 rounded-sm bg-black/70 backdrop-blur-md border border-white/10 hover:border-orange-500/40 transition-colors">
-              <span className="text-orange-500 text-lg">🎯</span>
+            <div className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.03] border border-white/5">
+              <div className="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center text-orange-400 flex-shrink-0">
+                <Car className="w-5 h-5" />
+              </div>
               <div>
-                <div className="text-base sm:text-lg font-black text-white">1.45G</div>
-                <div className="text-[10px] uppercase text-slate-400">LATERAL G</div>
+                <span className="text-xs font-bold text-white block">Free Pick & Drop</span>
+                <span className="text-[10px] text-slate-400">Doorstep Convenience</span>
               </div>
             </div>
 
-            <div className="flex items-center gap-3 p-3.5 rounded-sm bg-black/70 backdrop-blur-md border border-white/10 hover:border-orange-500/40 transition-colors">
-              <span className="text-orange-500 text-lg">🔥</span>
+            <div className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.03] border border-white/5">
+              <div className="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center text-orange-400 flex-shrink-0">
+                <CheckCircle2 className="w-5 h-5" />
+              </div>
               <div>
-                <div className="text-base sm:text-lg font-black text-white">820 HP</div>
-                <div className="text-[10px] uppercase text-slate-400">DYNO POWER</div>
+                <span className="text-xs font-bold text-white block">Zero Advance Pay</span>
+                <span className="text-[10px] text-slate-400">Pay After Satisfaction</span>
               </div>
             </div>
 
-            <div className="flex items-center gap-3 p-3.5 rounded-sm bg-black/70 backdrop-blur-md border border-white/10 hover:border-orange-500/40 transition-colors col-span-2 sm:col-span-1">
-              <span className="text-orange-500 text-lg">📊</span>
-              <div>
-                <div className="text-base sm:text-lg font-black text-white">6,900 RPM</div>
-                <div className="text-[10px] uppercase text-slate-400">REDLINE PEAK</div>
-              </div>
-            </div>
-
-          </ScrollReveal>
-
-        </div>
-
-      </section>
-
-      {/* ============================================================== */}
-      {/* SPECIFICATIONS & ENGINE SECTION */}
-      {/* ============================================================== */}
-      <section id="engineering" className="py-20 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto border-t border-white/5">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          
-          {/* Left Dyno Table */}
-          <ScrollReveal animation="slide-left" duration={850} className="lg:col-span-5 p-6 rounded-xl bg-[#090b0e] border border-white/10 shadow-2xl hover:border-orange-500/40 transition-colors">
-            <span className="font-mono-tech text-[10px] uppercase text-orange-500 tracking-widest block mb-4">
-              SPECIFICATIONS & DYNO DATA
-            </span>
-
-            <div className="space-y-3 font-mono-tech text-xs">
-              <div className="flex justify-between py-1.5 border-b border-white/5">
-                <span className="text-slate-500">ENGINE</span>
-                <span className="text-white font-bold">4.0L Twin-Turbo V8</span>
-              </div>
-              <div className="flex justify-between py-1.5 border-b border-white/5">
-                <span className="text-slate-500">POWER</span>
-                <span className="text-orange-400 font-bold">820 HP @ 6,900 RPM</span>
-              </div>
-              <div className="flex justify-between py-1.5 border-b border-white/5">
-                <span className="text-slate-500">TORQUE</span>
-                <span className="text-white font-bold">780 Nm @ 5,500 RPM</span>
-              </div>
-              <div className="flex justify-between py-1.5 border-b border-white/5">
-                <span className="text-slate-500">WEIGHT</span>
-                <span className="text-white font-bold">1,250 KG</span>
-              </div>
-              <div className="flex justify-between py-1.5 border-b border-white/5">
-                <span className="text-slate-500">DRIVETRAIN</span>
-                <span className="text-white font-bold">RWD Track Spec</span>
-              </div>
-              <div className="flex justify-between py-1.5 border-b border-white/5">
-                <span className="text-slate-500">TRANSMISSION</span>
-                <span className="text-white font-bold">6-Speed Sequential</span>
-              </div>
-              <div className="flex justify-between py-1.5 border-b border-white/5">
-                <span className="text-slate-500">0-100 KM/H</span>
-                <span className="text-orange-400 font-bold">2.7 SECONDS</span>
-              </div>
-              <div className="flex justify-between py-1.5">
-                <span className="text-slate-500">TOP SPEED</span>
-                <span className="text-white font-bold">188 MPH (302 KM/H)</span>
-              </div>
-            </div>
-
-            <button
-              onClick={() => alert('VORTEX Engine Dyno Calibration Sheet Downloaded (PDF)!')}
-              className="w-full mt-6 py-3 px-4 rounded-sm bg-white/5 hover:bg-white/10 border border-white/10 text-white font-rajdhani font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer"
-            >
-              <Download className="w-3.5 h-3.5 text-orange-400" />
-              <span>DOWNLOAD SPEC SHEET</span>
-            </button>
-          </ScrollReveal>
-
-          {/* Right Engineered For Advantage */}
-          <ScrollReveal animation="slide-right" duration={850} className="lg:col-span-7 space-y-6">
-            <h2 className="font-syncopate text-3xl sm:text-4xl font-bold uppercase text-white tracking-tight">
-              ENGINEERED <br />
-              <span className="text-orange-500">FOR ADVANTAGE</span>
-            </h2>
-
-            <p className="font-space text-slate-400 text-xs sm:text-sm leading-relaxed max-w-lg">
-              From CFD-optimized aero to motorsport-grade suspension, every element is engineered to deliver surgical speed, lateral stability, and unyielding driver confidence.
-            </p>
-
-            {/* Custom Clean Vector Icons */}
-            <div className="grid grid-cols-3 gap-4 pt-4">
-              <div className="p-4 rounded-xl bg-[#090b0e] border border-white/5 text-center hover:border-orange-500/50 hover:scale-105 transition-all">
-                <svg viewBox="0 0 48 48" className="w-7 h-7 mx-auto mb-2 text-orange-500" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <path d="M6 16C16 16 22 28 42 28M6 24C14 24 20 32 42 32M6 32C18 32 24 20 42 20" strokeLinecap="round" />
-                </svg>
-                <span className="font-mono-tech text-[10px] font-bold text-white block uppercase">CFD AERODYNAMICS</span>
-                <span className="font-mono-tech text-[9px] text-slate-500">Wind-Tunnel Verified</span>
-              </div>
-
-              <div className="p-4 rounded-xl bg-[#090b0e] border border-white/5 text-center hover:border-orange-500/50 hover:scale-105 transition-all">
-                <svg viewBox="0 0 48 48" className="w-7 h-7 mx-auto mb-2 text-orange-500" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <rect x="20" y="6" width="8" height="36" rx="2" />
-                  <path d="M14 14C24 10 24 20 34 16M14 24C24 20 24 30 34 26M14 34C24 30 24 40 34 36" strokeLinecap="round" />
-                </svg>
-                <span className="font-mono-tech text-[10px] font-bold text-white block uppercase">MOTORSPORT SUSPENSION</span>
-                <span className="font-mono-tech text-[9px] text-slate-500">Active Dynamic Damping</span>
-              </div>
-
-              <div className="p-4 rounded-xl bg-[#090b0e] border border-white/5 text-center hover:border-orange-500/50 hover:scale-105 transition-all">
-                <svg viewBox="0 0 48 48" className="w-7 h-7 mx-auto mb-2 text-orange-500" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <polygon points="24,6 40,16 40,32 24,42 8,32 8,16" />
-                  <line x1="24" y1="6" x2="24" y2="42" />
-                  <line x1="8" y1="16" x2="40" y2="32" />
-                </svg>
-                <span className="font-mono-tech text-[10px] font-bold text-white block uppercase">CARBON FIBER CHASSIS</span>
-                <span className="font-mono-tech text-[9px] text-slate-500">Peak Torque Rigidity</span>
-              </div>
-            </div>
-          </ScrollReveal>
-
-        </div>
-      </section>
-
-      {/* ============================================================== */}
-      {/* BUILT. TESTED. PROVEN. (Before & After Transformation) */}
-      {/* ============================================================== */}
-      <section id="workshop" className="py-20 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto border-t border-white/5">
-        <ScrollReveal animation="fade-up" duration={800} className="mb-8 flex flex-wrap items-center justify-between gap-4 font-mono-tech">
-          <div>
-            <span className="text-[10px] uppercase text-orange-500 tracking-widest block mb-1">
-              BUILT. TESTED. PROVEN.
-            </span>
-            <h2 className="font-syncopate text-2xl sm:text-3xl font-bold uppercase text-white tracking-tight">
-              THE WORKSHOP TRANSFORMATION
-            </h2>
           </div>
-
-          <div className="flex items-center gap-4 p-2.5 rounded bg-orange-950/40 border border-orange-500/40 text-[11px]">
-            <div>LAP IMPROVEMENT: <strong className="text-orange-400 font-bold">-4.823 SECONDS</strong></div>
-            <div>&bull;</div>
-            <div>DOWNFORCE: <strong className="text-emerald-400 font-bold">+41% GAIN</strong></div>
-          </div>
-        </ScrollReveal>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <ScrollReveal animation="slide-left" delay={100} duration={850}>
-            <div className="p-4 rounded-xl bg-[#090b0e] border border-white/10 hover:border-white/30 transition-all h-full">
-              <span className="font-mono-tech text-[10px] uppercase text-slate-500 block mb-2 font-bold">
-                BEFORE THE BUILD (STOCK STREET SPEC)
-              </span>
-              <div className="relative h-60 rounded-lg overflow-hidden mb-3">
-                <img
-                  src="https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?w=800&auto=format&fit=crop&q=85"
-                  alt="Before build"
-                  className="w-full h-full object-cover filter grayscale contrast-125 hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute top-3 left-3 px-2 py-0.5 rounded bg-black/80 font-mono-tech text-[10px] text-slate-300">
-                  STOCK ENGINE &bull; 410 HP
-                </div>
-              </div>
-              <p className="font-space text-xs text-slate-400">
-                Standard factory tolerances, street suspension damping, prone to thermal brake fade under repeated track laps.
-              </p>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal animation="slide-right" delay={200} duration={850}>
-            <div className="p-4 rounded-xl bg-[#090b0e] border border-orange-500/40 shadow-xl shadow-orange-950/30 hover:border-orange-500 hover:shadow-[0_0_30px_rgba(249,115,22,0.2)] transition-all h-full">
-              <span className="font-mono-tech text-[10px] uppercase text-orange-400 block mb-2 font-bold">
-                AFTER THE BUILD (RACE-SPEC WEAPON)
-              </span>
-              <div className="relative h-60 rounded-lg overflow-hidden mb-3">
-                <img
-                  src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=800&auto=format&fit=crop&q=85"
-                  alt="After build"
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute top-3 left-3 px-2 py-0.5 rounded bg-orange-600 font-mono-tech text-[10px] text-black font-bold">
-                  VORTEX REBUILD &bull; 820 HP
-                </div>
-              </div>
-              <p className="font-space text-xs text-slate-300">
-                Forged internals, twin sequential turbos, 100% genuine motorsport components, and 2-year performance warranty.
-              </p>
-            </div>
-          </ScrollReveal>
         </div>
+
       </section>
 
       {/* ============================================================== */}
-      {/* 7. DRIVER FEEDBACK (Driver Testimonials) */}
+      {/* 2. CORE FEATURE: DYNAMIC BUDGET CALCULATOR WITH ADD TO CART    */}
       {/* ============================================================== */}
-      <section id="reviews" className="py-20 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto border-t border-white/5">
-        <ScrollReveal animation="fade-up" duration={800} className="mb-8">
-          <span className="font-mono-tech text-[10px] uppercase text-orange-500 tracking-widest block mb-2">
-            DRIVER FEEDBACK & PODIUM TESTIMONIALS
-          </span>
-          <h2 className="font-syncopate text-2xl sm:text-3xl font-bold uppercase text-white tracking-tight">
-            TRUSTED AT 180 MPH
-          </h2>
-        </ScrollReveal>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {DRIVER_REVIEWS.map((drv, i) => (
-            <ScrollReveal key={i} animation="fade-up" delay={i * 150} duration={850} className="h-full">
-              <div className="h-full p-6 rounded-xl bg-[#090b0e] border border-white/10 hover:border-orange-500/50 hover:shadow-[0_0_25px_rgba(249,115,22,0.15)] transition-all flex flex-col justify-between">
-                <p className="font-space text-xs sm:text-sm text-slate-300 italic mb-6 leading-relaxed">
-                  "{drv.quote}"
-                </p>
-                <div className="flex items-center gap-3 pt-4 border-t border-white/5 font-mono-tech">
-                  <img src={drv.img} alt={drv.name} className="w-10 h-10 rounded-full object-cover border border-orange-500" />
-                  <div>
-                    <h4 className="text-xs font-bold text-white uppercase">{drv.name}</h4>
-                    <span className="text-[10px] text-orange-400">{drv.title}</span>
-                  </div>
-                </div>
-              </div>
-            </ScrollReveal>
-          ))}
-        </div>
-      </section>
+      <BudgetCalculator onSelectBookingSlot={handleCalculatorBooking} />
 
       {/* ============================================================== */}
-      {/* 6. CAR BRANDS (Matches Navbar Item #6) */}
+      {/* 3. CORE FEATURE: APPOINTMENT BOOKING OPTION                    */}
       {/* ============================================================== */}
-      <section id="brands-pricing" className="py-20 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto border-t border-white/5">
-        <ScrollReveal animation="scale-up" duration={900}>
-          <div className="p-8 sm:p-12 rounded-2xl bg-[#090b0e] border border-orange-500/40 relative overflow-hidden shadow-2xl hover:border-orange-500/70 hover:shadow-[0_0_40px_rgba(249,115,22,0.25)] transition-all">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-orange-600/15 blur-[130px] pointer-events-none rounded-full" />
+      <BookingSection prefilledData={activeBookingPrefill} />
+
+      {/* ============================================================== */}
+      {/* 4. CORE FEATURE: 4-5 FEATURED SPARE PARTS (STORE TEASER)       */}
+      {/* ============================================================== */}
+      <FeaturedPartsSection
+        onNavigateToStore={onNavigateToParts}
+        onSelectProduct={onSelectProduct}
+      />
+
+      {/* ============================================================== */}
+      {/* 5. CORE FEATURE: PREVIOUS WORK, REVIEWS & SHORT CLIPS          */}
+      {/* ============================================================== */}
+      <WorkAndReviewsSection />
+
+      {/* ============================================================== */}
+      {/* 6. MULTI-BRAND PRICING ESTIMATOR CALLOUT BANNER               */}
+      {/* ============================================================== */}
+      <section className="py-16 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto border-t border-white/10">
+        <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-r from-[#0c0f17] via-[#121622] to-[#0c0f17] border border-orange-500/30 shadow-2xl relative overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
-            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-              <div className="lg:col-span-8 space-y-3">
-                <span className="font-mono-tech text-[10px] uppercase text-orange-500 tracking-widest block font-bold">
-                  MULTI-BRAND CAR WORKSHOP & RATE CALCULATOR
-                </span>
-                <h2 className="font-syncopate text-2xl sm:text-4xl font-bold uppercase text-white tracking-tight leading-tight">
-                  SELECT YOUR BRAND & <br />
-                  <span className="text-orange-500">GET INSTANT ESTIMATE</span>
-                </h2>
-                <p className="font-space text-slate-300 text-xs sm:text-sm leading-relaxed max-w-xl">
-                  Need service or mechanical repairs for your Maruti Suzuki, Hyundai, Tata, Mahindra, Toyota, Honda, Kia, BMW or Mercedes? Click below to view transparent prices, turnaround time guarantees, genuine parts warranty, and 1-click slot booking on our dedicated pricing page.
-                </p>
-
-                {/* Supported brands tags */}
-                <div className="flex flex-wrap gap-2 pt-2 font-mono-tech text-[10px] text-slate-400">
-                  <span className="px-2 py-1 rounded bg-black/80 border border-white/10">Maruti Suzuki</span>
-                  <span className="px-2 py-1 rounded bg-black/80 border border-white/10">Hyundai</span>
-                  <span className="px-2 py-1 rounded bg-black/80 border border-white/10">Tata Motors</span>
-                  <span className="px-2 py-1 rounded bg-black/80 border border-white/10">Mahindra 4x4</span>
-                  <span className="px-2 py-1 rounded bg-black/80 border border-white/10">Toyota</span>
-                  <span className="px-2 py-1 rounded bg-black/80 border border-white/10">BMW / Merc / Audi</span>
-                </div>
-              </div>
-
-              <div className="lg:col-span-4 flex flex-col gap-3">
-                <button
-                  onClick={onOpenBrandsPage}
-                  className="w-full py-4 px-6 rounded-sm bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-500 hover:to-orange-400 text-black font-rajdhani font-black text-xs uppercase tracking-widest shadow-xl shadow-orange-600/30 hover:scale-105 transition-all cursor-pointer flex items-center justify-center gap-2.5"
-                >
-                  <span>OPEN CAR BRANDS PAGE</span>
-                  <ArrowRight className="w-4 h-4 stroke-[3]" />
-                </button>
-                <span className="font-mono-tech text-[10px] text-center text-slate-500">
-                  100% Genuine OEM Spares &bull; Zero Advance Payment
-                </span>
+            <div className="lg:col-span-8 space-y-3">
+              <span className="text-xs uppercase font-bold text-orange-400 tracking-wider block">
+                Multi-Brand Car Rate Matrix
+              </span>
+              <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+                Want Transparent Rates For Your Specific Car Brand?
+              </h2>
+              <p className="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-xl">
+                Maruti Suzuki, Hyundai, Tata, Mahindra 4x4, Toyota, Honda, BMW or Mercedes? Click below to explore standard vs showroom dealer rates, guaranteed turnaround times, and genuine part warranties on our brand estimator page.
+              </p>
+              <div className="flex flex-wrap gap-2 pt-2 text-xs text-slate-400">
+                <span className="px-2.5 py-1 rounded bg-black/60 border border-white/10">Maruti Suzuki</span>
+                <span className="px-2.5 py-1 rounded bg-black/60 border border-white/10">Hyundai</span>
+                <span className="px-2.5 py-1 rounded bg-black/60 border border-white/10">Tata Motors</span>
+                <span className="px-2.5 py-1 rounded bg-black/60 border border-white/10">Mahindra 4x4</span>
+                <span className="px-2.5 py-1 rounded bg-black/60 border border-white/10">Toyota</span>
+                <span className="px-2.5 py-1 rounded bg-black/60 border border-white/10">BMW / Mercedes</span>
               </div>
             </div>
+
+            <div className="lg:col-span-4 flex flex-col gap-3">
+              <button
+                onClick={onOpenBrandsPage}
+                className="w-full py-4 px-6 rounded-xl bg-orange-500 hover:bg-orange-600 text-black font-extrabold text-xs uppercase tracking-wider shadow-xl shadow-orange-500/25 hover:scale-105 transition-all cursor-pointer flex items-center justify-center gap-2"
+              >
+                <span>Open Brand Pricing Page</span>
+                <ArrowRight className="w-4 h-4 stroke-[3]" />
+              </button>
+              <span className="text-[11px] text-center text-slate-400">
+                Zero Hidden Charges &bull; Genuine OEM Warranty
+              </span>
+            </div>
+
           </div>
-        </ScrollReveal>
+        </div>
       </section>
 
       {/* ============================================================== */}
-      {/* 7. INQUIRY FORM: READY TO BUILD YOUR WEAPON? LET'S MAKE IT HAPPEN (Matches Navbar #7) */}
+      {/* 7. WORKSHOP CONTACT, HOTLINE & LOCATION                        */}
       {/* ============================================================== */}
-      <section id="inquiry" className="py-24 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto border-t border-white/5">
+      <section id="contact" className="py-20 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto border-t border-white/10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           
-          <ScrollReveal animation="slide-left" duration={850} className="lg:col-span-5 space-y-4">
-            <span className="font-mono-tech text-[10px] uppercase text-orange-500 tracking-widest block">
-              READY TO BUILD YOUR WEAPON?
+          <div className="lg:col-span-5 space-y-4">
+            <span className="text-xs font-bold uppercase text-orange-400 tracking-wider block">
+              Workshop Location & Assistance
             </span>
-            <h2 className="font-syncopate text-3xl sm:text-4xl font-bold uppercase text-white tracking-tight leading-tight">
-              LET'S MAKE IT <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-400">
-                HAPPEN.
-              </span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+              Visit Our Garage or <span className="text-orange-500">Call Us Anytime</span>
             </h2>
-            <p className="font-space text-slate-400 text-xs sm:text-sm leading-relaxed">
-              Tell us about your car and goals. Our master mechanics and performance dyno calibrators will build a machine that's engineered for you.
+            <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
+              Have an urgent breakdown, brake noise, or scheduled service query? Our master service advisors are available 7 days a week to inspect your car and answer your questions.
             </p>
 
-            <div className="pt-6 border-t border-white/10 space-y-3 font-mono-tech text-xs">
-              <div className="flex items-center gap-2 text-slate-300">
-                <Phone className="w-4 h-4 text-orange-500" />
-                <span>HOTLINE: <strong>+91 98765 43210 / +1 (888) 4-VORTEX</strong></span>
-              </div>
-              <div className="flex items-center gap-2 text-slate-300">
-                <Mail className="w-4 h-4 text-orange-500" />
-                <span>EMAIL: <strong>service@vortexperformance.com</strong></span>
-              </div>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal animation="slide-right" duration={850} className="lg:col-span-7">
-            {inquirySubmitted ? (
-              <div className="p-8 rounded-xl bg-[#090b0e] border border-emerald-500/50 text-center">
-                <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto mb-3" />
-                <h3 className="font-syncopate text-lg font-bold text-white mb-2">INQUIRY DISPATCHED!</h3>
-                <p className="font-space text-xs text-slate-400 max-w-sm mx-auto mb-4">
-                  Our chief race engineer will contact you on WhatsApp / Phone within 15 minutes with a dyno spec consultation.
-                </p>
-                <button
-                  onClick={() => setInquirySubmitted(false)}
-                  className="px-4 py-2 rounded bg-slate-800 text-xs text-slate-300 font-mono-tech"
-                >
-                  Submit Another Project
-                </button>
-              </div>
-            ) : (
-              <form onSubmit={handleFormSubmit} className="p-6 sm:p-8 rounded-xl bg-[#090b0e] border border-white/10 shadow-2xl space-y-4 hover:border-orange-500/40 transition-colors">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block font-mono-tech text-[10px] uppercase text-slate-400 mb-1">FULL NAME *</label>
-                    <input
-                      type="text"
-                      required
-                      placeholder="e.g. John Wick / Rohan Mehra"
-                      value={inquiryForm.name}
-                      onChange={(e) => setInquiryForm({ ...inquiryForm, name: e.target.value })}
-                      className="w-full py-3 px-3.5 rounded bg-black border border-white/10 text-white font-space text-xs focus:outline-none focus:border-orange-500"
-                    />
-                  </div>
-                  <div>
-                    <label className="block font-mono-tech text-[10px] uppercase text-slate-400 mb-1">EMAIL ADDRESS *</label>
-                    <input
-                      type="email"
-                      required
-                      placeholder="e.g. pilot@racecars.com"
-                      value={inquiryForm.email}
-                      onChange={(e) => setInquiryForm({ ...inquiryForm, email: e.target.value })}
-                      className="w-full py-3 px-3.5 rounded bg-black border border-white/10 text-white font-space text-xs focus:outline-none focus:border-orange-500"
-                    />
-                  </div>
+            <div className="space-y-3 pt-4 text-xs font-medium">
+              <div className="flex items-center gap-3 text-slate-200">
+                <div className="w-8 h-8 rounded-lg bg-orange-500/20 text-orange-400 flex items-center justify-center">
+                  <Phone className="w-4 h-4" />
                 </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block font-mono-tech text-[10px] uppercase text-slate-400 mb-1">PHONE NUMBER *</label>
-                    <input
-                      type="tel"
-                      required
-                      placeholder="+91 98765 43210"
-                      value={inquiryForm.phone}
-                      onChange={(e) => setInquiryForm({ ...inquiryForm, phone: e.target.value })}
-                      className="w-full py-3 px-3.5 rounded bg-black border border-white/10 text-white font-space text-xs focus:outline-none focus:border-orange-500"
-                    />
-                  </div>
-                  <div>
-                    <label className="block font-mono-tech text-[10px] uppercase text-slate-400 mb-1">PROJECT TYPE ▾</label>
-                    <select
-                      value={inquiryForm.projectType}
-                      onChange={(e) => setInquiryForm({ ...inquiryForm, projectType: e.target.value })}
-                      className="w-full py-3 px-3.5 rounded bg-black border border-white/10 text-white font-space text-xs focus:outline-none focus:border-orange-500"
-                    >
-                      <option value="Track Day & Performance Overhaul">Track Day & Performance Overhaul</option>
-                      <option value="Engine Rebuild & Turbo Tuning">Engine Rebuild & Turbo Tuning</option>
-                      <option value="Periodic Synthetic Maintenance">Periodic Synthetic Maintenance</option>
-                      <option value="Brake & Suspension Overhaul">Brake & Suspension Overhaul</option>
-                      <option value="Super Chill AC & Electrical">Super Chill AC & Electrical</option>
-                    </select>
-                  </div>
-                </div>
-
                 <div>
-                  <label className="block font-mono-tech text-[10px] uppercase text-slate-400 mb-1">TELL US ABOUT YOUR PROJECT</label>
-                  <textarea
-                    rows="3"
-                    placeholder="Describe your car model, current issues or desired horsepower target..."
-                    value={inquiryForm.details}
-                    onChange={(e) => setInquiryForm({ ...inquiryForm, details: e.target.value })}
-                    className="w-full py-2.5 px-3.5 rounded bg-black border border-white/10 text-white font-space text-xs focus:outline-none focus:border-orange-500"
-                  />
+                  <span className="text-[10px] text-slate-400 block uppercase">Direct Hotline</span>
+                  <strong>+91 98765 43210 / 011-4567-8900</strong>
                 </div>
+              </div>
 
-                <button
-                  type="submit"
-                  className="w-full py-3.5 px-6 rounded bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-500 hover:to-orange-400 text-black font-rajdhani font-black text-xs uppercase tracking-widest shadow-xl shadow-orange-600/30 transition-all cursor-pointer flex items-center justify-center gap-2"
-                >
-                  <span>SUBMIT INQUIRY</span>
-                  <ArrowRight className="w-4 h-4 stroke-[3]" />
-                </button>
-              </form>
-            )}
-          </ScrollReveal>
-
-        </div>
-      </section>
-
-      {/* Video Modal */}
-      {isFilmOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/95 backdrop-blur-md">
-          <div className="relative w-full max-w-3xl rounded-xl bg-[#090b0e] border border-orange-500/40 p-6">
-            <button
-              onClick={() => setIsFilmOpen(false)}
-              className="absolute top-4 right-4 font-mono-tech text-xs px-3 py-1 bg-white/10 rounded text-white cursor-pointer"
-            >
-              CLOSE &times;
-            </button>
-            <h3 className="font-syncopate text-base font-bold text-white mb-2">VORTEX WORKSHOP FILM &bull; PIT LANE SPRINT</h3>
-            <div className="relative h-72 sm:h-96 rounded-lg overflow-hidden bg-black flex items-center justify-center">
-              <img
-                src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1600&auto=format&fit=crop&q=85"
-                alt="Film preview"
-                className="w-full h-full object-cover opacity-75"
-              />
-              <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-4 bg-black/60">
-                <div className="w-16 h-16 rounded-full bg-orange-500 flex items-center justify-center text-black mb-3 shadow-2xl animate-pulse">
-                  <Play className="w-8 h-8 fill-black translate-x-0.5" />
+              <div className="flex items-center gap-3 text-slate-200">
+                <div className="w-8 h-8 rounded-lg bg-orange-500/20 text-orange-400 flex items-center justify-center">
+                  <Mail className="w-4 h-4" />
                 </div>
-                <span className="text-white font-mono-tech text-xs uppercase font-bold tracking-widest">
-                  PRECISION DYNO RUN &bull; 820 HP AT 6,900 RPM
-                </span>
+                <div>
+                  <span className="text-[10px] text-slate-400 block uppercase">Email Support</span>
+                  <strong>service@vortexperformance.com</strong>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3 text-slate-200">
+                <div className="w-8 h-8 rounded-lg bg-orange-500/20 text-orange-400 flex items-center justify-center">
+                  <MapPin className="w-4 h-4" />
+                </div>
+                <div>
+                  <span className="text-[10px] text-slate-400 block uppercase">Central Workshop</span>
+                  <strong>Plot 42, Auto Hub Avenue, Industrial Area Phase II</strong>
+                </div>
               </div>
             </div>
           </div>
+
+          <div className="lg:col-span-7 p-6 sm:p-8 rounded-3xl bg-[#090b10] border border-white/10 space-y-4 shadow-xl">
+            <h3 className="text-lg font-bold text-white">Workshop Operating Hours</h3>
+            
+            <div className="divide-y divide-white/5 text-xs">
+              <div className="flex justify-between py-2.5">
+                <span className="text-slate-400">Monday - Friday</span>
+                <span className="text-white font-mono font-bold">8:30 AM - 8:00 PM</span>
+              </div>
+              <div className="flex justify-between py-2.5">
+                <span className="text-slate-400">Saturday</span>
+                <span className="text-white font-mono font-bold">8:30 AM - 7:30 PM</span>
+              </div>
+              <div className="flex justify-between py-2.5">
+                <span className="text-slate-400">Sunday</span>
+                <span className="text-orange-400 font-mono font-bold">9:00 AM - 4:00 PM (Emergency & Express)</span>
+              </div>
+            </div>
+
+            <div className="p-4 rounded-xl bg-black/60 border border-white/10 text-xs text-slate-300 space-y-2">
+              <span className="text-orange-400 font-bold block">🚗 Free Doorstep Pick & Drop Service</span>
+              <p className="text-[11px] text-slate-400 leading-relaxed">
+                Live within a 15 KM radius? Book a morning slot and our insured driver will pick up your car from your residence or office, complete the service, and return it washed and sanitized before 6 PM.
+              </p>
+            </div>
+          </div>
+
         </div>
-      )}
+      </section>
 
     </div>
   );

@@ -1,140 +1,196 @@
-import React, { useState, useEffect } from 'react';
-import { ArrowRight, Menu, X } from 'lucide-react';
+import React, { useState } from 'react';
+import { useCart } from '../context/CartContext';
+import { ShoppingBag, ArrowRight, Menu, X, Wrench, ShieldCheck, Phone } from 'lucide-react';
 
-export default function VortexNavbar({ activePage = 'home', onNavigate, onInquireClick }) {
+export default function VortexNavbar({ activePage = 'home', onNavigate, onBookAppointmentClick }) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { totalItemsCount, setIsCartOpen } = useCart();
 
-  // Navigation links
   const navLinks = [
-    { id: 'home', label: 'HOME', href: '#hero' },
-    { id: 'engineering', label: 'ENGINEERING', href: '#engineering' },
-    { id: 'workshop', label: 'WORKSHOP', href: '#workshop' },
-    { id: 'reviews', label: 'REVIEWS', href: '#reviews' },
-    { id: 'brands', label: 'CAR BRANDS', href: '#brands-pricing', isPageRedirect: true },
-    { id: 'inquiry', label: 'CONTACT', href: '#inquiry' },
+    { id: 'home', label: 'HOME', href: '#hero', type: 'home_anchor' },
+    { id: 'budget', label: 'BUDGET CALCULATOR', href: '#budget-calculator', type: 'home_anchor' },
+    { id: 'booking', label: 'BOOK APPOINTMENT', href: '#booking-section', type: 'home_anchor' },
+    { id: 'parts', label: 'PARTS STORE', href: '#parts-store', type: 'page', page: 'parts' },
+    { id: 'work', label: 'PREVIOUS WORK', href: '#previous-work', type: 'home_anchor' },
+    { id: 'brands', label: 'CAR BRANDS', href: '#brands-pricing', type: 'page', page: 'brands' }
   ];
 
   const handleLinkClick = (e, link) => {
-    if (link.isPageRedirect) {
+    if (link.type === 'page') {
       e.preventDefault();
-      if (onNavigate) onNavigate('brands');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (onNavigate) onNavigate(link.page);
     } else {
       if (activePage !== 'home') {
+        e.preventDefault();
         if (onNavigate) onNavigate('home');
+        setTimeout(() => {
+          const el = document.querySelector(link.href);
+          if (el) {
+            if (window.lenis) {
+              window.lenis.scrollTo(el, { offset: -70, duration: 1.0 });
+            } else {
+              el.scrollIntoView({ behavior: 'smooth' });
+            }
+          }
+        }, 150);
       }
     }
     setMobileOpen(false);
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
-      {/* 
-        Transparent Navbar with low default opacity on links:
-        User requested: "नेविगेशन बार को ट्रांसपेरेंट रखो। जब माउस जाएगा उस पर तभी वो जो नेविगेशन बार की चीजें हैं वो हल्की सी ब्लिंक होगी। सिर्फ उनका मतलब ओपेसिटी कम रखना है। दिखेंगी पर हल्की दिखेंगी, क्लियर डार्क नहीं दिखेंगी।"
-      */}
-      <nav className="px-4 sm:px-8 lg:px-12 py-5 bg-transparent backdrop-blur-[3px] border-b border-white/[0.04] transition-all duration-500 hover:bg-black/40 hover:backdrop-blur-md">
+    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+      <nav className="px-4 sm:px-8 lg:px-12 py-4 bg-black/85 backdrop-blur-md border-b border-white/10 transition-all">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           
-          {/* Logo with subdued default opacity that brightens on hover */}
-          <a
-            href="#hero"
-            onClick={(e) => {
-              if (activePage !== 'home') {
-                e.preventDefault();
-                if (onNavigate) onNavigate('home');
-              }
-            }}
-            className="flex items-center gap-2 group opacity-75 hover:opacity-100 transition-opacity duration-300"
+          {/* Logo on Left */}
+          <button
+            onClick={() => onNavigate('home')}
+            className="flex items-center gap-2.5 text-left group cursor-pointer"
           >
+            <div className="w-9 h-9 rounded-xl bg-orange-500 flex items-center justify-center text-black font-black text-lg shadow-lg shadow-orange-500/30 group-hover:scale-105 transition-transform">
+              <Wrench className="w-5 h-5 stroke-[2.5]" />
+            </div>
             <div className="flex flex-col">
-              <div className="flex items-center font-syncopate text-xl sm:text-2xl font-bold tracking-widest text-white leading-none">
-                <span>VORTE</span>
-                <span className="text-orange-500 font-black">X</span>
+              <div className="flex items-center text-lg sm:text-xl font-extrabold tracking-wider text-white leading-none">
+                <span>VORTEX</span>
+                <span className="text-orange-500 ml-1">MOTORS</span>
               </div>
-              <span className="font-mono-tech text-[8px] sm:text-[9px] tracking-[0.28em] text-slate-400 uppercase -mt-0.5 opacity-60 group-hover:opacity-100 transition-opacity">
-                PERFORMANCE
+              <span className="text-[9px] tracking-widest text-slate-400 uppercase font-semibold mt-0.5">
+                WORKSHOP & GENUINE SPARES
               </span>
             </div>
-          </a>
+          </button>
 
-          {/* 
-            Desktop Navigation Links:
-            Base opacity is kept LOW (opacity-40) - "दिखेंगी पर हल्की दिखेंगी, क्लियर डार्क नहीं दिखेंगी"
-            On hover: opacity jumps to 100% with soft glow/blink transition!
-          */}
-          <div className="hidden lg:flex items-center gap-8 font-mono-tech text-xs tracking-widest">
+          {/* Desktop Navigation Links */}
+          <div className="hidden lg:flex items-center gap-7 text-xs font-semibold tracking-wider">
             {navLinks.map((link) => {
-              const isActive = (link.id === 'brands' && activePage === 'brands') || (link.id === 'home' && activePage === 'home');
+              const isCurrent =
+                (link.id === 'parts' && activePage === 'parts') ||
+                (link.id === 'brands' && activePage === 'brands') ||
+                (link.id === 'home' && activePage === 'home');
+
               return (
                 <a
-                  key={link.label}
+                  key={link.id}
                   href={link.href}
                   onClick={(e) => handleLinkClick(e, link)}
-                  className={`relative py-1 cursor-pointer transition-all duration-300 uppercase ${
-                    isActive
-                      ? 'text-orange-400 opacity-90 font-bold'
-                      : 'text-slate-200 opacity-40 hover:opacity-100 hover:text-orange-400 hover:drop-shadow-[0_0_8px_rgba(249,115,22,0.6)]'
+                  className={`py-1 cursor-pointer transition-colors uppercase ${
+                    isCurrent
+                      ? 'text-orange-400 font-bold'
+                      : 'text-slate-300 hover:text-orange-400'
                   }`}
                 >
-                  <span>{link.label}</span>
-                  {/* Subtle animated indicator on hover */}
-                  <span className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-orange-500 hover:w-full transition-all duration-300" />
+                  {link.label}
                 </a>
               );
             })}
           </div>
 
-          {/* Right Action: Subdued opacity Inquire button that brightens on hover */}
-          <div className="hidden sm:flex items-center gap-4">
+          {/* Right Action Icons & Buttons */}
+          <div className="flex items-center gap-3">
+            
+            {/* Parts Store Shortcut Pill (Desktop) */}
+            <button
+              onClick={() => onNavigate('parts')}
+              className={`hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
+                activePage === 'parts'
+                  ? 'bg-orange-500 text-black shadow-md shadow-orange-500/20'
+                  : 'bg-white/5 hover:bg-white/10 text-slate-200 border border-white/10'
+              }`}
+            >
+              <span>Parts Store</span>
+              <span className="px-1.5 py-0.2 rounded text-[10px] bg-orange-500/20 text-orange-400 font-mono">
+                35+
+              </span>
+            </button>
+
+            {/* Cart Icon with Live Badge Counter */}
+            <button
+              onClick={() => setIsCartOpen(true)}
+              className="relative p-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white transition-all cursor-pointer group"
+              title="View Cart & Services"
+            >
+              <ShoppingBag className="w-5 h-5 group-hover:text-orange-400 transition-colors" />
+              {totalItemsCount > 0 && (
+                <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-orange-500 text-black text-[11px] font-black flex items-center justify-center animate-bounce shadow-lg shadow-orange-500/50">
+                  {totalItemsCount}
+                </span>
+              )}
+            </button>
+
+            {/* Direct Book Appointment CTA */}
             <button
               onClick={() => {
-                if (activePage !== 'home') {
-                  if (onNavigate) onNavigate('home');
-                  setTimeout(() => {
-                    const el = document.getElementById('inquiry');
-                    if (el) el.scrollIntoView({ behavior: 'smooth' });
-                  }, 100);
+                if (onBookAppointmentClick) {
+                  onBookAppointmentClick();
                 } else {
-                  const el = document.getElementById('inquiry');
-                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  if (activePage !== 'home') onNavigate('home');
+                  setTimeout(() => {
+                    const el = document.getElementById('booking-section');
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  }, 150);
                 }
-                if (onInquireClick) onInquireClick();
               }}
-              className="py-2 px-5 rounded-sm bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-500 hover:to-orange-400 text-black font-rajdhani font-black text-xs uppercase tracking-widest shadow-lg shadow-orange-600/20 opacity-75 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-pointer flex items-center gap-1.5"
+              className="hidden md:inline-flex items-center gap-2 py-2 px-4 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-black font-extrabold text-xs uppercase tracking-wider shadow-lg shadow-orange-500/20 hover:scale-105 transition-all cursor-pointer"
             >
-              <span>INQUIRE NOW</span>
-              <ArrowRight className="w-3.5 h-3.5 stroke-[3]" />
+              <span>Book Appointment</span>
+              <ArrowRight className="w-3.5 h-3.5 stroke-[2.5]" />
             </button>
-          </div>
 
-          {/* Mobile Menu Toggle */}
-          <div className="flex lg:hidden items-center gap-3">
+            {/* Mobile Menu Toggle */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="p-2 rounded bg-white/5 border border-white/10 text-white opacity-70 hover:opacity-100"
+              className="lg:hidden p-2 rounded-lg bg-white/5 hover:bg-white/10 text-white cursor-pointer"
             >
               {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
+
           </div>
 
         </div>
 
-        {/* Mobile Dropdown */}
+        {/* Mobile Dropdown Menu */}
         {mobileOpen && (
-          <div className="lg:hidden mt-4 pt-4 border-t border-white/10 bg-black/95 rounded-xl p-4 space-y-3 font-mono-tech text-xs tracking-wider">
+          <div className="lg:hidden pt-4 pb-3 border-t border-white/10 mt-3 space-y-2">
             {navLinks.map((link) => (
               <a
-                key={link.label}
+                key={link.id}
                 href={link.href}
                 onClick={(e) => handleLinkClick(e, link)}
-                className="block py-2 text-slate-300 opacity-60 hover:opacity-100 hover:text-orange-400"
+                className="block py-2 px-3 rounded-lg text-sm font-semibold text-slate-200 hover:bg-white/5 hover:text-orange-400"
               >
                 {link.label}
               </a>
             ))}
+
+            <div className="pt-2 border-t border-white/5 flex gap-2">
+              <button
+                onClick={() => {
+                  onNavigate('parts');
+                  setMobileOpen(false);
+                }}
+                className="w-1/2 py-2.5 rounded-lg bg-white/10 text-white font-bold text-xs uppercase text-center"
+              >
+                Parts Store
+              </button>
+              <button
+                onClick={() => {
+                  if (activePage !== 'home') onNavigate('home');
+                  setMobileOpen(false);
+                  setTimeout(() => {
+                    const el = document.getElementById('booking-section');
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  }, 150);
+                }}
+                className="w-1/2 py-2.5 rounded-lg bg-orange-500 text-black font-bold text-xs uppercase text-center"
+              >
+                Book Slot
+              </button>
+            </div>
           </div>
         )}
+
       </nav>
     </header>
   );
