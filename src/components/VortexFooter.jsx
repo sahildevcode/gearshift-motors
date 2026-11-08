@@ -38,10 +38,9 @@ export default function VortexFooter() {
         {/* Explore Links */}
         <div className="lg:col-span-2 font-mono-tech text-xs space-y-2.5">
           <h4 className="text-white uppercase font-bold tracking-wider mb-3">EXPLORE</h4>
-          <div><a href="#builds" className="hover:text-orange-400 transition-colors">Builds</a></div>
-          <div><a href="#telemetry" className="hover:text-orange-400 transition-colors">Performance</a></div>
           <div><a href="#engineering" className="hover:text-orange-400 transition-colors">Engineering</a></div>
-          <div><a href="#aerodynamics" className="hover:text-orange-400 transition-colors">Aerodynamics</a></div>
+          <div><a href="#workshop" className="hover:text-orange-400 transition-colors">Workshop</a></div>
+          <div><a href="#reviews" className="hover:text-orange-400 transition-colors">Reviews</a></div>
           <div><a href="#brands-pricing" className="hover:text-orange-400 transition-colors">Car Brands</a></div>
         </div>
 

@@ -12,14 +12,11 @@ export default function SmoothScrollProvider({ children, activePage = 'home' }) 
 
   const SECTORS = [
     { id: 'hero', num: '01', label: 'HERO' },
-    { id: 'builds', num: '02', label: 'BUILDS' },
-    { id: 'telemetry', num: '03', label: 'TELEMETRY' },
-    { id: 'engineering', num: '04', label: 'V8 DYNO' },
-    { id: 'aerodynamics', num: '05', label: 'AERO CFD' },
-    { id: 'workshop', num: '06', label: 'WORKSHOP' },
-    { id: 'reviews', num: '07', label: 'REVIEWS' },
-    { id: 'brands-pricing', num: '08', label: 'BRANDS' },
-    { id: 'inquiry', num: '09', label: 'CONTACT' },
+    { id: 'engineering', num: '02', label: 'V8 DYNO' },
+    { id: 'workshop', num: '03', label: 'WORKSHOP' },
+    { id: 'reviews', num: '04', label: 'REVIEWS' },
+    { id: 'brands-pricing', num: '05', label: 'BRANDS' },
+    { id: 'inquiry', num: '06', label: 'CONTACT' },
   ];
 
   useEffect(() => {

@@ -3,12 +3,8 @@ import { Play, ArrowRight, Download, CheckCircle2, Phone, Mail, ChevronRight } f
 import ScrollReveal from './ScrollReveal';
 
 export default function VortexPerformanceShowcase({ currentLanguage = 'en', onOpenBooking, onOpenBrandsPage }) {
-  const [activeTelemetryTab, setActiveTelemetryTab] = useState('SPEED');
-  const [activeAeroSpeed, setActiveAeroSpeed] = useState(150);
   const [isFilmOpen, setIsFilmOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
-  const canvasRef = useRef(null);
-  const aeroCanvasRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,198 +23,6 @@ export default function VortexPerformanceShowcase({ currentLanguage = 'en', onOp
     details: ''
   });
   const [inquirySubmitted, setInquirySubmitted] = useState(false);
-
-  const TELEMETRY_TABS = ['SPEED', 'G FORCE', 'THROTTLE', 'BRAKE', 'RPM', 'TEMPERATURE'];
-
-  // 1. Live Interactive Waveform Canvas
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    let animationId;
-    let offset = 0;
-
-    const renderGraph = () => {
-      const w = canvas.width = canvas.parentElement.clientWidth;
-      const h = canvas.height = 200;
-
-      ctx.clearRect(0, 0, w, h);
-
-      // Clean Sub-Grid lines
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.04)';
-      ctx.lineWidth = 1;
-      for (let x = 0; x < w; x += 40) {
-        ctx.beginPath();
-        ctx.moveTo(x, 0);
-        ctx.lineTo(x, h);
-        ctx.stroke();
-      }
-      for (let y = 0; y < h; y += 40) {
-        ctx.beginPath();
-        ctx.moveTo(0, y);
-        ctx.lineTo(w, y);
-        ctx.stroke();
-      }
-
-      // Smooth Telemetry Waveform Curve
-      ctx.beginPath();
-      ctx.strokeStyle = '#f97316'; // Vibrant motorsport orange
-      ctx.lineWidth = 2.5;
-
-      const points = [];
-      const step = 6;
-      const freq = activeTelemetryTab === 'RPM' ? 0.045 : activeTelemetryTab === 'BRAKE' ? 0.022 : 0.032;
-      const amp = activeTelemetryTab === 'G FORCE' ? 32 : 52;
-
-      for (let x = 0; x <= w; x += step) {
-        const y = h / 2 + Math.sin((x + offset) * freq) * amp + Math.cos(x * 0.012) * (amp * 0.35);
-        points.push({ x, y });
-        if (x === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
-      }
-      ctx.stroke();
-
-      // Translucent Orange Under-Gradient
-      ctx.lineTo(w, h);
-      ctx.lineTo(0, h);
-      ctx.closePath();
-      const grad = ctx.createLinearGradient(0, 0, 0, h);
-      grad.addColorStop(0, 'rgba(249, 115, 22, 0.22)');
-      grad.addColorStop(1, 'rgba(249, 115, 22, 0.0)');
-      ctx.fillStyle = grad;
-      ctx.fill();
-
-      // Peak Indicator dot
-      if (points.length > 0) {
-        const peak = points[Math.floor(points.length * 0.72)];
-        ctx.beginPath();
-        ctx.arc(peak.x, peak.y, 4.5, 0, Math.PI * 2);
-        ctx.fillStyle = '#ffffff';
-        ctx.fill();
-        ctx.strokeStyle = '#f97316';
-        ctx.lineWidth = 2.5;
-        ctx.stroke();
-      }
-
-      offset += 1.4;
-      animationId = requestAnimationFrame(renderGraph);
-    };
-
-    renderGraph();
-    return () => cancelAnimationFrame(animationId);
-  }, [activeTelemetryTab]);
-
-  // 2. High-Precision Wind Tunnel Aerodynamic Streamlines Animation (Replaces the boat dashes)
-  useEffect(() => {
-    const canvas = aeroCanvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    let animId;
-    let time = 0;
-
-    // Define 7 smooth continuous aerodynamic streamlines following the car profile
-    const renderWindTunnel = () => {
-      const w = canvas.width = canvas.parentElement.clientWidth;
-      const h = canvas.height = 240;
-
-      ctx.clearRect(0, 0, w, h);
-
-      // Base wind tunnel flow lines
-      const streamLines = [
-        { baseY: 45, curveAmp: 25, startX: 0 },
-        { baseY: 75, curveAmp: 35, startX: 30 },
-        { baseY: 105, curveAmp: 42, startX: 10 },
-        { baseY: 135, curveAmp: 38, startX: 50 },
-        { baseY: 165, curveAmp: 28, startX: 20 },
-        { baseY: 195, curveAmp: 18, startX: 40 },
-      ];
-
-      streamLines.forEach((line, index) => {
-        ctx.beginPath();
-        const speed = (activeAeroSpeed / 100) * 8;
-        const lineOffset = (time * speed + line.startX * 4) % w;
-
-        // Draw flowing aerodynamic curve over vehicle
-        for (let x = 0; x <= w; x += 10) {
-          // Curvature mimicking sports car roofline: rise over hood (x: 200-400), peak at cockpit (400-550), drop to rear wing (550-700)
-          let y = line.baseY;
-          if (x > 180 && x < 420) {
-            // Hood & Windshield rise
-            y -= Math.sin(((x - 180) / 240) * Math.PI) * line.curveAmp;
-          } else if (x >= 420 && x < 680) {
-            // Roof & Rear Spoiler downforce compression
-            y -= Math.cos(((x - 420) / 260) * Math.PI) * (line.curveAmp * 0.85);
-          }
-
-          if (x === 0) ctx.moveTo(x, y);
-          else ctx.lineTo(x, y);
-        }
-
-        // Animated neon dash
-        ctx.strokeStyle = `rgba(249, 115, 22, ${0.18 + (index % 3) * 0.12})`;
-        ctx.lineWidth = 1.6;
-        ctx.stroke();
-
-        // Glowing Flow Tracer Bullet
-        const tracerX = lineOffset;
-        let tracerY = line.baseY;
-        if (tracerX > 180 && tracerX < 420) {
-          tracerY -= Math.sin(((tracerX - 180) / 240) * Math.PI) * line.curveAmp;
-        } else if (tracerX >= 420 && tracerX < 680) {
-          tracerY -= Math.cos(((tracerX - 420) / 260) * Math.PI) * (line.curveAmp * 0.85);
-        }
-
-        // Draw glowing tracer particle
-        const particleGrad = ctx.createRadialGradient(tracerX, tracerY, 0, tracerX, tracerY, 18);
-        particleGrad.addColorStop(0, 'rgba(255, 255, 255, 0.95)');
-        particleGrad.addColorStop(0.3, 'rgba(249, 115, 22, 0.8)');
-        particleGrad.addColorStop(1, 'rgba(249, 115, 22, 0)');
-        ctx.fillStyle = particleGrad;
-        ctx.beginPath();
-        ctx.arc(tracerX, tracerY, 18, 0, Math.PI * 2);
-        ctx.fill();
-      });
-
-      time += 0.8;
-      animId = requestAnimationFrame(renderWindTunnel);
-    };
-
-    renderWindTunnel();
-    return () => cancelAnimationFrame(animId);
-  }, [activeAeroSpeed]);
-
-  const FEATURED_BUILDS = [
-    {
-      id: 'gt-r',
-      name: 'VORTEX GT-R',
-      tag: 'TRACK WEAPON',
-      hp: '820 HP',
-      weight: '1,250 KG',
-      spec: 'FIA HOMOLOGATED',
-      image: 'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=800&auto=format&fit=crop&q=85',
-      desc: 'Purpose-built carbon widebody for sprint race domination and surgical apex cornering.'
-    },
-    {
-      id: 'gt3x',
-      name: 'VORTEX GT3X',
-      tag: 'ENDURANCE READY',
-      hp: '750 HP',
-      weight: '1,280 KG',
-      spec: '24H TESTED',
-      image: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&auto=format&fit=crop&q=85',
-      desc: 'Reinforced cooling jackets and dry-sump lubrication calibrated for brutal 24-hour endurance.'
-    },
-    {
-      id: 'cs',
-      name: 'VORTEX CS',
-      tag: 'CLUBSPORT',
-      hp: '600 HP',
-      weight: '1,150 KG',
-      spec: 'TRACK FOCUSED',
-      image: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800&auto=format&fit=crop&q=85',
-      desc: 'The ultimate gentleman driver track-day machine with street legality and surgical precision.'
-    }
-  ];
 
   const DRIVER_REVIEWS = [
     {
@@ -291,13 +95,13 @@ export default function VortexPerformanceShowcase({ currentLanguage = 'en', onOp
               Track-focused machines. Zero compromises. Every component. Every detail. Every lap. Precision maintenance and race-grade engine overhauls.
             </p>
 
-            {/* Dual Buttons (EXPLORE BUILDS & WATCH FILM) */}
+            {/* Dual Buttons (EXPLORE WORKSHOP & WATCH FILM) */}
             <div className="flex flex-wrap items-center gap-4 pt-2">
               <a
-                href="#builds"
+                href="#engineering"
                 className="py-3.5 px-8 rounded-sm bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-500 hover:to-orange-400 text-black font-rajdhani font-black text-xs uppercase tracking-widest shadow-xl shadow-orange-600/30 hover:scale-105 transition-all flex items-center gap-2"
               >
-                <span>EXPLORE BUILDS</span>
+                <span>EXPLORE WORKSHOP</span>
                 <ArrowRight className="w-3.5 h-3.5 stroke-[3]" />
               </a>
 
@@ -385,142 +189,7 @@ export default function VortexPerformanceShowcase({ currentLanguage = 'en', onOp
       </section>
 
       {/* ============================================================== */}
-      {/* 2. BUILDS: FEATURED BUILDS GRID (Matches Navbar item #2) */}
-      {/* ============================================================== */}
-      <section id="builds" className="py-20 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto border-t border-white/5">
-        <ScrollReveal animation="fade-up" duration={800} className="mb-10">
-          <span className="font-mono-tech text-[10px] uppercase text-orange-500 tracking-widest block mb-1">
-            FEATURED BUILDS & PERFORMANCE PACKAGES
-          </span>
-          <h2 className="font-syncopate text-2xl sm:text-3xl font-bold uppercase text-white tracking-tight">
-            MOTORSPORT WEAPONS
-          </h2>
-        </ScrollReveal>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {FEATURED_BUILDS.map((build, index) => (
-            <ScrollReveal
-              key={build.id}
-              animation="fade-up"
-              delay={index * 150}
-              duration={850}
-              className="h-full"
-            >
-              <div className="group h-full rounded-xl bg-[#090b0e] border border-white/10 overflow-hidden shadow-2xl flex flex-col justify-between hover:border-orange-500/60 hover:shadow-[0_0_30px_rgba(249,115,22,0.22)] transition-all duration-300">
-                <div>
-                  <div className="p-5 pb-3">
-                    <h3 className="font-syncopate text-lg font-bold uppercase text-white tracking-wide">
-                      {build.name}
-                    </h3>
-                    <span className="font-mono-tech text-[10px] uppercase text-orange-400 tracking-wider">
-                      {build.tag}
-                    </span>
-                  </div>
-
-                  <div className="relative h-44 overflow-hidden">
-                    <img
-                      src={build.image}
-                      alt={build.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#090b0e] via-transparent to-transparent pointer-events-none" />
-                  </div>
-
-                  <div className="grid grid-cols-3 gap-2 px-5 py-3 text-center border-t border-b border-white/5 font-mono-tech text-[11px]">
-                    <div>
-                      <div className="font-bold text-white">{build.hp}</div>
-                      <div className="text-[9px] text-slate-500">POWER</div>
-                    </div>
-                    <div>
-                      <div className="font-bold text-white">{build.weight}</div>
-                      <div className="text-[9px] text-slate-500">WEIGHT</div>
-                    </div>
-                    <div>
-                      <div className="font-bold text-orange-400">{build.spec}</div>
-                      <div className="text-[9px] text-slate-500">CLASS</div>
-                    </div>
-                  </div>
-
-                  <p className="font-space px-5 py-3 text-xs text-slate-400 leading-relaxed">
-                    {build.desc}
-                  </p>
-                </div>
-
-                {/* Orange Bottom Button (Exact match from screenshot) */}
-                <a
-                  href="#inquiry"
-                  className="w-full py-3.5 px-4 bg-orange-600 hover:bg-orange-500 text-black font-rajdhani font-black text-xs uppercase tracking-widest transition-colors cursor-pointer text-center block"
-                >
-                  VIEW BUILD &bull; INQUIRE
-                </a>
-              </div>
-            </ScrollReveal>
-          ))}
-        </div>
-      </section>
-
-      {/* ============================================================== */}
-      {/* 3. PERFORMANCE: REAL DATA. REAL RESULTS. (Matches Navbar item #3) */}
-      {/* ============================================================== */}
-      <section id="telemetry" className="py-20 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto border-t border-white/5">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
-          <ScrollReveal animation="slide-left" duration={850} className="lg:col-span-4 space-y-4">
-            <span className="font-mono-tech text-[10px] uppercase text-orange-500 tracking-widest block">
-              PERFORMANCE TELEMETRY
-            </span>
-            <h2 className="font-syncopate text-3xl sm:text-4xl font-bold uppercase text-white tracking-tight">
-              REAL DATA. <br />
-              REAL RESULTS.
-            </h2>
-            <p className="font-space text-slate-400 text-xs sm:text-sm leading-relaxed">
-              Our systems don't just perform on paper. They perform where it matters — on track, dyno ramps, and real-world asphalt.
-            </p>
-            <a
-              href="#inquiry"
-              className="font-mono-tech text-xs uppercase tracking-wider text-orange-400 hover:text-white flex items-center gap-1.5 pt-2 transition-colors cursor-pointer"
-            >
-              <span>VIEW FULL DATA LOGS</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </a>
-          </ScrollReveal>
-
-          <ScrollReveal animation="slide-right" duration={850} className="lg:col-span-8 p-6 rounded-xl bg-[#090b0e] border border-white/10 shadow-2xl hover:border-orange-500/40 transition-colors">
-            {/* Telemetry Mode Tabs */}
-            <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-white/10 mb-4 font-mono-tech">
-              <div className="flex flex-wrap gap-1.5">
-                {TELEMETRY_TABS.map((tab) => (
-                  <button
-                    key={tab}
-                    onClick={() => setActiveTelemetryTab(tab)}
-                    className={`px-3.5 py-1.5 rounded-sm text-[11px] font-bold tracking-wider transition-all cursor-pointer ${
-                      activeTelemetryTab === tab
-                        ? 'bg-orange-500 text-black shadow-md'
-                        : 'text-slate-400 hover:text-white hover:bg-white/5'
-                    }`}
-                  >
-                    {tab}
-                  </button>
-                ))}
-              </div>
-
-              <div className="text-right text-[11px]">
-                <span className="text-slate-500 block">BEST LAP: <strong className="text-orange-400 font-bold">01:37.542</strong></span>
-                <span className="text-slate-500 text-[10px]">CIRCUIT OF THE AMERICAS &bull; 92°F / DRY</span>
-              </div>
-            </div>
-
-            {/* Live Canvas Graph */}
-            <div className="relative w-full h-[200px] overflow-hidden rounded-sm">
-              <canvas ref={canvasRef} className="w-full h-full block" />
-            </div>
-          </ScrollReveal>
-
-        </div>
-      </section>
-
-      {/* ============================================================== */}
-      {/* 4. SPECIFICATIONS & ENGINE SECTION */}
+      {/* SPECIFICATIONS & ENGINE SECTION */}
       {/* ============================================================== */}
       <section id="engineering" className="py-20 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto border-t border-white/5">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
@@ -621,83 +290,7 @@ export default function VortexPerformanceShowcase({ currentLanguage = 'en', onOp
       </section>
 
       {/* ============================================================== */}
-      {/* 5. AERO BY DESIGN / DOWNFORCE (Clean Studio Car & CFD Streamlines) */}
-      {/* ============================================================== */}
-      <section id="aerodynamics" className="py-20 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto border-t border-white/5">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          
-          <ScrollReveal animation="slide-left" duration={850} className="lg:col-span-4 space-y-3">
-            <span className="font-mono-tech text-[10px] uppercase text-orange-500 tracking-widest block">
-              AERO BY DESIGN
-            </span>
-            <h2 className="font-syncopate text-3xl font-bold uppercase text-white tracking-tight">
-              DOWNFORCE. <br />
-              WHERE IT COUNTS.
-            </h2>
-            <p className="font-space text-slate-400 text-xs sm:text-sm leading-relaxed">
-              Every curve, vent, and surface is shaped by telemetry. More grip. More stability. Faster corner exit speeds.
-            </p>
-
-            <div className="pt-2 font-mono-tech">
-              <span className="text-[11px] text-slate-400 block mb-1">
-                WIND TUNNEL SPEED: <strong className="text-orange-400 font-bold">{activeAeroSpeed} MPH</strong>
-              </span>
-              <input
-                type="range"
-                min="60"
-                max="220"
-                value={activeAeroSpeed}
-                onChange={(e) => setActiveAeroSpeed(Number(e.target.value))}
-                className="w-full accent-orange-500 cursor-pointer"
-              />
-            </div>
-          </ScrollReveal>
-
-          {/* Pure Dark Studio Supercar with Authentic Continuous Streamlines (No boats!) */}
-          <ScrollReveal animation="scale-up" duration={900} className="lg:col-span-8 p-6 rounded-xl bg-[#07080a] border border-white/10 shadow-2xl relative overflow-hidden">
-            
-            <div className="relative w-full h-[240px] rounded-lg overflow-hidden flex items-center justify-center bg-black">
-              {/* Dynamic CFD Streamlines Canvas */}
-              <canvas ref={aeroCanvasRef} className="absolute inset-0 w-full h-full block z-20 pointer-events-none" />
-              
-              {/* Clean Dark Supercar Side Silhouette (No Boats / Clean Pitch Black Studio) */}
-              <img
-                src="https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?w=1600&auto=format&fit=crop&q=85"
-                alt="Race Car Studio Profile"
-                className="w-full h-full object-cover object-center filter brightness-90 contrast-125 z-10"
-              />
-
-              {/* Dark lateral vignette blending into pure black */}
-              <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black pointer-events-none z-15" />
-            </div>
-
-            {/* Downforce Metrics (Exact from screenshot) */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6 pt-4 border-t border-white/10 text-center font-mono-tech">
-              <div>
-                <div className="text-base sm:text-lg font-black text-white">1,850 KG</div>
-                <div className="text-[9px] text-slate-500 uppercase">DOWNFORCE @ 150 MPH</div>
-              </div>
-              <div>
-                <div className="text-base sm:text-lg font-black text-white">0.28 Cd</div>
-                <div className="text-[9px] text-slate-500 uppercase">DRAG COEFFICIENT</div>
-              </div>
-              <div>
-                <div className="text-base sm:text-lg font-black text-orange-400">+32%</div>
-                <div className="text-[9px] text-slate-500 uppercase">SPLITTER FLOW</div>
-              </div>
-              <div>
-                <div className="text-base sm:text-lg font-black text-orange-400">+18%</div>
-                <div className="text-[9px] text-slate-500 uppercase">DIFFUSER EFFICIENCY</div>
-              </div>
-            </div>
-
-          </ScrollReveal>
-
-        </div>
-      </section>
-
-      {/* ============================================================== */}
-      {/* 6. BUILT. TESTED. PROVEN. (Before & After Transformation) */}
+      {/* BUILT. TESTED. PROVEN. (Before & After Transformation) */}
       {/* ============================================================== */}
       <section id="workshop" className="py-20 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto border-t border-white/5">
         <ScrollReveal animation="fade-up" duration={800} className="mb-8 flex flex-wrap items-center justify-between gap-4 font-mono-tech">

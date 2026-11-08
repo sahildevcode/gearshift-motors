@@ -4,13 +4,12 @@ import { ArrowRight, Menu, X } from 'lucide-react';
 export default function VortexNavbar({ activePage = 'home', onNavigate, onInquireClick }) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  // Exact navigation sequence requested by the user
+  // Navigation links
   const navLinks = [
     { id: 'home', label: 'HOME', href: '#hero' },
-    { id: 'builds', label: 'BUILDS', href: '#builds' },
-    { id: 'telemetry', label: 'PERFORMANCE', href: '#telemetry' },
     { id: 'engineering', label: 'ENGINEERING', href: '#engineering' },
-    { id: 'aerodynamics', label: 'AERODYNAMICS', href: '#aerodynamics' },
+    { id: 'workshop', label: 'WORKSHOP', href: '#workshop' },
+    { id: 'reviews', label: 'REVIEWS', href: '#reviews' },
     { id: 'brands', label: 'CAR BRANDS', href: '#brands-pricing', isPageRedirect: true },
     { id: 'inquiry', label: 'CONTACT', href: '#inquiry' },
   ];
