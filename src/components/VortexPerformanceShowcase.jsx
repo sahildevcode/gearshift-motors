@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-import { 
-  ArrowRight, ShieldCheck, Clock, Wrench, CheckCircle2, 
-  Phone, Mail, MapPin, Calendar, ShoppingBag, Sparkles, Car, Star 
-} from 'lucide-react';
+import { ArrowRight, Phone, Mail, MapPin } from 'lucide-react';
 import BudgetCalculator from './BudgetCalculator';
 import FeaturedPartsSection from './FeaturedPartsSection';
 import BookingSection from './BookingSection';
@@ -35,195 +32,19 @@ export default function VortexPerformanceShowcase({
     <div className="relative bg-[#000000] text-white selection:bg-orange-500 selection:text-black">
       
       {/* ============================================================== */}
-      {/* 1. HERO SECTION: PRACTICAL AUTOMOTIVE WORKSHOP & SHOWCASE      */}
+      {/* 1. HERO SECTION: PURE FULL-SCREEN CAR IMAGE (ZERO TEXT/BUTTONS) */}
+      {/* User requested: "Home page mein jitna bhi text aur button       */}
+      {/* wagera hai un sab ko hata do. Sirf ek car ki image rahegi       */}
+      {/* background mein, uske upar kuch bhi nahi karna hai."           */}
       {/* ============================================================== */}
-      <section id="hero" className="relative min-h-[92vh] flex flex-col justify-between pt-28 sm:pt-36 pb-12 overflow-hidden w-full border-b border-white/10">
-        
-        {/* Ambient Warm Workshop Lighting Glow */}
-        <div className="absolute top-1/4 right-1/3 w-[600px] h-[600px] bg-orange-600/10 blur-[180px] rounded-full pointer-events-none" />
-        <div className="absolute bottom-10 left-10 w-[400px] h-[400px] bg-amber-500/5 blur-[150px] rounded-full pointer-events-none" />
-
-        {/* Hero Main Content Container */}
-        <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-8 lg:px-12 flex-1 flex flex-col justify-center">
-          
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center py-6">
-            
-            {/* Left Column: Headlines & Actions (7 Cols) */}
-            <div className="lg:col-span-7 space-y-6 text-left">
-              
-              {/* Top Tagline Badge */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-500/15 border border-orange-500/30 text-orange-400 text-xs font-semibold uppercase tracking-wider">
-                <Wrench className="w-3.5 h-3.5" />
-                <span>Certified Multi-Brand Automotive Workshop & Spares</span>
-              </div>
-
-              {/* Main Headline */}
-              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tight leading-[1.05] text-white">
-                PRECISION SERVICE. <br />
-                HONEST PRICING. <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-amber-400 to-yellow-400">
-                  GENUINE SPARES.
-                </span>
-              </h1>
-
-              {/* Description */}
-              <p className="text-slate-300 text-sm sm:text-base tracking-wide leading-relaxed max-w-xl">
-                From 100% synthetic engine oiling and 3D wheel alignment to 3-layer ceramic glazing and genuine OEM spare parts. Free doorstep pick & drop, live WhatsApp video updates, and zero advance payment.
-              </p>
-
-              {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-3.5 pt-2">
-                <a
-                  href="#booking-section"
-                  className="py-3.5 px-6 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-black font-extrabold text-xs uppercase tracking-wider shadow-xl shadow-orange-500/25 hover:scale-105 transition-all flex items-center gap-2"
-                >
-                  <Calendar className="w-4 h-4 fill-black" />
-                  <span>Book Service Appointment</span>
-                  <ArrowRight className="w-3.5 h-3.5 stroke-[3]" />
-                </a>
-
-                <a
-                  href="#budget-calculator"
-                  className="py-3.5 px-5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-white font-bold text-xs uppercase tracking-wider hover:border-orange-500/50 transition-all flex items-center gap-2"
-                >
-                  <Sparkles className="w-4 h-4 text-orange-400" />
-                  <span>Calculate Budget</span>
-                </a>
-
-                <button
-                  onClick={onNavigateToParts}
-                  className="py-3.5 px-5 rounded-xl bg-black/60 hover:bg-black/90 border border-white/20 text-slate-200 hover:text-white font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer"
-                >
-                  <ShoppingBag className="w-4 h-4 text-orange-400" />
-                  <span>Spare Parts Store</span>
-                </button>
-              </div>
-
-              {/* Direct Car Brands Selector Link */}
-              <div className="pt-2 max-w-xl">
-                <button
-                  onClick={onOpenBrandsPage}
-                  className="w-full p-3.5 rounded-xl bg-black/70 hover:bg-black/90 backdrop-blur-md border border-white/15 hover:border-orange-500/60 flex items-center justify-between text-left transition-all cursor-pointer group/btn"
-                >
-                  <div className="flex items-center gap-3">
-                    <span className="text-xl">🚗</span>
-                    <div>
-                      <span className="text-xs font-bold text-white group-hover/btn:text-orange-400 block">
-                        CHECK SPECIFIC RATES FOR YOUR CAR BRAND
-                      </span>
-                      <span className="text-[11px] text-slate-400">
-                        Maruti, Hyundai, Tata, Mahindra, Toyota, BMW, Mercedes rates &rarr;
-                      </span>
-                    </div>
-                  </div>
-                  <div className="w-7 h-7 rounded-full bg-orange-500 text-black flex items-center justify-center font-bold flex-shrink-0 group-hover/btn:scale-110 transition-transform">
-                    <ArrowRight className="w-3.5 h-3.5 stroke-[3]" />
-                  </div>
-                </button>
-              </div>
-
-            </div>
-
-            {/* Right Column: Stunning Featured Workshop Car Visual with Floating Badges (5 Cols) */}
-            <div className="lg:col-span-5 relative">
-              <div className="relative rounded-3xl overflow-hidden border border-white/15 shadow-[0_0_60px_rgba(249,115,22,0.18)] bg-gradient-to-b from-[#11151f] to-[#07090e] group">
-                
-                {/* High-Resolution Workshop Performance Car Image */}
-                <div className="relative aspect-4/3 sm:aspect-16/11 overflow-hidden">
-                  <img
-                    src="https://images.unsplash.com/photo-1617788138017-80ad40651399?w=1600&auto=format&fit=crop&q=90"
-                    alt="Precision Workshop Performance Car"
-                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 brightness-[0.88] contrast-[1.1]"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
-                </div>
-
-                {/* Floating Top Badge: Customer Rating */}
-                <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/80 backdrop-blur-md border border-white/15 text-xs text-white shadow-xl">
-                  <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                  <span className="font-bold">4.9 / 5.0 Rating</span>
-                  <span className="text-slate-400 text-[10px]">(420+ Reviews)</span>
-                </div>
-
-                {/* Floating Live Diagnostic Pill */}
-                <div className="absolute top-4 right-4 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/20 backdrop-blur-md border border-emerald-500/40 text-emerald-400 text-[11px] font-bold">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span>Workshop Bays Open</span>
-                </div>
-
-                {/* Bottom Overlay Info Card */}
-                <div className="p-5 bg-gradient-to-b from-black/90 to-black/95 border-t border-white/10 space-y-3">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-slate-400">Master Service Bay</span>
-                    <span className="font-mono font-bold text-orange-400">Bosch & Hunter 3D Equipped</span>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-2 text-[11px]">
-                    <div className="p-2.5 rounded-xl bg-white/[0.04] border border-white/5 flex items-center gap-2 text-slate-300">
-                      <ShieldCheck className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                      <span>100% Genuine OEM Spares</span>
-                    </div>
-                    <div className="p-2.5 rounded-xl bg-white/[0.04] border border-white/5 flex items-center gap-2 text-slate-300">
-                      <Clock className="w-4 h-4 text-orange-400 flex-shrink-0" />
-                      <span>Same-Day Vehicle Delivery</span>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-
-        {/* 4 Practical Trust Pillars Bar on Hero Footer */}
-        <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-8 lg:px-12 pt-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 border-t border-white/10 pt-6">
-            
-            <div className="flex items-center gap-3 p-3.5 rounded-xl bg-white/[0.03] border border-white/5">
-              <div className="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center text-orange-400 flex-shrink-0">
-                <Clock className="w-5 h-5" />
-              </div>
-              <div>
-                <span className="text-xs font-bold text-white block">90-Min Service</span>
-                <span className="text-[10px] text-slate-400">Express Turnaround</span>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3 p-3.5 rounded-xl bg-white/[0.03] border border-white/5">
-              <div className="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center text-orange-400 flex-shrink-0">
-                <ShieldCheck className="w-5 h-5" />
-              </div>
-              <div>
-                <span className="text-xs font-bold text-white block">100% Genuine OEM</span>
-                <span className="text-[10px] text-slate-400">Official Parts Warranty</span>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3 p-3.5 rounded-xl bg-white/[0.03] border border-white/5">
-              <div className="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center text-orange-400 flex-shrink-0">
-                <Car className="w-5 h-5" />
-              </div>
-              <div>
-                <span className="text-xs font-bold text-white block">Free Pick & Drop</span>
-                <span className="text-[10px] text-slate-400">Doorstep Convenience</span>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3 p-3.5 rounded-xl bg-white/[0.03] border border-white/5">
-              <div className="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center text-orange-400 flex-shrink-0">
-                <CheckCircle2 className="w-5 h-5" />
-              </div>
-              <div>
-                <span className="text-xs font-bold text-white block">Zero Advance Pay</span>
-                <span className="text-[10px] text-slate-400">Pay After Satisfaction</span>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
+      <section id="hero" className="relative w-full h-[85vh] sm:h-[95vh] overflow-hidden bg-black border-b border-white/10">
+        <img
+          src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=2400&auto=format&fit=crop&q=95"
+          alt="Performance Car"
+          className="w-full h-full object-cover object-center brightness-[0.95] contrast-[1.05]"
+        />
+        {/* Subtle dark gradient blend into the following sections */}
+        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none" />
       </section>
 
       {/* ============================================================== */}
