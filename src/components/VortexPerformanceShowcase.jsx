@@ -13,19 +13,22 @@ const BANNER_OPTIONS = {
     src: kdBannerTop,
     alt: 'KD Workshop - Professional DPF Chemical Cleaning with XRS',
     label: 'Workshop Bay (Dark)',
-    badge: 'Official Service Bay'
+    badge: 'Official Service Bay',
+    aspectRatio: '1024 / 337'
   },
   full: {
     src: kdBannerFull,
     alt: 'KD Workshop - Complete XRS DPF Decoking Poster',
     label: 'Full Campaign Poster',
-    badge: 'Complete Guide'
+    badge: 'Complete Guide',
+    aspectRatio: '1024 / 576'
   },
   tech: {
     src: kdBannerBottom,
     alt: 'KD Workshop - 3D DPF Filter Exhaust Flow Tech',
     label: '3D Technical Cutaway',
-    badge: 'Ceramic Filter Tech'
+    badge: 'Ceramic Filter Tech',
+    aspectRatio: '1024 / 239'
   }
 };
 
@@ -58,10 +61,10 @@ export default function VortexPerformanceShowcase({
       
       {/* ============================================================== */}
       {/* 1. HERO SECTION: OFFICIAL KD WORKSHOP BILLBOARD SHOWCASE      */}
-      {/* Perfectly scaled: zero top cut, zero bottom cut, zero stretch  */}
+      {/* Responsive aspect-ratio layout: zero cut, zero stretch        */}
       {/* ============================================================== */}
       <section id="hero" className="relative w-full bg-[#030406] border-b border-white/10 pt-24 sm:pt-28 pb-8 sm:pb-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto space-y-3">
+        <div className="max-w-5xl mx-auto space-y-3">
           
           {/* Subtle Top Metadata Bar & View Selector */}
           <div className="flex flex-wrap items-center justify-between gap-3 text-xs">
@@ -110,12 +113,17 @@ export default function VortexPerformanceShowcase({
             </div>
           </div>
 
-          {/* Master Framed Banner Display - Natural Aspect Ratio, Zero Stretch, Zero Cut */}
-          <div className="relative w-full rounded-2xl sm:rounded-3xl overflow-hidden border border-white/15 bg-black shadow-2xl shadow-orange-500/10 flex items-center justify-center">
+          {/* Master Framed Banner Display - Responsive Aspect-Ratio Layout, Zero Cut, Zero Stretch */}
+          <div
+            className="relative w-full rounded-2xl sm:rounded-3xl border border-white/15 bg-black shadow-2xl shadow-orange-500/10 flex items-center justify-center transition-all duration-300"
+            style={{
+              aspectRatio: BANNER_OPTIONS[activeBannerTab].aspectRatio
+            }}
+          >
             <img
               src={BANNER_OPTIONS[activeBannerTab].src}
               alt={BANNER_OPTIONS[activeBannerTab].alt}
-              className="w-full h-auto max-h-[75vh] object-contain block mx-auto transition-all duration-300"
+              className="w-full h-full object-contain rounded-2xl sm:rounded-3xl block"
             />
           </div>
 
