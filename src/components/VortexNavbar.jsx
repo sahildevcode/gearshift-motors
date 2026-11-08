@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useCart } from '../context/CartContext';
 import { ShoppingBag, ArrowRight, Menu, X } from 'lucide-react';
-import kdcLogo from '../assets/kdc-logo.jpg';
+import kdLogo from '../assets/kd-logo.jpg';
 
 export default function VortexNavbar({ activePage = 'home', onNavigate, onBookAppointmentClick }) {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -44,21 +44,21 @@ export default function VortexNavbar({ activePage = 'home', onNavigate, onBookAp
       <nav className="px-4 sm:px-8 lg:px-12 py-3.5 bg-black/90 backdrop-blur-md border-b border-white/10 transition-all">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           
-          {/* Real KDC Workshop Logo on Left */}
+          {/* Real KD Workshop Logo on Left */}
           <button
             onClick={() => onNavigate('home')}
             className="flex items-center gap-3 text-left group cursor-pointer"
           >
             <div className="w-11 h-11 rounded-full overflow-hidden border border-orange-500/60 shadow-lg shadow-orange-500/30 group-hover:scale-105 transition-transform bg-black flex-shrink-0">
               <img
-                src={kdcLogo}
-                alt="KDC Workshop Logo"
+                src={kdLogo}
+                alt="KD Workshop Logo"
                 className="w-full h-full object-cover"
               />
             </div>
             <div className="flex flex-col">
               <div className="flex items-center text-lg sm:text-xl font-black tracking-wider text-white leading-none">
-                <span>KDC</span>
+                <span>KD</span>
                 <span className="text-orange-500 ml-1.5">WORKSHOP</span>
               </div>
               <span className="text-[9px] tracking-widest text-slate-400 uppercase font-semibold mt-0.5">

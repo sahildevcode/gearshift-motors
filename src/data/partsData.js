@@ -1,4 +1,4 @@
-// Genuine Car Spare Parts & Accessories Data for KDC Workshop
+// Genuine Car Spare Parts & Accessories Data for KD Workshop
 // High-grade OEM & Performance Parts with specs, warranty, fitment, and demo clips
 import dpfImg from '../assets/dpf-clean-service.jpg';
 
@@ -9,7 +9,7 @@ export const CAR_PARTS_DATA = [
     brand: 'XRS Chemical Labs',
     category: 'engine-oils',
     categoryLabel: 'Diesel & Exhaust Chemistry',
-    badge: 'KDC Workshop Verified',
+    badge: 'KD Workshop Verified',
     price: 1899,
     mrp: 2799,
     discountPercent: 32,
@@ -26,11 +26,11 @@ export const CAR_PARTS_DATA = [
       'Toyota Fortuner, Hilux & Innova Crysta GD Series Diesel'
     ],
     shortDesc: 'High-performance chemical flush for Diesel Particulate Filters. Clears stubborn carbon soot and ash without cutting or removing the exhaust silencer.',
-    fullDesc: 'As used in our KDC Workshop bays, the XRS Professional DPF Cleaner dissolves carbon soot, unburnt hydrocarbons, and ash clogged inside the ceramic honeycomb filter. Restores engine horsepower, eliminates sluggish turbo lag, improves fuel mileage by up to 18%, and stops heavy black exhaust smoke.',
+    fullDesc: 'As used in our KD Workshop bays, the XRS Professional DPF Cleaner dissolves carbon soot, unburnt hydrocarbons, and ash clogged inside the ceramic honeycomb filter. Restores engine horsepower, eliminates sluggish turbo lag, improves fuel mileage by up to 18%, and stops heavy black exhaust smoke.',
     features: [
       'Dissolves heavy carbon soot inside the filter without cutting or welding silencer',
       'Restores factory exhaust backpressure and cures DPF choke warning lights',
-      'Tested and verified by master mechanics at KDC Workshop',
+      'Tested and verified by master mechanics at KD Workshop',
       'Safe for oxygen sensors, catalytic converters, and turbochargers',
       'Includes professional application nozzle and pressure hose'
     ],
@@ -50,13 +50,13 @@ export const CAR_PARTS_DATA = [
       title: 'Live DPF Flushing Demonstration & Black Smoke Clear Test',
       duration: '0:45',
       thumbnail: dpfImg,
-      description: 'See the live chemical reaction decoking soot honeycomb in our KDC Workshop bay.'
+      description: 'See the live chemical reaction decoking soot honeycomb in our KD Workshop bay.'
     },
     inTheBox: [
       '1x XRS DPF Cleaner 1L Sealed Canister',
       '1x Flexible High-Pressure Application Hose',
       '1x DPF Treatment Service Record Sticker',
-      '1x KDC Workshop Free Installation Coupon'
+      '1x KD Workshop Free Installation Coupon'
     ]
   },
   {

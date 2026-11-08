@@ -29,7 +29,7 @@ const PREVIOUS_WORK = [
     time: '24 Hours Turnaround',
     realImg: fenderImg,
     beforeDesc: 'Deep crease arch collision dent, crushed wheel well body line, and chipped bare metal requiring primer repair.',
-    afterDesc: 'Laser panel alignment, epoxy anti-rust primer, and exact computer shade match baked in KDC Workshop spray booth with zero color mismatch.',
+    afterDesc: 'Laser panel alignment, epoxy anti-rust primer, and exact computer shade match baked in KD Workshop spray booth with zero color mismatch.',
     customer: 'Amit Patel, Verified Car Owner',
     costSaved: '100% Invisible Factory Finish with 2-Year Warranty'
   },
@@ -74,7 +74,7 @@ const CUSTOMER_CLIPS = [
     vehicle: 'Maruti Ertiga (Restored)',
     duration: '0:50',
     thumbnail: ertigaImg,
-    desc: 'Insane reflection test in the KDC Workshop delivery bay showing zero orange peel texture.'
+    desc: 'Insane reflection test in the KD Workshop delivery bay showing zero orange peel texture.'
   },
   {
     id: 'clip-3',
@@ -102,7 +102,7 @@ const CUSTOMER_REVIEWS = [
     avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&auto=format&fit=crop&q=80',
     rating: 5,
     service: 'Full Body Denting, Painting & Headlight Revive',
-    text: 'Dealer asked me for ₹65,000 to replace both doors and front bumper. KDC Workshop repaired and painted the exact original grey shade in their German booth for less than half the price. My car looks brand new!'
+    text: 'Dealer asked me for ₹65,000 to replace both doors and front bumper. KD Workshop repaired and painted the exact original grey shade in their German booth for less than half the price. My car looks brand new!'
   },
   {
     name: 'Amit Patel',
@@ -111,7 +111,7 @@ const CUSTOMER_REVIEWS = [
     avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&auto=format&fit=crop&q=80',
     rating: 5,
     service: 'Fender Scratch & Dent Repair',
-    text: 'Hit my front fender in tight parking. KDC Workshop matched the white paint so flawlessly that even my insurance surveyor could not detect any repaint. Outstanding craftsmanship!'
+    text: 'Hit my front fender in tight parking. KD Workshop matched the white paint so flawlessly that even my insurance surveyor could not detect any repaint. Outstanding craftsmanship!'
   },
   {
     name: 'Manish Verma',
@@ -120,7 +120,7 @@ const CUSTOMER_REVIEWS = [
     avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80',
     rating: 5,
     service: 'XRS DPF Chemical Cleaning',
-    text: 'My car was throwing DPF choke error and mileage dropped to 11 km/l. KDC Workshop cleaned it with genuine XRS chemical without cutting silencer. Mileage jumped back to 19 km/l on highway!'
+    text: 'My car was throwing DPF choke error and mileage dropped to 11 km/l. KD Workshop cleaned it with genuine XRS chemical without cutting silencer. Mileage jumped back to 19 km/l on highway!'
   }
 ];
 
@@ -137,7 +137,7 @@ export default function WorkAndReviewsSection() {
       <div className="max-w-3xl mb-14">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-semibold uppercase tracking-wider mb-3">
           <Sparkles className="w-3.5 h-3.5" />
-          <span>Real KDC Workshop Results</span>
+          <span>Real KD Workshop Results</span>
         </div>
         <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white mb-3">
           Real Before & After Work & <span className="text-orange-500">Customer Transformations</span>
@@ -195,9 +195,9 @@ export default function WorkAndReviewsSection() {
                   className="w-full h-auto max-h-[520px] object-contain mx-auto group-hover:scale-102 transition-transform duration-500"
                 />
                 
-                {/* Genuine KDC Job Badge */}
+                {/* Genuine KD Job Badge */}
                 <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-orange-500 text-black font-black text-[10px] uppercase tracking-wider shadow-lg">
-                  KDC Verified Workshop Job
+                  KD Verified Workshop Job
                 </div>
               </div>
             </div>
@@ -243,7 +243,7 @@ export default function WorkAndReviewsSection() {
 
                   <div>
                     <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider block">
-                      Work Completed by KDC Workshop:
+                      Work Completed by KD Workshop:
                     </span>
                     <p className="text-slate-300 text-[11px] leading-relaxed mt-0.5">
                       {currentWork.afterDesc}
@@ -349,7 +349,7 @@ export default function WorkAndReviewsSection() {
               Verified Feedback
             </span>
             <h3 className="text-2xl font-bold text-white">
-              What Real Car Owners Say About KDC Workshop
+              What Real Car Owners Say About KD Workshop
             </h3>
           </div>
           <div className="flex items-center gap-2 text-xs text-amber-400 font-bold">
@@ -440,7 +440,7 @@ export default function WorkAndReviewsSection() {
                   <Play className="w-8 h-8 fill-black translate-x-0.5" />
                 </div>
                 <span className="text-xs font-bold text-white uppercase tracking-wider">
-                  KDC Workshop Quality Test Track
+                  KD Workshop Quality Test Track
                 </span>
                 <p className="text-[11px] text-slate-300 max-w-sm mt-1">
                   {activeClipModal.desc}
@@ -449,7 +449,7 @@ export default function WorkAndReviewsSection() {
             </div>
 
             <p className="text-xs text-slate-400 text-center">
-              Recorded in the KDC Workshop Service & Diagnostic Bay.
+              Recorded in the KD Workshop Service & Diagnostic Bay.
             </p>
           </div>
         </div>

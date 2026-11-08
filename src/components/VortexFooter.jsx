@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowRight, CheckCircle2, ShieldCheck } from 'lucide-react';
-import kdcLogo from '../assets/kdc-logo.jpg';
+import kdLogo from '../assets/kd-logo.jpg';
 
 export default function VortexFooter() {
   const [email, setEmail] = useState('');
@@ -15,19 +15,19 @@ export default function VortexFooter() {
     <footer className="relative bg-[#050608] text-slate-400 border-t border-white/10 pt-16 pb-12 px-4 sm:px-8 lg:px-12">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-white/10">
         
-        {/* Brand Col with Real KDC Logo */}
+        {/* Brand Col with Real KD Logo */}
         <div className="lg:col-span-4 space-y-4">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-full overflow-hidden border border-orange-500/50 shadow-lg shadow-orange-500/25 bg-black flex-shrink-0">
               <img
-                src={kdcLogo}
-                alt="KDC Workshop"
+                src={kdLogo}
+                alt="KD Workshop"
                 className="w-full h-full object-cover"
               />
             </div>
             <div className="flex flex-col">
               <div className="flex items-center text-xl font-black tracking-wider text-white leading-none">
-                <span>KDC</span>
+                <span>KD</span>
                 <span className="text-orange-500 ml-1.5">WORKSHOP</span>
               </div>
               <span className="text-[9px] tracking-widest text-slate-500 uppercase font-semibold mt-0.5">
@@ -70,13 +70,13 @@ export default function VortexFooter() {
         <div className="lg:col-span-4 space-y-3 text-xs">
           <h4 className="text-white uppercase font-bold tracking-wider mb-1">SERVICE REMINDERS & DEALS</h4>
           <p className="text-xs text-slate-400">
-            Subscribe to get periodic oil change reminders, monsoon safety checks, and special discounts on genuine spare parts from KDC Workshop.
+            Subscribe to get periodic oil change reminders, monsoon safety checks, and special discounts on genuine spare parts from KD Workshop.
           </p>
 
           {subscribed ? (
             <div className="p-3 rounded-xl bg-[#090b10] border border-emerald-500 text-emerald-400 flex items-center gap-2 text-xs">
               <CheckCircle2 className="w-4 h-4" />
-              <span>Subscribed! Check your inbox for KDC Workshop discounts.</span>
+              <span>Subscribed! Check your inbox for KD Workshop discounts.</span>
             </div>
           ) : (
             <form onSubmit={handleSubscribe} className="flex items-center gap-0 mt-3">
@@ -102,7 +102,7 @@ export default function VortexFooter() {
 
       {/* Legal Bar */}
       <div className="max-w-7xl mx-auto pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-        <div>&copy; {new Date().getFullYear()} KDC Workshop. Precision Automotive Care & Genuine Spares.</div>
+        <div>&copy; {new Date().getFullYear()} KD Workshop. Precision Automotive Care & Genuine Spares.</div>
         <div className="flex items-center gap-6">
           <span className="flex items-center gap-1.5 text-slate-400">
             <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
