@@ -1,29 +1,29 @@
 @import "tailwindcss";
+@source "../index.html";
+@source "./**/*.{js,ts,jsx,tsx}";
 
-@layer base {
-  :root {
-    --bg-pure-black: #000000;
-    --bg-dark: #07090d;
-    --bg-surface: #0a0d14;
-    --bg-card: #0e121a;
-    --vortex-orange: #f97316;
-    --vortex-orange-deep: #ea580c;
-  }
+:root {
+  --bg-pure-black: #000000;
+  --bg-dark: #07090d;
+  --bg-surface: #0a0d14;
+  --bg-card: #0e121a;
+  --vortex-orange: #f97316;
+  --vortex-orange-deep: #ea580c;
+}
 
-  html {
-    scroll-behavior: smooth;
-    background-color: #000000;
-    color: #f1f5f9;
-    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  }
+html {
+  scroll-behavior: smooth;
+  background-color: #000000;
+  color: #f1f5f9;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
 
-  body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    background-color: #000000;
-    color: #f8fafc;
-  }
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background-color: #000000;
+  color: #f8fafc;
 }
 
 /* Clean Readable Typography Classes */
