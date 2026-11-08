@@ -1,7 +1,64 @@
-// Genuine Car Spare Parts & Accessories Data for Vortex Motors
+// Genuine Car Spare Parts & Accessories Data for KDC Workshop
 // High-grade OEM & Performance Parts with specs, warranty, fitment, and demo clips
+import dpfImg from '../assets/dpf-clean-service.jpg';
 
 export const CAR_PARTS_DATA = [
+  {
+    id: 'xrs-dpf-cleaner-kit',
+    name: 'Original XRS Professional DPF Cleaner & Decarbonizing Kit',
+    brand: 'XRS Chemical Labs',
+    category: 'engine-oils',
+    categoryLabel: 'Diesel & Exhaust Chemistry',
+    badge: 'KDC Workshop Verified',
+    price: 1899,
+    mrp: 2799,
+    discountPercent: 32,
+    rating: 5.0,
+    reviewCount: 94,
+    inStock: true,
+    stockCount: 24,
+    warranty: '100% Genuine XRS Sealed Product with Emission Test Pass Guarantee',
+    fitment: [
+      'Maruti Suzuki Swift, Dzire, Brezza, Ertiga, S-Cross DDiS Diesel',
+      'Hyundai Creta, Venue, Verna 1.4 & 1.5 CRDi Diesel',
+      'Tata Harrier, Safari, Nexon, Altroz Revotorq Diesel',
+      'Mahindra Thar, Scorpio-N, XUV700 mHawk 2.2 Diesel',
+      'Toyota Fortuner, Hilux & Innova Crysta GD Series Diesel'
+    ],
+    shortDesc: 'High-performance chemical flush for Diesel Particulate Filters. Clears stubborn carbon soot and ash without cutting or removing the exhaust silencer.',
+    fullDesc: 'As used in our KDC Workshop bays, the XRS Professional DPF Cleaner dissolves carbon soot, unburnt hydrocarbons, and ash clogged inside the ceramic honeycomb filter. Restores engine horsepower, eliminates sluggish turbo lag, improves fuel mileage by up to 18%, and stops heavy black exhaust smoke.',
+    features: [
+      'Dissolves heavy carbon soot inside the filter without cutting or welding silencer',
+      'Restores factory exhaust backpressure and cures DPF choke warning lights',
+      'Tested and verified by master mechanics at KDC Workshop',
+      'Safe for oxygen sensors, catalytic converters, and turbochargers',
+      'Includes professional application nozzle and pressure hose'
+    ],
+    specifications: {
+      'Volume': '1,000 ml High-Concentration Decoking Agent',
+      'Application Type': 'Direct Pressure Sensor Port or Spray Gun Injection',
+      'Compatibility': 'All BS-IV & BS-VI Diesel Cars with DPF / SCR systems',
+      'Turnaround Time': '45 to 60 Mins Complete Treatment',
+      'Formulation': 'Ashless organic solvent with Cerium Oxide nano-catalyst',
+      'Country of Origin': 'India / Germany Tech'
+    },
+    images: [
+      dpfImg,
+      'https://images.unsplash.com/photo-1615906655593-ad0386982a0f?w=1000&auto=format&fit=crop&q=85'
+    ],
+    videoClip: {
+      title: 'Live DPF Flushing Demonstration & Black Smoke Clear Test',
+      duration: '0:45',
+      thumbnail: dpfImg,
+      description: 'See the live chemical reaction decoking soot honeycomb in our KDC Workshop bay.'
+    },
+    inTheBox: [
+      '1x XRS DPF Cleaner 1L Sealed Canister',
+      '1x Flexible High-Pressure Application Hose',
+      '1x DPF Treatment Service Record Sticker',
+      '1x KDC Workshop Free Installation Coupon'
+    ]
+  },
   {
     id: 'brembo-ceramic-brake-pads',
     name: 'Brembo Ceramic Low-Dust Front Brake Pads',
@@ -271,178 +328,15 @@ export const CAR_PARTS_DATA = [
       '1x Premium Ergonomic Foam Applicator Pad',
       '1x Ultra-plush 800 GSM Edgeless Microfiber Buffing Towel'
     ]
-  },
-  {
-    id: 'bosch-laser-iridium-spark-plugs',
-    name: 'Bosch Laser Iridium High-Ignition Spark Plugs (Set of 4)',
-    brand: 'Bosch',
-    category: 'spark-plugs',
-    categoryLabel: 'Ignition & Fuel',
-    badge: 'Top Reliability',
-    price: 1999,
-    mrp: 2799,
-    discountPercent: 28,
-    rating: 4.8,
-    reviewCount: 165,
-    inStock: true,
-    stockCount: 35,
-    warranty: '100,000 KM Long-Life Warranty / 2 Years Replacement',
-    fitment: [
-      'Maruti Suzuki Swift, Baleno, WagonR, Dzire, Ertiga K12 / K15 engines',
-      'Hyundai i10, i20, Aura, Verna 1.2 / 1.5 Kappa engines',
-      'Tata Tiago, Tigor, Punch 1.2 Revotron',
-      'Honda Amaze, City 1.2 & 1.5 i-VTEC'
-    ],
-    shortDesc: 'Ultra-fine 0.6mm laser-welded iridium center electrode guarantees explosive spark energy, smoother engine idling, and eliminates misfires.',
-    fullDesc: 'Engineered by Bosch Germany, these Laser Iridium spark plugs represent the pinnacle of ignition technology. Iridium has a melting point of 2,466°C, making it 6x harder and 8x stronger than standard copper or nickel spark plugs. Produces an intense, focused spark kernel even in lean fuel-air mixtures, delivering instant combustion and noticeable mileage improvement.',
-    features: [
-      '0.6mm ultra-fine laser welded continuous iridium firing pin',
-      'Platinum ground electrode pad prevents spark erosion and gap growth',
-      'Eliminates morning cold-start hesitations and rough RPM idling',
-      'Guaranteed 100,000 KM operational lifespan with zero gap adjustments',
-      'Nickel-plated anti-seize shell resists rust in aluminum cylinder heads'
-    ],
-    specifications: {
-      'Center Electrode Material': 'Pure Laser-Welded Iridium (0.6mm Tip)',
-      'Ground Electrode Material': 'Tapered Cut with Platinum Inlay',
-      'Thread Diameter': '12 mm or 14 mm (Model Specific)',
-      'Thread Pitch': '1.25 mm',
-      'Hex Size': '16 mm (5/8 inch)',
-      'Heat Range': 'Bosch Rating 7 / 8'
-    },
-    images: [
-      'https://images.unsplash.com/photo-1486006920555-c77dce18193b?w=1000&auto=format&fit=crop&q=85',
-      'https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=1000&auto=format&fit=crop&q=85'
-    ],
-    videoClip: {
-      title: 'High-Speed Spark Chamber Ignition Test at 8,000 RPM',
-      duration: '0:28',
-      thumbnail: 'https://images.unsplash.com/photo-1486006920555-c77dce18193b?w=800&auto=format&fit=crop&q=80',
-      description: 'Slow-motion 1,000 FPS footage showing zero flame quench and violent combustion spark propagation.'
-    },
-    inTheBox: [
-      '4x Bosch Laser Iridium Spark Plugs (Individual Factory Pre-Gapped Sleeves)',
-      '1x Spark Plug Gap Gauge Check Tool',
-      '1x Installation Torque Guide'
-    ]
-  },
-  {
-    id: 'mann-filter-activated-carbon-cabin-filter',
-    name: 'Mann-Filter FreciousPlus Biofunctional Cabin AC Filter',
-    brand: 'Mann-Filter',
-    category: 'filters',
-    categoryLabel: 'Air & Cabin Filters',
-    badge: 'PM2.5 Protection',
-    price: 1299,
-    mrp: 1799,
-    discountPercent: 27,
-    rating: 4.8,
-    reviewCount: 88,
-    inStock: true,
-    stockCount: 16,
-    warranty: '1 Year Manufacturer Guarantee against Odors & Allergen Ingress',
-    fitment: [
-      'Maruti Suzuki Swift, Baleno, Brezza, Grand Vitara, Ciaz',
-      'Hyundai Creta, Venue, Verna, Tucson (2016-2024)',
-      'Tata Harrier, Safari, Nexon',
-      'Volkswagen Polo, Vento, Taigun, Virtus'
-    ],
-    shortDesc: '3-layer biofunctional cabin filter binds almost 100% of micro allergens, catches PM2.5 smog particles, and eliminates bacteria and toxic exhaust gases.',
-    fullDesc: 'Indian city air contains severe concentrations of diesel soot, toxic NOx fumes, and fine PM2.5 dust. The Mann-Filter FreciousPlus cabin filter features a particle filter layer, an activated coconut shell carbon layer, and a polyphenol anti-allergen coating. Ensures the air your family breathes inside your car cabin is hospital-grade pure and free from foul smells.',
-    features: [
-      'Binds nearly 100% of particulate matter (PM2.5) and pollen allergens',
-      'Natural polyphenol coating prevents mold spores and bacteria growth in AC duct',
-      'High-grade activated carbon adsorbs noxious exhaust fumes and foul odors',
-      'Eliminates sticky oily film buildup on the inside of car windshields',
-      'Direct slide-in fit behind glovebox in under 3 minutes'
-    ],
-    specifications: {
-      'Layer 1': 'Coarse Particle Filter fleece (Leaves, road dust)',
-      'Layer 2': 'Activated Coconut Shell Carbon Matrix (Toxic gases, odors)',
-      'Layer 3': 'Biofunctional Polyphenol Layer (Allergens, bacteria)',
-      'Efficiency': '>98% filtration at 2.5 micrometers',
-      'Replacement Cycle': 'Recommended every 10,000 KM or 1 Year'
-    },
-    images: [
-      'https://images.unsplash.com/photo-1615906655593-ad0386982a0f?w=1000&auto=format&fit=crop&q=85',
-      'https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=1000&auto=format&fit=crop&q=85'
-    ],
-    videoClip: {
-      title: 'Smoke Chamber Cabin Air Purification Test',
-      duration: '0:32',
-      thumbnail: 'https://images.unsplash.com/photo-1615906655593-ad0386982a0f?w=800&auto=format&fit=crop&q=80',
-      description: 'See heavy smoke pumped into one side of the filter and coming out 100% crystal clean on the cabin air meter.'
-    },
-    inTheBox: [
-      '1x Mann-Filter FreciousPlus Activated Carbon Filter',
-      '1x Anti-Bacterial AC Duct Sanitizer Wipe',
-      '1x Step-by-Step Glovebox Replacement Guide'
-    ]
-  },
-  {
-    id: 'bilstein-b6-performance-shock-absorbers',
-    name: 'Bilstein B6 High-Pressure Monotube Shock Absorbers (Pair)',
-    brand: 'Bilstein',
-    category: 'suspension',
-    categoryLabel: 'Suspension & Steering',
-    badge: 'German Engineering',
-    price: 18999,
-    mrp: 24999,
-    discountPercent: 24,
-    rating: 4.9,
-    reviewCount: 54,
-    inStock: true,
-    stockCount: 8,
-    warranty: '3 Years / 50,000 KM Bilstein International Warranty',
-    fitment: [
-      'Mahindra Thar 4x4 & Scorpio-N (Eliminates body roll & bouncing)',
-      'Tata Harrier & Safari (Tighter highway stability)',
-      'Skoda Octavia / Superb / Laura',
-      'Volkswagen Polo / Vento / Taigun / Virtus'
-    ],
-    shortDesc: 'Gas-pressure monotube damper technology dramatically reduces body roll, nose dive under braking, and high-speed highway float without lowering the car.',
-    fullDesc: 'If your car suffers from excessive side-to-side body roll on mountain twisties, annoying pitch during emergency braking, or rear bouncing over highway undulations, Bilstein B6 is the definitive upgrade. Utilizes precision monotube gas-pressure construction that never fades even over continuous bad roads. Compatible with your stock springs so ground clearance remains intact.',
-    features: [
-      'Monotube gas-pressure technology prevents oil foaming under rapid cycling',
-      'Massively reduces body sway, cornering roll, and brake nose-dive',
-      'Delivers precise handling feedback and glued-to-the-road tire contact',
-      'Individually track-tuned at the legendary Nürburgring Nordschleife circuit',
-      'Retains factory vehicle ride height and suspension geometry'
-    ],
-    specifications: {
-      'Damper Design': 'Monotube Inverted High-Pressure Gas Damper',
-      'Piston Rod Diameter': '36 mm Hard Chromed Solid Steel',
-      'Finish': 'Bilstein Signature Yellow Powder-Coat with Anti-Corrosion Zinc',
-      'Fitting Position': 'Front Axle or Rear Axle Pair (Select upon order)',
-      'Country of Origin': 'Germany'
-    },
-    images: [
-      'https://images.unsplash.com/photo-1486006920555-c77dce18193b?w=1000&auto=format&fit=crop&q=85',
-      'https://images.unsplash.com/photo-1600705722908-bab1e61c0b4d?w=1000&auto=format&fit=crop&q=85'
-    ],
-    videoClip: {
-      title: 'Slalom Cornering Body Roll Test: Stock Suspension vs Bilstein B6',
-      duration: '0:45',
-      thumbnail: 'https://images.unsplash.com/photo-1486006920555-c77dce18193b?w=800&auto=format&fit=crop&q=80',
-      description: 'Side-by-side video proving a 65% reduction in cabin pitch and roll during 70 km/h emergency double-lane change test.'
-    },
-    inTheBox: [
-      '2x Bilstein B6 Monotube Gas Shock Absorbers',
-      '2x Heavy-Duty Polyurethane Bump Stops & Dust Boots',
-      '1x Set of High-Tensile Mounting Hardware & Lock Nuts',
-      '1x Bilstein Germany Certificate of Authenticity'
-    ]
   }
 ];
 
 // Product Category Filters
 export const PART_CATEGORIES = [
   { id: 'all', label: 'All Spare Parts' },
+  { id: 'engine-oils', label: 'DPF & Engine Chemistry' },
   { id: 'brakes', label: 'Braking Systems' },
-  { id: 'engine-oils', label: 'Engine Oils & Lubes' },
   { id: 'lighting', label: 'LED Headlights' },
   { id: 'filters', label: 'Air & Cabin Filters' },
-  { id: 'spark-plugs', label: 'Spark Plugs & Ignition' },
-  { id: 'detailing', label: 'Glaze & Detailing' },
-  { id: 'suspension', label: 'Suspension & Shocks' }
+  { id: 'detailing', label: 'Glaze & Detailing' }
 ];

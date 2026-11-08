@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useCart } from '../context/CartContext';
-import { ShoppingBag, ArrowRight, Menu, X, Wrench, ShieldCheck, Phone } from 'lucide-react';
+import { ShoppingBag, ArrowRight, Menu, X } from 'lucide-react';
+import kdcLogo from '../assets/kdc-logo.jpg';
 
 export default function VortexNavbar({ activePage = 'home', onNavigate, onBookAppointmentClick }) {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -40,24 +41,28 @@ export default function VortexNavbar({ activePage = 'home', onNavigate, onBookAp
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-      <nav className="px-4 sm:px-8 lg:px-12 py-4 bg-black/85 backdrop-blur-md border-b border-white/10 transition-all">
+      <nav className="px-4 sm:px-8 lg:px-12 py-3.5 bg-black/90 backdrop-blur-md border-b border-white/10 transition-all">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           
-          {/* Logo on Left */}
+          {/* Real KDC Workshop Logo on Left */}
           <button
             onClick={() => onNavigate('home')}
-            className="flex items-center gap-2.5 text-left group cursor-pointer"
+            className="flex items-center gap-3 text-left group cursor-pointer"
           >
-            <div className="w-9 h-9 rounded-xl bg-orange-500 flex items-center justify-center text-black font-black text-lg shadow-lg shadow-orange-500/30 group-hover:scale-105 transition-transform">
-              <Wrench className="w-5 h-5 stroke-[2.5]" />
+            <div className="w-11 h-11 rounded-full overflow-hidden border border-orange-500/60 shadow-lg shadow-orange-500/30 group-hover:scale-105 transition-transform bg-black flex-shrink-0">
+              <img
+                src={kdcLogo}
+                alt="KDC Workshop Logo"
+                className="w-full h-full object-cover"
+              />
             </div>
             <div className="flex flex-col">
-              <div className="flex items-center text-lg sm:text-xl font-extrabold tracking-wider text-white leading-none">
-                <span>VORTEX</span>
-                <span className="text-orange-500 ml-1">MOTORS</span>
+              <div className="flex items-center text-lg sm:text-xl font-black tracking-wider text-white leading-none">
+                <span>KDC</span>
+                <span className="text-orange-500 ml-1.5">WORKSHOP</span>
               </div>
               <span className="text-[9px] tracking-widest text-slate-400 uppercase font-semibold mt-0.5">
-                WORKSHOP & GENUINE SPARES
+                PRECISION SERVICE & GENUINE SPARES
               </span>
             </div>
           </button>

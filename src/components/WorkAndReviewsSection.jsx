@@ -1,126 +1,126 @@
 import React, { useState } from 'react';
 import { 
   Star, Play, CheckCircle2, ShieldCheck, ArrowRight, 
-  Sparkles, Car, Clock, ThumbsUp, ChevronLeft, ChevronRight, X 
+  Sparkles, Car, Clock, ChevronLeft, ChevronRight, X 
 } from 'lucide-react';
+import ertigaImg from '../assets/before-after-ertiga.jpg';
+import fenderImg from '../assets/before-after-fender.jpg';
+import wheelImg from '../assets/before-after-wheel.jpg';
+import dpfImg from '../assets/dpf-clean-service.jpg';
 
 const PREVIOUS_WORK = [
   {
     id: 1,
-    title: 'BMW 330i M-Sport — Deep Fender Dent & Scratch Restoration',
-    category: 'German Booth Paint & Denting',
-    car: 'BMW 3-Series 330i',
-    time: '24 Hours Turnaround',
-    beforeImg: 'https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=800&auto=format&fit=crop&q=80',
-    afterImg: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800&auto=format&fit=crop&q=80',
-    beforeDesc: 'Deep crease dent and scraped metal paint from parking collision.',
-    afterDesc: 'Laser paintless dent pulled and PPG German waterborne color matched to 100% factory spec.',
-    customer: 'Dr. Sameer Kapoor, Mumbai',
-    costSaved: 'Saved ₹32,000 vs Dealer Estimate'
+    title: 'Maruti Suzuki Ertiga — Full Body Restoration, Denting, Painting & Headlight Revive',
+    category: 'Full Body Paint & Spray Booth Restoration',
+    car: 'Maruti Suzuki Ertiga (Grey Metallic)',
+    time: '48 Hours Turnaround',
+    realImg: ertigaImg,
+    beforeDesc: 'Multiple deep door panel dents, heavily scraped front bumper, oxidized yellow headlights, and sun-faded chalky paint.',
+    afterDesc: 'Complete dent removal, robotic DuPont paint match baked in temperature-controlled spray booth, headlight UV crystal polish, and mirror finish clear coat.',
+    customer: 'Rajesh Sharma, Verified Car Owner',
+    costSaved: 'Saved ₹42,000 compared to Authorized Dealer quote'
   },
   {
     id: 2,
-    title: 'Hyundai Creta SX — 3-Stage Paint Correction & 9H Ceramic Glaze',
-    category: 'Ceramic Coating & Detailing',
-    car: 'Hyundai Creta 1.5 Diesel',
-    time: '6 Hours Turnaround',
-    beforeImg: 'https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?w=800&auto=format&fit=crop&q=80',
-    afterImg: 'https://images.unsplash.com/photo-1607860108855-64acf2078ed9?w=800&auto=format&fit=crop&q=80',
-    beforeDesc: 'Heavy swirl marks, water etching, and dull oxidized clear coat.',
-    afterDesc: 'Rotary jewelling polish topped with 3 layers of hydrophobic SiO2 ceramic mirror coat.',
-    customer: 'Ankit Bansal, Pune',
-    costSaved: '3 Years Gloss Warranty Included'
+    title: 'Front Fender Dent Pulling & High-Gloss Factory Paint Match',
+    category: 'Paintless Dent Pull & German Booth Match',
+    car: 'Maruti Suzuki Dzire (Pearl White)',
+    time: '24 Hours Turnaround',
+    realImg: fenderImg,
+    beforeDesc: 'Deep crease arch collision dent, crushed wheel well body line, and chipped bare metal requiring primer repair.',
+    afterDesc: 'Laser panel alignment, epoxy anti-rust primer, and exact computer shade match baked in KDC Workshop spray booth with zero color mismatch.',
+    customer: 'Amit Patel, Verified Car Owner',
+    costSaved: '100% Invisible Factory Finish with 2-Year Warranty'
   },
   {
     id: 3,
-    title: 'Mahindra Thar 4x4 — Bilstein B6 Suspension & Brembo Brake Upgrade',
-    category: 'Suspension & Braking',
-    car: 'Mahindra Thar Roxx 4x4',
-    time: '4 Hours Turnaround',
-    beforeImg: 'https://images.unsplash.com/photo-1486006920555-c77dce18193b?w=800&auto=format&fit=crop&q=80',
-    afterImg: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&auto=format&fit=crop&q=80',
-    beforeDesc: 'Extreme body roll in highway curves and loud brake judder.',
-    afterDesc: 'Bilstein B6 gas monotube dampers + Brembo ceramic low-dust pads installed.',
-    customer: 'Col. Rajesh Randhawa, Delhi NCR',
-    costSaved: 'Transformed Highway Stability'
+    title: 'Maruti Suzuki Alloy Wheel & Wheel Arch Deep De-Greasing & Glaze',
+    category: 'Wheel Detailing & Ceramic Protection',
+    car: 'Maruti Suzuki Baleno / Ciaz (Alloy)',
+    time: '60 Mins Turnaround',
+    realImg: wheelImg,
+    beforeDesc: 'Caked road mud, baked-on abrasive brake pad dust, and dull oxidized alloy spokes.',
+    afterDesc: 'pH-neutral wheel decontamination, ultrasonic dust extraction, and hydrophobic ceramic tire dressing.',
+    customer: 'Deepak Varma, Verified Car Owner',
+    costSaved: 'Showroom Fresh Gloss & Water-Beading Shield'
   },
   {
     id: 4,
-    title: 'Maruti Suzuki Swift — Sluggish Throttle to Razor-Sharp Tune',
-    category: 'Engine & Synthetic Oiling',
-    car: 'Maruti Swift 1.2 DualJet',
+    title: 'Diesel DPF Filter Deep Cleaning with Genuine XRS Chemistry',
+    category: 'DPF Decoking & Emission Overhaul',
+    car: 'All CRDi & Diesel Vehicles (Creta, Harrier, Swift DDiS)',
     time: '90 Mins Turnaround',
-    beforeImg: 'https://images.unsplash.com/photo-1615906655593-ad0386982a0f?w=800&auto=format&fit=crop&q=80',
-    afterImg: 'https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=800&auto=format&fit=crop&q=80',
-    beforeDesc: '18,000 KM dark sludge oil, choked air filter, and sluggish pick-up.',
-    afterDesc: 'Castrol EDGE 5W-40 full synthetic flush, Bosch Laser Iridium plugs & K&N filter.',
-    customer: 'Vikram Joshi, Bengaluru',
-    costSaved: '+18% Fuel Mileage Boost'
+    realImg: dpfImg,
+    beforeDesc: 'DPF exhaust warning light illuminated, choked carbon soot honeycomb, excessive black smoke, and high fuel consumption.',
+    afterDesc: 'Flushed with genuine XRS DPF Cleaner kit without cutting or welding silencer. Completely decokes filter and restores original throttle punch.',
+    customer: 'Manish Verma, Fleet Owner',
+    costSaved: 'Saved ₹35,000 (No costly DPF replacement needed)'
   }
 ];
 
 const CUSTOMER_CLIPS = [
   {
     id: 'clip-1',
-    title: 'Cold Start & Deep Exhaust Note after Synthetic Service & Plugs',
-    vehicle: 'Skoda Octavia vRS 245',
-    duration: '0:35',
-    thumbnail: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&auto=format&fit=crop&q=80',
-    desc: 'Listen to the buttery smooth cold start idle after full Castrol EDGE 5W-40 oil flush and Bosch Iridium plugs.'
+    title: 'DPF Filter Chemical Flush & Exhaust Smoke Clear Test',
+    vehicle: 'Diesel CRDi Engine (XRS Kit)',
+    duration: '0:45',
+    thumbnail: dpfImg,
+    desc: 'Watch the live decoking process using genuine XRS DPF Cleaner restoring 100% exhaust air flow.'
   },
   {
     id: 'clip-2',
-    title: 'Hydrophobic Water Beading Angle Test after 9H Ceramic Glaze',
-    vehicle: 'Tata Safari Dark Edition',
-    duration: '0:42',
-    thumbnail: 'https://images.unsplash.com/photo-1607860108855-64acf2078ed9?w=600&auto=format&fit=crop&q=80',
-    desc: 'Watch high-pressure water roll off like liquid glass with zero standing droplets.'
+    title: 'Full Body Paint Reflection & Mirror Clear Coat Walkaround',
+    vehicle: 'Maruti Ertiga (Restored)',
+    duration: '0:50',
+    thumbnail: ertigaImg,
+    desc: 'Insane reflection test in the KDC Workshop delivery bay showing zero orange peel texture.'
   },
   {
     id: 'clip-3',
-    title: 'Engine Bay Steam Detailing & Computerized Sensor Check',
-    vehicle: 'Honda City 1.5 i-VTEC',
-    duration: '0:28',
-    thumbnail: 'https://images.unsplash.com/photo-1486006920555-c77dce18193b?w=600&auto=format&fit=crop&q=80',
-    desc: 'Deep de-greasing of engine block, alternator shielding, and live OBD-II diagnostic readout.'
+    title: 'Front Fender Paint Match & Bumper Alignment Inspection',
+    vehicle: 'Maruti Dzire Pearl White',
+    duration: '0:35',
+    thumbnail: fenderImg,
+    desc: 'Seamless color blend under dual-spectrum paint inspection lights.'
   },
   {
     id: 'clip-4',
-    title: 'Happy Customer Key Handover & Workshop Review',
-    vehicle: 'Hyundai Creta SX Petrol',
-    duration: '0:50',
-    thumbnail: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=80',
-    desc: 'Customer sharing their experience on saving 50% vs authorized dealer service charges.'
+    title: 'Alloy Wheel Ceramic Water-Beading & Spin Test',
+    vehicle: 'Baleno Dual-Tone Wheels',
+    duration: '0:30',
+    thumbnail: wheelImg,
+    desc: 'Watch water beads glide off the freshly de-greased and ceramic sealed alloy rims.'
   }
 ];
 
 const CUSTOMER_REVIEWS = [
   {
-    name: 'Vikramaditya Rathore',
-    location: 'Jaipur',
-    car: 'Tata Harrier XZA+ (Diesel)',
+    name: 'Rajesh Sharma',
+    location: 'Verified Customer',
+    car: 'Maruti Suzuki Ertiga VXi',
     avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&auto=format&fit=crop&q=80',
     rating: 5,
-    service: 'Major Suspension & Brake Overhaul',
-    text: 'Showroom quoted me ₹28,000 for suspension overhaul and clutch judder. Vortex Motors solved it for ₹14,200 with genuine parts in just 5 hours. My car drives like butter now with zero squeaks!'
+    service: 'Full Body Denting, Painting & Headlight Revive',
+    text: 'Dealer asked me for ₹65,000 to replace both doors and front bumper. KDC Workshop repaired and painted the exact original grey shade in their German booth for less than half the price. My car looks brand new!'
   },
   {
-    name: 'Pooja Iyer',
-    location: 'Bengaluru',
-    car: 'Hyundai Creta SX (Petrol)',
-    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80',
-    rating: 5,
-    service: 'Super Chill AC Service & Gas Top-Up',
-    text: 'My AC was blowing warm air in 42°C heat. Their technician diagnosed a micro-leak in condenser in 15 mins, replaced the O-rings and refilled pure R134a. Ice cold sub-6°C cooling within 90 minutes!'
-  },
-  {
-    name: 'Sunil Deshmukh',
-    location: 'Mumbai',
-    car: 'Mahindra Thar Roxx 4x4',
+    name: 'Amit Patel',
+    location: 'Verified Customer',
+    car: 'Maruti Suzuki Dzire',
     avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&auto=format&fit=crop&q=80',
     rating: 5,
-    service: 'Denting & Spray Booth Painting',
-    text: 'Got deep scratch and dent on my left fender after an off-road trip. Their German paint booth matched the exact Everest White shade. Impossible to tell there was ever a scratch!'
+    service: 'Fender Scratch & Dent Repair',
+    text: 'Hit my front fender in tight parking. KDC Workshop matched the white paint so flawlessly that even my insurance surveyor could not detect any repaint. Outstanding craftsmanship!'
+  },
+  {
+    name: 'Manish Verma',
+    location: 'Fleet Owner',
+    car: 'Hyundai Creta 1.5 Diesel',
+    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80',
+    rating: 5,
+    service: 'XRS DPF Chemical Cleaning',
+    text: 'My car was throwing DPF choke error and mileage dropped to 11 km/l. KDC Workshop cleaned it with genuine XRS chemical without cutting silencer. Mileage jumped back to 19 km/l on highway!'
   }
 ];
 
@@ -137,24 +137,24 @@ export default function WorkAndReviewsSection() {
       <div className="max-w-3xl mb-14">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-semibold uppercase tracking-wider mb-3">
           <Sparkles className="w-3.5 h-3.5" />
-          <span>Real Workshop Results</span>
+          <span>Real KDC Workshop Results</span>
         </div>
         <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white mb-3">
-          Previous Work, Before/After & <span className="text-orange-500">Customer Reviews</span>
+          Real Before & After Work & <span className="text-orange-500">Customer Transformations</span>
         </h2>
         <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-          See the tangible transformations carried out on customer vehicles in our garage: from precision paint matching to engine overhauls and ceramic glaze water-beading clips.
+          Actual vehicles repaired, dented, painted, and chemically cleaned in our workshop bays. See genuine before & after evidence and verified customer satisfaction.
         </p>
       </div>
 
-      {/* 1. Before & After Showcase Slider */}
+      {/* 1. Real Before & After Showcase Slider */}
       <div className="mb-20">
         <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
           <div className="flex items-center gap-2">
             <span className="text-xs font-bold uppercase tracking-wider text-slate-300">
-              Work Transformation Showcase
+              Genuine Workshop Job Card
             </span>
-            <span className="text-xs text-orange-400 font-mono">
+            <span className="text-xs text-orange-400 font-mono font-bold">
               ({activeWorkIndex + 1} of {PREVIOUS_WORK.length})
             </span>
           </div>
@@ -166,7 +166,7 @@ export default function WorkAndReviewsSection() {
                 setActiveWorkIndex((prev) => (prev > 0 ? prev - 1 : PREVIOUS_WORK.length - 1))
               }
               className="p-2 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 text-white cursor-pointer"
-              title="Previous Transformation"
+              title="Previous Case"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
@@ -175,65 +175,42 @@ export default function WorkAndReviewsSection() {
                 setActiveWorkIndex((prev) => (prev < PREVIOUS_WORK.length - 1 ? prev + 1 : 0))
               }
               className="p-2 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 text-white cursor-pointer"
-              title="Next Transformation"
+              title="Next Case"
             >
               <ChevronRight className="w-4 h-4" />
             </button>
           </div>
         </div>
 
-        {/* Transformation Card */}
+        {/* Real Transformation Card */}
         <div className="rounded-3xl bg-[#090b10] border border-white/10 overflow-hidden shadow-2xl">
-          
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
-            {/* Left: Before & After Split Photos (7 Cols) */}
-            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-1 bg-black p-2">
-              
-              {/* Before Photo */}
-              <div className="relative aspect-4/3 rounded-xl overflow-hidden group">
+            
+            {/* Left: Real High-Res Before & After Photo (7 Cols) */}
+            <div className="lg:col-span-7 bg-black p-3 sm:p-5 flex items-center justify-center">
+              <div className="relative w-full rounded-2xl overflow-hidden border border-white/15 shadow-2xl bg-slate-950 group">
                 <img
-                  src={currentWork.beforeImg}
-                  alt="Before repair"
-                  className="w-full h-full object-cover"
+                  src={currentWork.realImg}
+                  alt={currentWork.title}
+                  className="w-full h-auto max-h-[520px] object-contain mx-auto group-hover:scale-102 transition-transform duration-500"
                 />
-                <div className="absolute top-3 left-3 px-2.5 py-1 rounded bg-red-600/90 text-white text-[11px] font-bold uppercase tracking-wider">
-                  BEFORE SERVICE
-                </div>
-                <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black via-black/80 to-transparent">
-                  <p className="text-[11px] text-slate-300">
-                    {currentWork.beforeDesc}
-                  </p>
+                
+                {/* Genuine KDC Job Badge */}
+                <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-orange-500 text-black font-black text-[10px] uppercase tracking-wider shadow-lg">
+                  KDC Verified Workshop Job
                 </div>
               </div>
-
-              {/* After Photo */}
-              <div className="relative aspect-4/3 rounded-xl overflow-hidden group">
-                <img
-                  src={currentWork.afterImg}
-                  alt="After repair"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute top-3 left-3 px-2.5 py-1 rounded bg-emerald-600/90 text-white text-[11px] font-bold uppercase tracking-wider">
-                  AFTER VORTEX REPAIR
-                </div>
-                <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black via-black/80 to-transparent">
-                  <p className="text-[11px] text-emerald-300 font-medium">
-                    {currentWork.afterDesc}
-                  </p>
-                </div>
-              </div>
-
             </div>
 
-            {/* Right: Details & Customer Case Notes (5 Cols) */}
-            <div className="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between space-y-6">
+            {/* Right: Job Details & Case Notes (5 Cols) */}
+            <div className="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between space-y-6 border-t lg:border-t-0 lg:border-l border-white/10 bg-[#0d1017]">
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <span className="px-3 py-1 rounded-full text-[11px] font-bold uppercase bg-orange-500/15 text-orange-400 border border-orange-500/30">
                     {currentWork.category}
                   </span>
                   <span className="text-xs text-slate-400 font-mono flex items-center gap-1">
-                    <Clock className="w-3 h-3 text-slate-500" />
+                    <Clock className="w-3.5 h-3.5 text-slate-500" />
                     {currentWork.time}
                   </span>
                 </div>
@@ -245,11 +222,32 @@ export default function WorkAndReviewsSection() {
                 <div className="space-y-2 text-xs">
                   <div className="flex items-center gap-2 text-slate-300">
                     <Car className="w-4 h-4 text-orange-400 flex-shrink-0" />
-                    <span><strong>Vehicle:</strong> {currentWork.car}</span>
+                    <span><strong>Car:</strong> {currentWork.car}</span>
                   </div>
                   <div className="flex items-center gap-2 text-slate-300">
                     <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                    <span><strong>Owner:</strong> {currentWork.customer}</span>
+                    <span><strong>Client:</strong> {currentWork.customer}</span>
+                  </div>
+                </div>
+
+                {/* Scope of Work */}
+                <div className="space-y-2 pt-2 border-t border-white/5 text-xs">
+                  <div>
+                    <span className="text-[10px] font-bold text-red-400 uppercase tracking-wider block">
+                      Initial Condition:
+                    </span>
+                    <p className="text-slate-300 text-[11px] leading-relaxed mt-0.5">
+                      {currentWork.beforeDesc}
+                    </p>
+                  </div>
+
+                  <div>
+                    <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider block">
+                      Work Completed by KDC Workshop:
+                    </span>
+                    <p className="text-slate-300 text-[11px] leading-relaxed mt-0.5">
+                      {currentWork.afterDesc}
+                    </p>
                   </div>
                 </div>
 
@@ -260,13 +258,13 @@ export default function WorkAndReviewsSection() {
 
               {/* Quick Dots Switcher */}
               <div className="flex items-center justify-between pt-4 border-t border-white/5">
-                <div className="flex gap-1.5">
+                <div className="flex gap-2">
                   {PREVIOUS_WORK.map((_, i) => (
                     <button
                       key={i}
                       onClick={() => setActiveWorkIndex(i)}
-                      className={`h-2 rounded-full transition-all cursor-pointer ${
-                        activeWorkIndex === i ? 'w-8 bg-orange-500' : 'w-2 bg-white/20'
+                      className={`h-2.5 rounded-full transition-all cursor-pointer ${
+                        activeWorkIndex === i ? 'w-8 bg-orange-500' : 'w-2.5 bg-white/20 hover:bg-white/40'
                       }`}
                     />
                   ))}
@@ -276,14 +274,13 @@ export default function WorkAndReviewsSection() {
                   href="#budget-calculator"
                   className="text-xs font-bold text-orange-400 hover:text-orange-300 flex items-center gap-1"
                 >
-                  <span>Calculate Similar Service &rarr;</span>
+                  <span>Book Similar Work &rarr;</span>
                 </a>
               </div>
 
             </div>
 
           </div>
-
         </div>
       </div>
 
@@ -291,13 +288,13 @@ export default function WorkAndReviewsSection() {
       <div className="mb-20 space-y-6">
         <div>
           <span className="text-xs font-bold uppercase tracking-wider text-orange-400 block mb-1">
-            Playable Garage Clips & Dyno Runs
+            Real Workshop Clips & Sound Demos
           </span>
           <h3 className="text-2xl font-bold text-white">
-            Listen to the Power & Watch the Glaze
+            Watch Real Workshop Demos & Inspections
           </h3>
           <p className="text-xs sm:text-sm text-slate-400">
-            Click on any video below to hear exhaust note comparisons, ceramic water-beading tests, and customer interviews.
+            Click on any video below to see real DPF cleaning demonstrations, mirror paint reflection walkarounds, and wheel detailing tests.
           </p>
         </div>
 
@@ -313,7 +310,7 @@ export default function WorkAndReviewsSection() {
                 <img
                   src={clip.thumbnail}
                   alt={clip.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-75"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80"
                 />
 
                 <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
@@ -352,7 +349,7 @@ export default function WorkAndReviewsSection() {
               Verified Feedback
             </span>
             <h3 className="text-2xl font-bold text-white">
-              What Real Car Owners Say About Us
+              What Real Car Owners Say About KDC Workshop
             </h3>
           </div>
           <div className="flex items-center gap-2 text-xs text-amber-400 font-bold">
@@ -436,14 +433,14 @@ export default function WorkAndReviewsSection() {
               <img
                 src={activeClipModal.thumbnail}
                 alt="clip thumbnail"
-                className="w-full h-full object-cover opacity-65"
+                className="w-full h-full object-cover opacity-75"
               />
               <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-4 bg-black/40">
                 <div className="w-16 h-16 rounded-full bg-orange-500 text-black flex items-center justify-center mb-3 shadow-2xl animate-pulse">
                   <Play className="w-8 h-8 fill-black translate-x-0.5" />
                 </div>
                 <span className="text-xs font-bold text-white uppercase tracking-wider">
-                  Live Dyno & Workshop Audio Track Playing
+                  KDC Workshop Quality Test Track
                 </span>
                 <p className="text-[11px] text-slate-300 max-w-sm mt-1">
                   {activeClipModal.desc}
@@ -452,7 +449,7 @@ export default function WorkAndReviewsSection() {
             </div>
 
             <p className="text-xs text-slate-400 text-center">
-              Recorded at Vortex Performance Workshop Pit Lane.
+              Recorded in the KDC Workshop Service & Diagnostic Bay.
             </p>
           </div>
         </div>
