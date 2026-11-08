@@ -41,7 +41,7 @@ export default function CartDrawer({ onProceedToBooking }) {
       )
       .join('\n');
 
-    const msg = `*NEW VORTEX ORDER & BOOKING*\nOrder ID: ${confirmedOrderId || 'NEW'}\n\n*Customer:* ${customerInfo.name || 'Customer'}\n*Phone:* ${customerInfo.phone}\n*Vehicle:* ${customerInfo.carModel || 'Not Specified'}\n*Order Type:* ${customerInfo.orderType === 'workshop_visit' ? 'Workshop Installation / Visit' : 'Courier Delivery'}\n\n*Items Ordered:*\n${itemsList}\n\n*Total Amount:* ₹${subtotal.toLocaleString('en-IN')}\n*Total Savings:* ₹${totalSavings.toLocaleString('en-IN')}`;
+    const msg = `*NEW KD WORKSHOP ORDER & BOOKING*\nOrder ID: ${confirmedOrderId || 'NEW'}\n\n*Customer:* ${customerInfo.name || 'Customer'}\n*Phone:* ${customerInfo.phone}\n*Vehicle:* ${customerInfo.carModel || 'Not Specified'}\n*Order Type:* ${customerInfo.orderType === 'workshop_visit' ? 'Workshop Installation / Visit' : 'Courier Delivery'}\n\n*Items Ordered:*\n${itemsList}\n\n*Total Amount:* ₹${subtotal.toLocaleString('en-IN')}\n*Total Savings:* ₹${totalSavings.toLocaleString('en-IN')}`;
 
     window.open(`https://wa.me/919876543210?text=${encodeURIComponent(msg)}`, '_blank');
   };

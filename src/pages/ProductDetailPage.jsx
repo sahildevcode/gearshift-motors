@@ -489,7 +489,7 @@ export default function ProductDetailPage({ productId, onBackToStore, onBackToHo
             </div>
 
             <div className="p-4 rounded-xl bg-orange-500/10 border border-orange-500/20 text-xs text-orange-300">
-              💡 <strong>Workshop Tip:</strong> Bring your car directly to Vortex Motors after ordering online, or select "Workshop Fitting" at checkout to have our team install it immediately without queuing!
+              💡 <strong>Workshop Tip:</strong> Bring your car directly to KD Workshop after ordering online, or select "Workshop Fitting" at checkout to have our team install it immediately without queuing!
             </div>
           </div>
 
@@ -588,7 +588,7 @@ export default function ProductDetailPage({ productId, onBackToStore, onBackToHo
             </div>
 
             <p className="text-xs text-slate-400 text-center">
-              Recorded in the Vortex Motors Precision Dyno Bay & Testing Track.
+              Recorded in the KD Workshop Precision Dyno Bay & Testing Track.
             </p>
           </div>
         </div>

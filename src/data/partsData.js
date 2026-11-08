@@ -1,6 +1,7 @@
 // Genuine Car Spare Parts & Accessories Data for KD Workshop
 // High-grade OEM & Performance Parts with specs, warranty, fitment, and demo clips
 import dpfImg from '../assets/dpf-clean-service.jpg';
+import kdBanner from '../assets/kd-banner.jpg';
 
 export const CAR_PARTS_DATA = [
   {
@@ -44,7 +45,7 @@ export const CAR_PARTS_DATA = [
     },
     images: [
       dpfImg,
-      'https://images.unsplash.com/photo-1615906655593-ad0386982a0f?w=1000&auto=format&fit=crop&q=85'
+      kdBanner
     ],
     videoClip: {
       title: 'Live DPF Flushing Demonstration & Black Smoke Clear Test',

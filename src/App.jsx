@@ -140,7 +140,7 @@ function AppContent() {
         {/* Floating Quick Action Buttons (WhatsApp & Direct Phone) */}
         <div className="fixed bottom-6 right-6 z-40 flex flex-col gap-3">
           <a
-            href="https://wa.me/919876543210?text=Hello%20Vortex%20Motors%2C%20I%20want%20to%20inquire%20about%20a%20car%20service%2C%20budget%20estimate%20or%20spare%20parts"
+            href="https://wa.me/919876543210?text=Hello%20KD%20Workshop%2C%20I%20want%20to%20inquire%20about%20a%20car%20service%2C%20budget%20estimate%20or%20spare%20parts"
             target="_blank"
             rel="noopener noreferrer"
             className="w-12 h-12 rounded-full bg-emerald-500 hover:bg-emerald-400 text-black flex items-center justify-center shadow-2xl shadow-emerald-500/40 hover:scale-110 transition-all cursor-pointer group"

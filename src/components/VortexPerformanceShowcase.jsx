@@ -4,6 +4,7 @@ import BudgetCalculator from './BudgetCalculator';
 import FeaturedPartsSection from './FeaturedPartsSection';
 import BookingSection from './BookingSection';
 import WorkAndReviewsSection from './WorkAndReviewsSection';
+import kdBanner from '../assets/kd-banner.jpg';
 
 export default function VortexPerformanceShowcase({ 
   onOpenBooking, 
@@ -32,19 +33,16 @@ export default function VortexPerformanceShowcase({
     <div className="relative bg-[#000000] text-white selection:bg-orange-500 selection:text-black">
       
       {/* ============================================================== */}
-      {/* 1. HERO SECTION: PURE FULL-SCREEN CAR IMAGE (ZERO TEXT/BUTTONS) */}
-      {/* User requested: "Home page mein jitna bhi text aur button       */}
-      {/* wagera hai un sab ko hata do. Sirf ek car ki image rahegi       */}
-      {/* background mein, uske upar kuch bhi nahi karna hai."           */}
+      {/* 1. HERO SECTION: 100% WIDTH & 100% HEIGHT FULL-SCREEN BANNER   */}
+      {/* User requested: "100%width and higth kardo set yrr"            */}
       {/* ============================================================== */}
-      <section id="hero" className="relative w-full h-[85vh] sm:h-[95vh] overflow-hidden bg-black border-b border-white/10">
+      <section id="hero" className="relative w-full h-screen sm:h-[100vh] overflow-hidden bg-black border-b border-white/10">
         <img
-          src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=2400&auto=format&fit=crop&q=95"
-          alt="Performance Car"
-          className="w-full h-full object-cover object-center brightness-[0.95] contrast-[1.05]"
+          src={kdBanner}
+          alt="KD Workshop - DPF Clean with XRS Products"
+          className="w-full h-full object-fill block"
+          style={{ width: '100%', height: '100%' }}
         />
-        {/* Subtle dark gradient blend into the following sections */}
-        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none" />
       </section>
 
       {/* ============================================================== */}
@@ -148,7 +146,7 @@ export default function VortexPerformanceShowcase({
                 </div>
                 <div>
                   <span className="text-[10px] text-slate-400 block uppercase">Email Support</span>
-                  <strong>service@vortexperformance.com</strong>
+                  <strong>service@kdworkshop.com</strong>
                 </div>
               </div>
 
