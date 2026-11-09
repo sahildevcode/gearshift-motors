@@ -30,13 +30,13 @@ export default function VortexPerformanceShowcase({
   };
 
   return (
-    <div className="relative bg-[#000000] text-white selection:bg-orange-500 selection:text-black">
+    <div className="relative bg-[#0b1120] text-white selection:bg-orange-500 selection:text-black">
       
       {/* ============================================================== */}
       {/* 1. HERO SECTION: OFFICIAL KD WORKSHOP BILLBOARD SHOWCASE      */}
       {/* Responsive aspect-ratio layout: zero cut, zero stretch        */}
       {/* ============================================================== */}
-      <section id="hero" className="relative w-full bg-[#030406] border-b border-white/10 pt-24 sm:pt-28 pb-8 sm:pb-12 px-4 sm:px-6 lg:px-8">
+      <section id="hero" className="relative w-full bg-[#0f172a] border-b border-white/10 pt-24 sm:pt-28 pb-8 sm:pb-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
           {/* Master Framed Banner Display - Responsive Aspect-Ratio Layout, Zero Cut, Zero Stretch */}
           <div
@@ -171,7 +171,7 @@ export default function VortexPerformanceShowcase({
             </div>
           </div>
 
-          <div className="lg:col-span-7 p-6 sm:p-8 rounded-3xl bg-[#090b10] border border-white/10 space-y-4 shadow-xl">
+          <div className="lg:col-span-7 p-6 sm:p-8 rounded-3xl bg-[#131d31] border border-white/10 space-y-4 shadow-xl">
             <h3 className="text-lg font-bold text-white">Workshop Operating Hours</h3>
             
             <div className="divide-y divide-white/5 text-xs">

@@ -27,7 +27,7 @@ export default function EditorialHero({ currentLanguage = 'en', onBookCar, onSel
       </div>
 
       {/* Main Luxury Frame (Matching reference screenshot exactly) */}
-      <div className="relative z-10 w-full rounded-2xl md:rounded-3xl border border-slate-800/90 bg-[#0d1017] shadow-2xl overflow-hidden backdrop-blur-2xl">
+      <div className="relative z-10 w-full rounded-2xl md:rounded-3xl border border-slate-800/90 bg-[#1a263d] shadow-2xl overflow-hidden backdrop-blur-2xl">
         
         {/* Top Navbar Inside Hero Canvas (Exactly like reference: AutoDealer | All Models ▾ | Search | ENG ▾ | USD ▾) */}
         <div className="flex flex-wrap items-center justify-between gap-3 px-5 md:px-8 py-4 border-b border-white/5 bg-slate-950/60 backdrop-blur-md text-xs">

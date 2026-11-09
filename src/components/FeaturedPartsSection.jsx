@@ -55,7 +55,7 @@ export default function FeaturedPartsSection({ onNavigateToStore, onSelectProduc
           <div
             key={part.id}
             onClick={() => onSelectProduct(part.id)}
-            className="group rounded-2xl bg-[#090b10] border border-white/10 hover:border-orange-500/50 transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-xl hover:-translate-y-1 cursor-pointer"
+            className="group rounded-2xl bg-[#131d31] border border-white/10 hover:border-orange-500/50 transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-xl hover:-translate-y-1 cursor-pointer"
           >
             {/* Card Top: Image + Badges */}
             <div className="relative aspect-square overflow-hidden bg-black/60">

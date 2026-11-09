@@ -3,17 +3,17 @@
 @source "./**/*.{js,ts,jsx,tsx}";
 
 :root {
-  --bg-pure-black: #000000;
-  --bg-dark: #07090d;
-  --bg-surface: #0a0d14;
-  --bg-card: #0e121a;
+  --bg-main: #0b1120;
+  --bg-dark: #070d19;
+  --bg-surface: #0f172a;
+  --bg-card: #1e293b;
   --vortex-orange: #f97316;
   --vortex-orange-deep: #ea580c;
 }
 
 html {
   scroll-behavior: smooth;
-  background-color: #000000;
+  background-color: #0b1120;
   color: #f1f5f9;
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
@@ -22,8 +22,12 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  background-color: #000000;
+  background-color: #0b1120;
   color: #f8fafc;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(30, 58, 138, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(234, 88, 12, 0.08) 0px, transparent 50%);
+  background-attachment: fixed;
 }
 
 /* Clean Readable Typography Classes */

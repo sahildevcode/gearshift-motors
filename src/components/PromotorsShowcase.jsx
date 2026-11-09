@@ -32,7 +32,7 @@ export default function PromotorsShowcase({ currentLanguage = 'en', onGetStarted
   ];
 
   return (
-    <div className="relative bg-[#090b0e] text-white overflow-hidden py-16 border-t border-b border-slate-900">
+    <div className="relative bg-[#131d31] text-white overflow-hidden py-16 border-t border-b border-slate-900">
       
       {/* Background Tire Track Overlay Texture */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none carbon-pattern" />
@@ -157,7 +157,7 @@ export default function PromotorsShowcase({ currentLanguage = 'en', onGetStarted
                   <ellipse cx="650" cy="295" rx="14" ry="10" fill="#e0f2fe" filter="url(#glow)" />
 
                   {/* Cutaway Engine Bay Compartment Frame */}
-                  <rect x="220" y="240" width="360" height="200" rx="14" fill="#0c0e14" stroke="#f97316" strokeWidth="2" strokeDasharray="6 4" opacity="0.8" />
+                  <rect x="220" y="240" width="360" height="200" rx="14" fill="#172236" stroke="#f97316" strokeWidth="2" strokeDasharray="6 4" opacity="0.8" />
 
                   {/* Left Suspension Strut & Coil Spring */}
                   <g transform="translate(170, 260)">

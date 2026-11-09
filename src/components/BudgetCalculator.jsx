@@ -206,7 +206,7 @@ export default function BudgetCalculator({ onSelectBookingSlot }) {
         <div className="lg:col-span-8 space-y-6">
           
           {/* Step 1: Car Segment Selection */}
-          <div className="p-5 rounded-2xl bg-[#090b10] border border-white/10 shadow-xl">
+          <div className="p-5 rounded-2xl bg-[#131d31] border border-white/10 shadow-xl">
             <div className="flex items-center justify-between mb-3">
               <span className="text-xs font-bold uppercase text-slate-300 tracking-wider flex items-center gap-2">
                 <Car className="w-4 h-4 text-orange-400" />
@@ -248,7 +248,7 @@ export default function BudgetCalculator({ onSelectBookingSlot }) {
           </div>
 
           {/* Step 2: Choose Services Checklist */}
-          <div className="p-5 rounded-2xl bg-[#090b10] border border-white/10 shadow-xl">
+          <div className="p-5 rounded-2xl bg-[#131d31] border border-white/10 shadow-xl">
             <div className="flex flex-wrap items-center justify-between gap-3 mb-4 pb-3 border-b border-white/10">
               <span className="text-xs font-bold uppercase text-slate-300 tracking-wider flex items-center gap-2">
                 <Wrench className="w-4 h-4 text-orange-400" />
@@ -338,7 +338,7 @@ export default function BudgetCalculator({ onSelectBookingSlot }) {
         {/* Right Side: Live Budget Summary & Add To Cart (4 Cols Sticky) */}
         <div className="lg:col-span-4 lg:sticky lg:top-24 space-y-4">
           
-          <div className="p-6 rounded-2xl bg-gradient-to-b from-[#0e1219] to-[#08090d] border border-orange-500/30 shadow-2xl relative overflow-hidden">
+          <div className="p-6 rounded-2xl bg-gradient-to-b from-[#1a263d] to-[#08090d] border border-orange-500/30 shadow-2xl relative overflow-hidden">
             
             <div className="flex items-center justify-between pb-4 border-b border-white/10">
               <span className="text-xs font-bold uppercase tracking-wider text-orange-400 flex items-center gap-2">

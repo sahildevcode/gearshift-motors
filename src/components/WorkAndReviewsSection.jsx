@@ -183,7 +183,7 @@ export default function WorkAndReviewsSection() {
         </div>
 
         {/* Real Transformation Card */}
-        <div className="rounded-3xl bg-[#090b10] border border-white/10 overflow-hidden shadow-2xl">
+        <div className="rounded-3xl bg-[#131d31] border border-white/10 overflow-hidden shadow-2xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
             
             {/* Left: Real High-Res Before & After Photo (7 Cols) */}
@@ -203,7 +203,7 @@ export default function WorkAndReviewsSection() {
             </div>
 
             {/* Right: Job Details & Case Notes (5 Cols) */}
-            <div className="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between space-y-6 border-t lg:border-t-0 lg:border-l border-white/10 bg-[#0d1017]">
+            <div className="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between space-y-6 border-t lg:border-t-0 lg:border-l border-white/10 bg-[#1a263d]">
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <span className="px-3 py-1 rounded-full text-[11px] font-bold uppercase bg-orange-500/15 text-orange-400 border border-orange-500/30">
@@ -303,7 +303,7 @@ export default function WorkAndReviewsSection() {
             <div
               key={clip.id}
               onClick={() => setActiveClipModal(clip)}
-              className="group rounded-2xl bg-[#090b10] border border-white/10 hover:border-orange-500/50 overflow-hidden shadow-xl transition-all hover:-translate-y-1 cursor-pointer flex flex-col justify-between"
+              className="group rounded-2xl bg-[#131d31] border border-white/10 hover:border-orange-500/50 overflow-hidden shadow-xl transition-all hover:-translate-y-1 cursor-pointer flex flex-col justify-between"
             >
               {/* Thumbnail with Play Icon */}
               <div className="relative aspect-video overflow-hidden bg-black">
@@ -367,7 +367,7 @@ export default function WorkAndReviewsSection() {
           {CUSTOMER_REVIEWS.map((rev, idx) => (
             <div
               key={idx}
-              className="p-6 rounded-2xl bg-[#090b10] border border-white/10 hover:border-white/20 transition-all flex flex-col justify-between space-y-4"
+              className="p-6 rounded-2xl bg-[#131d31] border border-white/10 hover:border-white/20 transition-all flex flex-col justify-between space-y-4"
             >
               <div className="space-y-3">
                 {/* Rating & Service tag */}
@@ -411,7 +411,7 @@ export default function WorkAndReviewsSection() {
       {/* Video Modal */}
       {activeClipModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/95 backdrop-blur-md">
-          <div className="relative w-full max-w-2xl rounded-2xl bg-[#090b10] border border-orange-500/50 p-6 space-y-4">
+          <div className="relative w-full max-w-2xl rounded-2xl bg-[#131d31] border border-orange-500/50 p-6 space-y-4">
             <div className="flex items-center justify-between">
               <div>
                 <span className="text-[10px] font-mono text-orange-400 uppercase tracking-widest font-bold">

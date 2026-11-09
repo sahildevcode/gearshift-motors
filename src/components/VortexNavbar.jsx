@@ -41,7 +41,7 @@ export default function VortexNavbar({ activePage = 'home', onNavigate, onBookAp
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-      <nav className="px-4 sm:px-8 lg:px-12 py-3.5 bg-black/90 backdrop-blur-md border-b border-white/10 transition-all">
+      <nav className="px-4 sm:px-8 lg:px-12 py-3.5 bg-[#070d19]/90 backdrop-blur-md border-b border-white/10 transition-all">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           
           {/* Real KD Workshop Logo on Left */}

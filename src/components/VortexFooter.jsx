@@ -12,7 +12,7 @@ export default function VortexFooter() {
   };
 
   return (
-    <footer className="relative bg-[#050608] text-slate-400 border-t border-white/10 pt-16 pb-12 px-4 sm:px-8 lg:px-12">
+    <footer className="relative bg-[#070d19] text-slate-400 border-t border-white/10 pt-16 pb-12 px-4 sm:px-8 lg:px-12">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-white/10">
         
         {/* Brand Col with Real KD Logo */}
@@ -74,7 +74,7 @@ export default function VortexFooter() {
           </p>
 
           {subscribed ? (
-            <div className="p-3 rounded-xl bg-[#090b10] border border-emerald-500 text-emerald-400 flex items-center gap-2 text-xs">
+            <div className="p-3 rounded-xl bg-[#131d31] border border-emerald-500 text-emerald-400 flex items-center gap-2 text-xs">
               <CheckCircle2 className="w-4 h-4" />
               <span>Subscribed! Check your inbox for KD Workshop discounts.</span>
             </div>

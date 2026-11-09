@@ -44,7 +44,7 @@ export default function BrandsEstimatorPage({ onBackToHome, onBookSlot }) {
   const savings = calculatedDealerPrice - calculatedPrice;
 
   return (
-    <div className="min-h-screen bg-[#000000] text-white pt-24 pb-20 px-4 sm:px-8 lg:px-12 selection:bg-orange-500 selection:text-black">
+    <div className="min-h-screen bg-[#0b1120] text-white pt-24 pb-20 px-4 sm:px-8 lg:px-12 selection:bg-orange-500 selection:text-black">
       <div className="max-w-7xl mx-auto">
         
         {/* Top Back Button & Trust Bar */}
@@ -86,8 +86,8 @@ export default function BrandsEstimatorPage({ onBackToHome, onBookSlot }) {
                 onClick={() => handleSelectBrand(brand)}
                 className={`group relative flex flex-col items-center justify-center p-4 sm:p-5 rounded-xl border transition-all duration-300 text-left cursor-pointer ${
                   isSelected
-                    ? 'bg-[#0e1118] border-orange-500 shadow-2xl shadow-orange-950/40 scale-[1.03]'
-                    : 'bg-[#07080b] border-white/10 hover:border-white/25 hover:bg-[#0c0e14]'
+                    ? 'bg-[#1a263d] border-orange-500 shadow-2xl shadow-orange-950/40 scale-[1.03]'
+                    : 'bg-[#0f172a] border-white/10 hover:border-white/25 hover:bg-[#172236]'
                 }`}
               >
                 <div
@@ -120,7 +120,7 @@ export default function BrandsEstimatorPage({ onBackToHome, onBookSlot }) {
           User requested: "ये जो पार्ट ये जो कॉलम बने हैं लेफ्ट साइड में ये सब पहले ऊपर रहेंगे। जब हम बॉक्स पर क्लिक करेंगे तो फिर उसके बाद राइट वाला बॉक्स ओपन हो वरना ये हाइड ही ओके।"
         */}
         <ScrollReveal animation="fade-up" delay={150} duration={850}>
-        <div className="rounded-2xl border border-white/10 bg-[#090b0e] p-6 sm:p-10 shadow-2xl space-y-8 mb-10">
+        <div className="rounded-2xl border border-white/10 bg-[#131d31] p-6 sm:p-10 shadow-2xl space-y-8 mb-10">
           
           {/* Active Brand Header */}
           <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-white/10">
@@ -198,7 +198,7 @@ export default function BrandsEstimatorPage({ onBackToHome, onBookSlot }) {
                     className={`group cursor-pointer p-5 rounded-xl border transition-all duration-300 flex flex-col justify-between select-none ${
                       isPkgActive
                         ? 'bg-[#121620] border-orange-500 ring-2 ring-orange-500/50 shadow-2xl shadow-orange-950/50 scale-[1.02]'
-                        : 'bg-black/60 border-white/10 hover:border-orange-500/40 hover:bg-[#0c0e14]'
+                        : 'bg-black/60 border-white/10 hover:border-orange-500/40 hover:bg-[#172236]'
                     }`}
                   >
                     <div>
@@ -242,7 +242,7 @@ export default function BrandsEstimatorPage({ onBackToHome, onBookSlot }) {
         {selectedPackageKey && currentPackage && (
           <div
             ref={estimateCardRef}
-            className="animate-in fade-in slide-in-from-bottom-6 duration-500 rounded-2xl border border-orange-500/50 bg-gradient-to-b from-[#111520] via-[#090b0e] to-[#07080a] p-6 sm:p-10 shadow-2xl relative overflow-hidden mb-12"
+            className="animate-in fade-in slide-in-from-bottom-6 duration-500 rounded-2xl border border-orange-500/50 bg-gradient-to-b from-[#111520] via-[#131d31] to-[#07080a] p-6 sm:p-10 shadow-2xl relative overflow-hidden mb-12"
           >
             {/* Top Glowing Neon Line */}
             <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-orange-500 via-amber-400 to-orange-600" />

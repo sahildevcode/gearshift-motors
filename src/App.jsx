@@ -53,7 +53,7 @@ function AppContent() {
 
   return (
     <SmoothScrollProvider activePage={activePage}>
-      <div className="min-h-screen bg-[#000000] text-slate-100 selection:bg-orange-500 selection:text-black font-space">
+      <div className="min-h-screen bg-[#0b1120] text-slate-100 selection:bg-orange-500 selection:text-black font-space">
         
         {/* Navigation Bar */}
         <VortexNavbar
@@ -170,3 +170,4 @@ export default function App() {
     </CartProvider>
   );
 }
+

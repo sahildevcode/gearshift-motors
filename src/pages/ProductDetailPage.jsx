@@ -69,7 +69,7 @@ export default function ProductDetailPage({ productId, onBackToStore, onBackToHo
   const relatedProducts = CAR_PARTS_DATA.filter((p) => p.id !== product.id).slice(0, 3);
 
   return (
-    <div className="min-h-screen bg-[#000000] text-white pt-24 pb-20 px-4 sm:px-8 lg:px-12 selection:bg-orange-500 selection:text-black">
+    <div className="min-h-screen bg-[#0b1120] text-white pt-24 pb-20 px-4 sm:px-8 lg:px-12 selection:bg-orange-500 selection:text-black">
       <div className="max-w-7xl mx-auto space-y-10">
         
         {/* Breadcrumb Navigation */}
@@ -119,7 +119,7 @@ export default function ProductDetailPage({ productId, onBackToStore, onBackToHo
           <div className="lg:col-span-6 space-y-4">
             
             {/* Main Featured Photo */}
-            <div className="relative aspect-4/3 rounded-3xl overflow-hidden bg-[#090b10] border border-white/10 shadow-2xl group">
+            <div className="relative aspect-4/3 rounded-3xl overflow-hidden bg-[#131d31] border border-white/10 shadow-2xl group">
               <img
                 src={product.images[activeImageIndex] || product.images[0]}
                 alt={product.name}
@@ -180,7 +180,7 @@ export default function ProductDetailPage({ productId, onBackToStore, onBackToHo
             {product.videoClip && (
               <div
                 onClick={() => setIsVideoModalOpen(true)}
-                className="p-4 rounded-2xl bg-gradient-to-r from-orange-500/15 via-[#0d1017] to-black border border-orange-500/30 flex items-center justify-between gap-4 cursor-pointer hover:border-orange-500 transition-all group"
+                className="p-4 rounded-2xl bg-gradient-to-r from-orange-500/15 via-[#1a263d] to-black border border-orange-500/30 flex items-center justify-between gap-4 cursor-pointer hover:border-orange-500 transition-all group"
               >
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 rounded-xl bg-orange-500 text-black flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform shadow-lg shadow-orange-500/30">
@@ -205,7 +205,7 @@ export default function ProductDetailPage({ productId, onBackToStore, onBackToHo
             )}
 
             {/* Official Warranty Card */}
-            <div className="p-5 rounded-2xl bg-[#090b10] border border-emerald-500/30 flex items-start gap-3.5">
+            <div className="p-5 rounded-2xl bg-[#131d31] border border-emerald-500/30 flex items-start gap-3.5">
               <div className="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 flex-shrink-0">
                 <ShieldCheck className="w-6 h-6" />
               </div>
@@ -252,7 +252,7 @@ export default function ProductDetailPage({ productId, onBackToStore, onBackToHo
             </div>
 
             {/* Key Features Bullet Points */}
-            <div className="p-4 rounded-2xl bg-[#090b10] border border-white/10 space-y-2">
+            <div className="p-4 rounded-2xl bg-[#131d31] border border-white/10 space-y-2">
               <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-1">
                 Engineered Performance Highlights
               </span>
@@ -265,7 +265,7 @@ export default function ProductDetailPage({ productId, onBackToStore, onBackToHo
             </div>
 
             {/* Car Compatibility Checker */}
-            <div className="p-5 rounded-2xl bg-[#0e1219] border border-white/10 space-y-3">
+            <div className="p-5 rounded-2xl bg-[#1a263d] border border-white/10 space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold uppercase tracking-wide text-white flex items-center gap-2">
                   <Car className="w-4 h-4 text-orange-400" />
@@ -334,7 +334,7 @@ export default function ProductDetailPage({ productId, onBackToStore, onBackToHo
             </div>
 
             {/* Price, Quantity & Add To Cart Box */}
-            <div className="p-6 rounded-3xl bg-gradient-to-b from-[#11151f] to-[#090b10] border border-orange-500/40 shadow-2xl space-y-5">
+            <div className="p-6 rounded-3xl bg-gradient-to-b from-[#11151f] to-[#131d31] border border-orange-500/40 shadow-2xl space-y-5">
               
               {/* Pricing Line */}
               <div className="flex flex-wrap items-baseline justify-between gap-2 pb-4 border-b border-white/10">
@@ -462,7 +462,7 @@ export default function ProductDetailPage({ productId, onBackToStore, onBackToHo
               Technical Specifications & OEM Standards
             </h3>
 
-            <div className="rounded-2xl bg-[#090b10] border border-white/10 overflow-hidden divide-y divide-white/5 text-xs">
+            <div className="rounded-2xl bg-[#131d31] border border-white/10 overflow-hidden divide-y divide-white/5 text-xs">
               {Object.entries(product.specifications).map(([key, val], idx) => (
                 <div key={idx} className="flex justify-between p-3.5 hover:bg-white/[0.02]">
                   <span className="text-slate-400 font-medium">{key}</span>
@@ -479,7 +479,7 @@ export default function ProductDetailPage({ productId, onBackToStore, onBackToHo
               What's Included in the Box
             </h3>
 
-            <div className="p-5 rounded-2xl bg-[#090b10] border border-white/10 space-y-3">
+            <div className="p-5 rounded-2xl bg-[#131d31] border border-white/10 space-y-3">
               {product.inTheBox.map((item, idx) => (
                 <div key={idx} className="flex items-start gap-2.5 text-xs text-slate-300">
                   <Check className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5 stroke-[3]" />
@@ -515,7 +515,7 @@ export default function ProductDetailPage({ productId, onBackToStore, onBackToHo
               <div
                 key={rel.id}
                 onClick={() => onSelectProduct(rel.id)}
-                className="group p-4 rounded-2xl bg-[#090b10] border border-white/10 hover:border-orange-500/50 transition-all flex gap-3.5 cursor-pointer"
+                className="group p-4 rounded-2xl bg-[#131d31] border border-white/10 hover:border-orange-500/50 transition-all flex gap-3.5 cursor-pointer"
               >
                 <img
                   src={rel.images[0]}
@@ -550,7 +550,7 @@ export default function ProductDetailPage({ productId, onBackToStore, onBackToHo
       {/* Video Clip Modal */}
       {isVideoModalOpen && product.videoClip && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/95 backdrop-blur-md">
-          <div className="relative w-full max-w-2xl rounded-2xl bg-[#090b10] border border-orange-500/50 p-6 space-y-4">
+          <div className="relative w-full max-w-2xl rounded-2xl bg-[#131d31] border border-orange-500/50 p-6 space-y-4">
             <div className="flex items-center justify-between">
               <div>
                 <span className="text-[10px] font-mono text-orange-400 uppercase tracking-widest font-bold">

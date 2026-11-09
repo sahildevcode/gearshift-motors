@@ -47,7 +47,7 @@ export default function PartsStorePage({ onBackToHome, onSelectProduct }) {
   };
 
   return (
-    <div className="min-h-screen bg-[#000000] text-white pt-24 pb-20 px-4 sm:px-8 lg:px-12 selection:bg-orange-500 selection:text-black">
+    <div className="min-h-screen bg-[#0b1120] text-white pt-24 pb-20 px-4 sm:px-8 lg:px-12 selection:bg-orange-500 selection:text-black">
       <div className="max-w-7xl mx-auto space-y-8">
         
         {/* Top Breadcrumb & Back Navigation */}
@@ -71,7 +71,7 @@ export default function PartsStorePage({ onBackToHome, onSelectProduct }) {
         </div>
 
         {/* Page Banner Header */}
-        <div className="p-6 sm:p-10 rounded-3xl bg-gradient-to-r from-[#0d1017] via-[#121622] to-[#0d1017] border border-white/10 shadow-2xl relative overflow-hidden">
+        <div className="p-6 sm:p-10 rounded-3xl bg-gradient-to-r from-[#1a263d] via-[#121622] to-[#1a263d] border border-white/10 shadow-2xl relative overflow-hidden">
           <div className="max-w-2xl space-y-3 relative z-10">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-semibold uppercase tracking-wider">
               <Sparkles className="w-3.5 h-3.5" />
@@ -89,7 +89,7 @@ export default function PartsStorePage({ onBackToHome, onSelectProduct }) {
         </div>
 
         {/* Search & Filter Toolbar */}
-        <div className="flex flex-col lg:flex-row gap-4 items-stretch lg:items-center justify-between p-4 rounded-2xl bg-[#090b10] border border-white/10">
+        <div className="flex flex-col lg:flex-row gap-4 items-stretch lg:items-center justify-between p-4 rounded-2xl bg-[#131d31] border border-white/10">
           {/* Search bar */}
           <div className="relative flex-1">
             <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
@@ -164,7 +164,7 @@ export default function PartsStorePage({ onBackToHome, onSelectProduct }) {
 
         {/* Empty State */}
         {filteredParts.length === 0 ? (
-          <div className="py-20 text-center rounded-3xl bg-[#090b10] border border-white/10 space-y-4">
+          <div className="py-20 text-center rounded-3xl bg-[#131d31] border border-white/10 space-y-4">
             <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mx-auto text-slate-500">
               <Search className="w-6 h-6" />
             </div>
@@ -189,7 +189,7 @@ export default function PartsStorePage({ onBackToHome, onSelectProduct }) {
               <div
                 key={part.id}
                 onClick={() => onSelectProduct(part.id)}
-                className="group rounded-2xl bg-[#090b10] border border-white/10 hover:border-orange-500/50 transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-xl hover:-translate-y-1 cursor-pointer"
+                className="group rounded-2xl bg-[#131d31] border border-white/10 hover:border-orange-500/50 transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-xl hover:-translate-y-1 cursor-pointer"
               >
                 {/* Image & Tags */}
                 <div className="relative aspect-square overflow-hidden bg-black/60">

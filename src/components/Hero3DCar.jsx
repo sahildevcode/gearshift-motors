@@ -447,7 +447,7 @@ export default function Hero3DCar({ onSelectPart, currentLanguage = 'en' }) {
   };
 
   return (
-    <div className="relative w-full h-[520px] md:h-[620px] rounded-3xl overflow-hidden border border-slate-800 bg-gradient-to-b from-[#0d1117] via-[#090b10] to-[#06080b] shadow-2xl shadow-orange-950/20">
+    <div className="relative w-full h-[520px] md:h-[620px] rounded-3xl overflow-hidden border border-slate-800 bg-gradient-to-b from-[#0d1117] via-[#131d31] to-[#06080b] shadow-2xl shadow-orange-950/20">
       {/* 3D Canvas Mount */}
       <div ref={mountRef} className="w-full h-full cursor-grab active:cursor-grabbing" />
 
