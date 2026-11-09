@@ -2,7 +2,15 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/jpeg" href="/kd-logo.jpg" />
+    <script>
+      // When served as static HTML on GitHub Pages at root, immediately forward to /docs/
+      if (window.location.hostname.includes('github.io') && !window.location.pathname.includes('/docs')) {
+        var target = window.location.pathname.replace(/\/+$/, '') + '/docs/';
+        window.location.replace(target + window.location.search + window.location.hash);
+      }
+    </script>
+    <meta http-equiv="refresh" content="0; url=./docs/" />
+    <link rel="icon" type="image/jpeg" href="./kd-logo.jpg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>KD WORKSHOP | Precision Car Service, Tuning & Genuine Spares</title>
     <meta name="description" content="Certified multi-brand car workshop & genuine spare parts store. German spray booth painting, computerized 3D wheel alignment, DPF cleaning, ceramic glazing, and authentic auto spares." />
